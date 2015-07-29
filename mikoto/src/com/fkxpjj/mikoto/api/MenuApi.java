@@ -27,6 +27,7 @@ public class MenuApi {
 
 	// 菜单创建（POST） 限100（次/天）  
 	public static String menu_create_url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";  
+	public static String menu_delete_url = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN";
 	  
 	/** 
 	 * 创建菜单 
@@ -48,4 +49,13 @@ public class MenuApi {
 	  
 	    return response;  
 	}  
+	
+	public static String deleteMenu() { 
+		
+		String url = menu_delete_url.replace("ACCESS_TOKEN", Mikoto.accessTokenApi.getAccessToken().getAccess_token());
+		
+		String response = HttpCon.httpRequest(url, "GET", null);
+		
+		return response;
+	}
 }

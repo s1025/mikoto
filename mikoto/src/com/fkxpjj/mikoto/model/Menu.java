@@ -11,6 +11,12 @@ public class Menu {
 	public void add(Button button){
 		this.button.add(button);
 	}
+	
+	public void add(Button button,int index){
+		if (button instanceof PopupButton){
+			this.button.set(index, button);
+		}
+	}
 
 	public List<Button> getButton() {
 		return button;

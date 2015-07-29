@@ -4,9 +4,9 @@ package com.fkxpjj.mikoto.demo;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alibaba.fastjson.JSON;
 import com.fkxpjj.mikoto.Mikoto;
 import com.fkxpjj.mikoto.api.AccessTokenApi;
+import com.fkxpjj.mikoto.api.GroupApi;
 import com.fkxpjj.mikoto.api.MenuApi;
 import com.fkxpjj.mikoto.model.AccessToken;
 import com.fkxpjj.mikoto.model.App;
@@ -21,7 +21,7 @@ import com.google.gson.Gson;
 
 public class Test {
 	public static void main(String[] args){
-		new Builder().build();
+		new Builder().build();/*
 		Gson gson = new Gson();
 		
 		ClickButton button1 = new ClickButton();
@@ -38,7 +38,6 @@ public class Test {
 		subbutton.setName("sub");
 		subbutton.add(button1);
 		subbutton.add(button2);
-		//subbutton.setSub_button(new Button[]{button1,button2});
 		
 		ClickButton button3 = new ClickButton();
 		button3.setType(Button.CLICK);
@@ -50,15 +49,15 @@ public class Test {
 		menu.add(button3);
 		menu.add(subbutton);
 		
-		
-		//menu.setButton(new Button[]{button3,subbutton});
-		
 		String json = gson.toJson(menu);
 		System.out.println(json);
 		
 		String r = MenuApi.createMenu(menu);
 		System.out.println(r);
-		
+		*/
+		//List<Menu> list = new ArrayList<Menu>();
+		//list.add(2, new Menu());
+		//System.out.println(list.size());
 		/*
 		new Builder().build();
 		
@@ -68,5 +67,11 @@ public class Test {
 		System.out.println(accessToken.getExpires_in());
 		System.out.println(accessToken.getExpires_in().length());
 		*/
+		
+		//String s = MenuApi.deleteMenu();
+		//System.out.println(s);
+		
+		String s = GroupApi.getGroup();
+		System.out.println(s);
 	}
 }

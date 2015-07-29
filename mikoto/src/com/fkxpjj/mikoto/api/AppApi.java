@@ -3,7 +3,7 @@ package com.fkxpjj.mikoto.api;
 import com.fkxpjj.mikoto.model.App;
 
 public class AppApi {
-	private App app;
+	private App app = new App();
 	private static AppApi appApi = new AppApi();
 	
 	private AppApi(){}

@@ -2,7 +2,6 @@ package com.fkxpjj.mikoto.api;
 
 import java.util.Calendar;
 
-import com.alibaba.fastjson.JSON;
 import com.fkxpjj.mikoto.Mikoto;
 import com.fkxpjj.mikoto.model.AccessToken;
 import com.fkxpjj.mikoto.model.App;
@@ -41,6 +40,7 @@ public class AccessTokenApi {
      */  
     public AccessToken getAccessToken() {
     	App app = Mikoto.appApi.getApp();
+    	
     	Calendar cal = Calendar.getInstance();
     	cal.add(Calendar.HOUR_OF_DAY, -1);
     	
