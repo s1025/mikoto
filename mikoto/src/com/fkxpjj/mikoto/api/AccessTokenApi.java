@@ -6,7 +6,6 @@ import com.fkxpjj.mikoto.Mikoto;
 import com.fkxpjj.mikoto.model.AccessToken;
 import com.fkxpjj.mikoto.model.App;
 import com.fkxpjj.mikoto.util.HttpCon;
-import com.fkxpjj.mikoto.util.MyX509TrustManager;
 import com.google.gson.Gson;
 
 /** 

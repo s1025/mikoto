@@ -1,24 +1,9 @@
 package com.fkxpjj.mikoto.demo;
 
 
-import java.util.ArrayList;
-import java.util.List;
 
-import com.fkxpjj.mikoto.Mikoto;
-import com.fkxpjj.mikoto.api.AccessTokenApi;
-import com.fkxpjj.mikoto.api.GroupApi;
-import com.fkxpjj.mikoto.api.MenuApi;
 import com.fkxpjj.mikoto.api.UserApi;
-import com.fkxpjj.mikoto.model.AccessToken;
-import com.fkxpjj.mikoto.model.App;
-import com.fkxpjj.mikoto.model.BaseButton;
-import com.fkxpjj.mikoto.model.Button;
-import com.fkxpjj.mikoto.model.ClickButton;
-import com.fkxpjj.mikoto.model.Menu;
-import com.fkxpjj.mikoto.model.PopupButton;
-import com.fkxpjj.mikoto.model.ViewButton;
 import com.fkxpjj.mikoto.util.Builder;
-import com.google.gson.Gson;
 
 public class Test {
 	public static void main(String[] args){

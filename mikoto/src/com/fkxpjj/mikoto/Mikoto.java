@@ -3,7 +3,6 @@ package com.fkxpjj.mikoto;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
 import com.fkxpjj.mikoto.api.AccessTokenApi;
 import com.fkxpjj.mikoto.api.AppApi;

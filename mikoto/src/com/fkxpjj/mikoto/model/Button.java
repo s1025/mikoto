@@ -1,6 +1,5 @@
 package com.fkxpjj.mikoto.model;
 
-import java.util.List;
 /**
  * 按钮类，用于配置微信下方菜单上的按钮。
  * 
