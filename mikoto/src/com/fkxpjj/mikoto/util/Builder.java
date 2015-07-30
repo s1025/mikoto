@@ -5,10 +5,10 @@ import com.fkxpjj.mikoto.model.App;
 
 public class Builder {
 	
-	public void build(){
+	public void build(String appid, String appsecret){
 		App app = new App();
-		app.setAppID("wx591b08daf676e085");
-		app.setAppSecret("921057ddd269c0ec8481430db96cc1bc");
+		app.setAppID(appid);
+		app.setAppSecret(appsecret);
 		setApp(app);
 	}
 	

@@ -8,6 +8,7 @@ import com.fkxpjj.mikoto.Mikoto;
 import com.fkxpjj.mikoto.api.AccessTokenApi;
 import com.fkxpjj.mikoto.api.GroupApi;
 import com.fkxpjj.mikoto.api.MenuApi;
+import com.fkxpjj.mikoto.api.UserApi;
 import com.fkxpjj.mikoto.model.AccessToken;
 import com.fkxpjj.mikoto.model.App;
 import com.fkxpjj.mikoto.model.BaseButton;
@@ -21,7 +22,7 @@ import com.google.gson.Gson;
 
 public class Test {
 	public static void main(String[] args){
-		new Builder().build();/*
+		new Builder().build("wx591b08daf676e085", "921057ddd269c0ec8481430db96cc1bc");/*
 		Gson gson = new Gson();
 		
 		ClickButton button1 = new ClickButton();
@@ -71,7 +72,7 @@ public class Test {
 		//String s = MenuApi.deleteMenu();
 		//System.out.println(s);
 		
-		String s = GroupApi.getGroup();
+		String s = UserApi.infoUser("oVW-oszd62QE_kT66ilsRuuOJspA", null);
 		System.out.println(s);
 	}
 }
