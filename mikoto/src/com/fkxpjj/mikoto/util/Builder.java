@@ -10,6 +10,7 @@ public class Builder {
 		app.setAppID(appid);
 		app.setAppSecret(appsecret);
 		setApp(app);
+		System.out.println(app);
 	}
 	
 	public void setApp(App app){

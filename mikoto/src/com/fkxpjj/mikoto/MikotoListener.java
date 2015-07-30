@@ -10,15 +10,16 @@ public class MikotoListener implements ServletContextListener{
 
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
-		ServletContext servletContext = arg0.getServletContext();
-		String appid = servletContext.getInitParameter("appid");
-		String appsecret = servletContext.getInitParameter("appsecret");
-		new Builder().build(appid, appsecret);
+		
 	}
 
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
-		// TODO Auto-generated method stub
+		ServletContext servletContext = arg0.getServletContext();
+		String appid = servletContext.getInitParameter("appid");
+		String appsecret = servletContext.getInitParameter("appsecret");
+		System.out.println(appid+" , "+ appsecret);
+		new Builder().build(appid, appsecret);
 		
 	}
 
