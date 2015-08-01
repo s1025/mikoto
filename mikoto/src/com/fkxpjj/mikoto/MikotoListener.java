@@ -18,9 +18,9 @@ public class MikotoListener implements ServletContextListener{
 		ServletContext servletContext = arg0.getServletContext();
 		String appid = servletContext.getInitParameter("appid");
 		String appsecret = servletContext.getInitParameter("appsecret");
-		System.out.println(appid+" , "+ appsecret);
+		String token = servletContext.getInitParameter("token");
 		new Builder().build(appid, appsecret);
-		
+		Mikoto.token = token;
 	}
 
 }

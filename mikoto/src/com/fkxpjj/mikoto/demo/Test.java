@@ -35,9 +35,6 @@ public class Test {
 		menu.add(button3);
 		menu.add(subbutton);
 		
-		String json = gson.toJson(menu);
-		System.out.println(json);
-		
 		String r = MenuApi.createMenu(menu);
 		System.out.println(r);
 		*/

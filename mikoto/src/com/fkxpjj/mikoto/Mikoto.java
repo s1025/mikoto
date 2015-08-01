@@ -12,6 +12,7 @@ public class Mikoto {
 	
 	public static AccessTokenApi accessTokenApi = AccessTokenApi.getAccessTokenApi();
 	public static AppApi appApi = AppApi.getAppApi();
+	public static String token;
 	
 	public static String connect(String signature,String timestmp,String nonce,String echostr){
 		return echostr;
