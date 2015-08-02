@@ -5,7 +5,7 @@ package com.fkxpjj.mikoto.model;
  * @author fkxpjj
  *
  */
-public  class ReplyBase {
+public  class RespBase {
 	public String toUserName;
 	private String fromUserName;
 	private String createTime;

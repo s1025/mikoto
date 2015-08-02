@@ -1,6 +1,6 @@
 package com.fkxpjj.mikoto.model;
 
-public class ReplyText extends ReplyBase{
+public class RespText extends RespBase{
 	private String contend;
 
 	public String getContend() {

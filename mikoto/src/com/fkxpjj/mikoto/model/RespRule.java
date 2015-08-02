@@ -8,7 +8,7 @@ import java.util.List;
  * @author fkxpjj
  *
  */
-public class ReplyRule {
+public class RespRule {
 	private String name;
 	private boolean replayALL;
 	private List<String> keys;
