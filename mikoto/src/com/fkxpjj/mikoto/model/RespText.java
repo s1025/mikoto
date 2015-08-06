@@ -1,13 +1,15 @@
 package com.fkxpjj.mikoto.model;
 
 public class RespText extends RespBase{
-	private String contend;
+	private String Content;
 
-	public String getContend() {
-		return contend;
+	public String getContent() {
+		return Content;
 	}
 
-	public void setContend(String contend) {
-		this.contend = contend;
+	public void setContent(String content) {
+		Content = content;
 	}
+
+
 }

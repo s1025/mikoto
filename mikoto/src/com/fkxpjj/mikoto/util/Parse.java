@@ -12,6 +12,7 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.fkxpjj.mikoto.model.RespBase;
 import com.fkxpjj.mikoto.model.RespText;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.QuickWriter;
@@ -41,6 +42,11 @@ public class Parse {
 	public static String RespTextToXML(RespText respText){
 		xstream.alias("xml", respText.getClass());  
 	    return xstream.toXML(respText);  
+	}
+	
+	public static String RespToXML(RespBase resp){
+		xstream.alias("xml", resp.getClass());  
+	    return xstream.toXML(resp);  
 	}
 	
 	private static XStream xstream = new XStream(new XppDriver() {  

@@ -6,34 +6,35 @@ package com.fkxpjj.mikoto.model;
  *
  */
 public  class RespBase {
-	public String toUserName;
-	private String fromUserName;
-	private String createTime;
-	private String msgType;
+	public String ToUserName;
+	private String FromUserName;
+	private String CreateTime;
+	private String MsgType;
 	public String getToUserName() {
-		return toUserName;
+		return ToUserName;
 	}
 	public void setToUserName(String toUserName) {
-		this.toUserName = toUserName;
+		ToUserName = toUserName;
 	}
 	public String getFromUserName() {
-		return fromUserName;
+		return FromUserName;
 	}
 	public void setFromUserName(String fromUserName) {
-		this.fromUserName = fromUserName;
+		FromUserName = fromUserName;
 	}
 	public String getCreateTime() {
-		return createTime;
+		return CreateTime;
 	}
 	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
+		CreateTime = createTime;
 	}
 	public String getMsgType() {
-		return msgType;
+		return MsgType;
 	}
 	public void setMsgType(String msgType) {
-		this.msgType = msgType;
+		MsgType = msgType;
 	}
+
 	
 	
 }
