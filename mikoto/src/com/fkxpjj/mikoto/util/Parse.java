@@ -12,6 +12,9 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.fkxpjj.mikoto.model.MsgType;
+import com.fkxpjj.mikoto.model.ReqBase;
+import com.fkxpjj.mikoto.model.ReqImg;
 import com.fkxpjj.mikoto.model.ReqText;
 import com.fkxpjj.mikoto.model.RespBase;
 import com.fkxpjj.mikoto.model.RespText;
@@ -22,6 +25,17 @@ import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public class Parse {
+	
+	public static ReqBase getReq(HttpServletRequest req) throws Exception{
+		Map<String, String> map = parseXML(req);
+		ReqBase reqBase = new ReqBase();
+		String type = map.get("MsgType");
+		if (MsgType.TEXT.equals(type)){
+			reqBase = XMLtoText(map);
+		}
+		return reqBase;
+	}
+	
 	public static Map<String, String> parseXML(HttpServletRequest req) throws Exception{
 		Map<String, String> map = new HashMap<String, String>();
 		
@@ -46,9 +60,21 @@ public class Parse {
 		text.setToUserName(map.get("ToUserName"));
 		text.setMsgType(map.get("MsgType"));
 		text.setMsgId(map.get("MsgId"));
-		text.setCreateTime("CreateTime");
-		text.setContent("Content");
+		text.setCreateTime(map.get("CreateTime"));
+		text.setContent(map.get("Content"));
 		return text;
+	}
+	
+	public static ReqImg XMLtoImg(Map<String, String> map){
+		ReqImg img = new ReqImg();
+		img.setFromUserName(map.get("FromUserName"));
+		img.setToUserName(map.get("ToUserName"));
+		img.setMsgType(map.get("MsgType"));
+		img.setMsgId(map.get("MsgId"));
+		img.setCreateTime(map.get("CreateTime"));
+		img.setMediaId(map.get("MediaId"));
+		img.setPicUrl(map.get("PicUrl"));
+		return img;
 	}
 	
 	public static String RespTextToXML(RespText respText){
