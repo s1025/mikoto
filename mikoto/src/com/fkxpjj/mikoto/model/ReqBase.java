@@ -1,28 +1,28 @@
 package com.fkxpjj.mikoto.model;
 
 public class ReqBase {
-	private String toUserName;
-	private String fromUserName;
-	private String createTime;
+	private String ToUserName;
+	private String FromUserName;
+	private String CreateTime;
 	private String MsgType;
 	private String MsgId;
 	public String getToUserName() {
-		return toUserName;
+		return ToUserName;
 	}
 	public void setToUserName(String toUserName) {
-		this.toUserName = toUserName;
+		ToUserName = toUserName;
 	}
 	public String getFromUserName() {
-		return fromUserName;
+		return FromUserName;
 	}
 	public void setFromUserName(String fromUserName) {
-		this.fromUserName = fromUserName;
+		FromUserName = fromUserName;
 	}
 	public String getCreateTime() {
-		return createTime;
+		return CreateTime;
 	}
 	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
+		CreateTime = createTime;
 	}
 	public String getMsgType() {
 		return MsgType;
@@ -36,6 +36,7 @@ public class ReqBase {
 	public void setMsgId(String msgId) {
 		MsgId = msgId;
 	}
+	
 	
 	
 }

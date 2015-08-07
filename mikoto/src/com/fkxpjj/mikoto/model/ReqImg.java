@@ -1,22 +1,20 @@
 package com.fkxpjj.mikoto.model;
 
 public class ReqImg extends ReqBase{
-	private String picUrl;
-	private String mediaId;
-
+	private String PicUrl;
+	private String MediaId;
 	public String getPicUrl() {
-		return picUrl;
+		return PicUrl;
 	}
-
 	public void setPicUrl(String picUrl) {
-		this.picUrl = picUrl;
+		PicUrl = picUrl;
 	}
-
 	public String getMediaId() {
-		return mediaId;
+		return MediaId;
+	}
+	public void setMediaId(String mediaId) {
+		MediaId = mediaId;
 	}
 
-	public void setMediaId(String mediaId) {
-		this.mediaId = mediaId;
-	}
+
 }

@@ -1,14 +1,16 @@
 package com.fkxpjj.mikoto.model;
 
 public class ReqText extends ReqBase{
-	private String content;
+	private String Content;
 
 	public String getContent() {
-		return content;
+		return Content;
 	}
 
 	public void setContent(String content) {
-		this.content = content;
+		Content = content;
 	}
+
+
 
 }

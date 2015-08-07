@@ -2,18 +2,19 @@ package com.fkxpjj.mikoto.model;
 
 public class ReqVideo {
 
-	private String mediaId;
-	private String thumbMediaId;
+	private String MediaId;
+	private String ThumbMediaId;
 	public String getMediaId() {
-		return mediaId;
+		return MediaId;
 	}
 	public void setMediaId(String mediaId) {
-		this.mediaId = mediaId;
+		MediaId = mediaId;
 	}
 	public String getThumbMediaId() {
-		return thumbMediaId;
+		return ThumbMediaId;
 	}
 	public void setThumbMediaId(String thumbMediaId) {
-		this.thumbMediaId = thumbMediaId;
+		ThumbMediaId = thumbMediaId;
 	}
+
 }

@@ -12,6 +12,7 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.fkxpjj.mikoto.model.ReqText;
 import com.fkxpjj.mikoto.model.RespBase;
 import com.fkxpjj.mikoto.model.RespText;
 import com.thoughtworks.xstream.XStream;
@@ -37,6 +38,17 @@ public class Parse {
 		inputStream = null;
 		
 		return map;
+	}
+	
+	public static ReqText XMLtoText( Map<String, String> map){
+		ReqText text = new ReqText();
+		text.setFromUserName(map.get("FromUserName"));
+		text.setToUserName(map.get("ToUserName"));
+		text.setMsgType(map.get("MsgType"));
+		text.setMsgId(map.get("MsgId"));
+		text.setCreateTime("CreateTime");
+		text.setContent("Content");
+		return text;
 	}
 	
 	public static String RespTextToXML(RespText respText){

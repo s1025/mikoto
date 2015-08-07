@@ -1,19 +1,20 @@
 package com.fkxpjj.mikoto.model;
 
 public class ReqVoice extends ReqBase{
-	private String mediaId;
-	private String format;
+	private String MediaId;
+	private String Format;
 	public String getMediaId() {
-		return mediaId;
+		return MediaId;
 	}
 	public void setMediaId(String mediaId) {
-		this.mediaId = mediaId;
+		MediaId = mediaId;
 	}
 	public String getFormat() {
-		return format;
+		return Format;
 	}
 	public void setFormat(String format) {
-		this.format = format;
+		Format = format;
 	}
+
 
 }
