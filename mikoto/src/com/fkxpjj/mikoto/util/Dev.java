@@ -1,13 +1,22 @@
 package com.fkxpjj.mikoto.util;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.fkxpjj.mikoto.Mikoto;
 
 public class Dev {
-	public boolean validate(String signature, String timestamp, String nonce){
+	public static boolean validate(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		String signature = req.getParameter("signature");
+		String timestamp = req.getParameter("timestamp");
+		String nonce = req.getParameter("nonce");
+		String echostr = req.getParameter("echostr");
 		String token = Mikoto.token;
 		String[] arr = new String[] { token, timestamp, nonce };  
 		Arrays.sort(arr);  
@@ -25,7 +34,13 @@ public class Dev {
 				e.printStackTrace();  
 				}  
 		content = null;  
-		return tmpStr != null ? tmpStr.equals(signature.toUpperCase()) : false;  
+		boolean val = tmpStr != null ? tmpStr.equals(signature.toUpperCase()) : false;
+		if(val) {
+			PrintWriter out = resp.getWriter();
+			out.print(echostr);
+			out.close();
+		}
+		return val;
 		
 	}
 	
