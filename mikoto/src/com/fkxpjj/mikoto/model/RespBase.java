@@ -8,7 +8,7 @@ package com.fkxpjj.mikoto.model;
 public  class RespBase {
 	public String ToUserName;
 	private String FromUserName;
-	private String CreateTime;
+	private long CreateTime;
 	private String MsgType;
 	public String getToUserName() {
 		return ToUserName;
@@ -22,17 +22,23 @@ public  class RespBase {
 	public void setFromUserName(String fromUserName) {
 		FromUserName = fromUserName;
 	}
-	public String getCreateTime() {
-		return CreateTime;
-	}
-	public void setCreateTime(String createTime) {
-		CreateTime = createTime;
-	}
 	public String getMsgType() {
 		return MsgType;
 	}
 	public void setMsgType(String msgType) {
 		MsgType = msgType;
+	}
+	public long getCreateTime() {
+		return CreateTime;
+	}
+	public void setCreateTime(long createTime) {
+		CreateTime = createTime;
+	}
+	@Override
+	public String toString() {
+		return "RespBase [ToUserName=" + ToUserName + ", FromUserName="
+				+ FromUserName + ", CreateTime=" + CreateTime + ", MsgType="
+				+ MsgType + "]";
 	}
 
 	

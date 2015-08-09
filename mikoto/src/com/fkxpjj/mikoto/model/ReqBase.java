@@ -3,7 +3,7 @@ package com.fkxpjj.mikoto.model;
 public class ReqBase {
 	private String ToUserName;
 	private String FromUserName;
-	private String CreateTime;
+	private long CreateTime;
 	private String MsgType;
 	private String MsgId;
 	public String getToUserName() {
@@ -18,12 +18,6 @@ public class ReqBase {
 	public void setFromUserName(String fromUserName) {
 		FromUserName = fromUserName;
 	}
-	public String getCreateTime() {
-		return CreateTime;
-	}
-	public void setCreateTime(String createTime) {
-		CreateTime = createTime;
-	}
 	public String getMsgType() {
 		return MsgType;
 	}
@@ -35,6 +29,12 @@ public class ReqBase {
 	}
 	public void setMsgId(String msgId) {
 		MsgId = msgId;
+	}
+	public long getCreateTime() {
+		return CreateTime;
+	}
+	public void setCreateTime(long createTime) {
+		CreateTime = createTime;
 	}
 	
 	

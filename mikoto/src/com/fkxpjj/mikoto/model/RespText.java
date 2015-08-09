@@ -11,5 +11,12 @@ public class RespText extends RespBase{
 		Content = content;
 	}
 
+	@Override
+	public String toString() {
+		return "RespText [Content=" + Content + ", toString()="
+				+ super.toString() + "]";
+	}
 
+
+	
 }

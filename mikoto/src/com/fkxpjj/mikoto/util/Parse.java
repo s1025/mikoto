@@ -26,7 +26,7 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public class Parse {
 	
-	public static ReqBase getReq(HttpServletRequest req) throws Exception{
+	public ReqBase getReq(HttpServletRequest req) throws Exception{
 		Map<String, String> map = parseXML(req);
 		ReqBase reqBase = new ReqBase();
 		String type = map.get("MsgType");
@@ -36,7 +36,7 @@ public class Parse {
 		return reqBase;
 	}
 	
-	public static Map<String, String> parseXML(HttpServletRequest req) throws Exception{
+	public Map<String, String> parseXML(HttpServletRequest req) throws Exception{
 		Map<String, String> map = new HashMap<String, String>();
 		
 		InputStream inputStream = req.getInputStream();
@@ -54,40 +54,40 @@ public class Parse {
 		return map;
 	}
 	
-	public static ReqText XMLtoText( Map<String, String> map){
+	public ReqText XMLtoText( Map<String, String> map){
 		ReqText text = new ReqText();
 		text.setFromUserName(map.get("FromUserName"));
 		text.setToUserName(map.get("ToUserName"));
 		text.setMsgType(map.get("MsgType"));
 		text.setMsgId(map.get("MsgId"));
-		text.setCreateTime(map.get("CreateTime"));
+		text.setCreateTime(Long.parseLong(map.get("CreateTime")));
 		text.setContent(map.get("Content"));
 		return text;
 	}
 	
-	public static ReqImg XMLtoImg(Map<String, String> map){
+	public ReqImg XMLtoImg(Map<String, String> map){
 		ReqImg img = new ReqImg();
 		img.setFromUserName(map.get("FromUserName"));
 		img.setToUserName(map.get("ToUserName"));
 		img.setMsgType(map.get("MsgType"));
 		img.setMsgId(map.get("MsgId"));
-		img.setCreateTime(map.get("CreateTime"));
+		img.setCreateTime(Long.parseLong(map.get("CreateTime")));
 		img.setMediaId(map.get("MediaId"));
 		img.setPicUrl(map.get("PicUrl"));
 		return img;
 	}
 	
-	public static String RespTextToXML(RespText respText){
+	public String RespTextToXML(RespText respText){
 		xstream.alias("xml", respText.getClass());  
 	    return xstream.toXML(respText);  
 	}
 	
-	public static String RespToXML(RespBase resp){
+	public String RespToXML(RespBase resp){
 		xstream.alias("xml", resp.getClass());  
 	    return xstream.toXML(resp);  
 	}
 	
-	private static XStream xstream = new XStream(new XppDriver() {  
+	private XStream xstream = new XStream(new XppDriver() {  
 	    public HierarchicalStreamWriter createWriter(Writer out) {  
 	        return new PrettyPrintWriter(out) {  
 	            // 对所有xml节点的转换都增加CDATA标记  
