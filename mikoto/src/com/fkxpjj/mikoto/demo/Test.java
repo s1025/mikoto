@@ -2,6 +2,7 @@ package com.fkxpjj.mikoto.demo;
 
 
 
+import com.fkxpjj.mikoto.Mikoto;
 import com.fkxpjj.mikoto.api.UserApi;
 import com.fkxpjj.mikoto.util.Builder;
 
@@ -54,7 +55,7 @@ public class Test {
 		//String s = MenuApi.deleteMenu();
 		//System.out.println(s);
 		
-		String s = UserApi.infoUser("oVW-oszd62QE_kT66ilsRuuOJspA", null);
+		String s = Mikoto.api.user.infoUser("oVW-oszd62QE_kT66ilsRuuOJspA", null);
 		System.out.println(s);
 	}
 }

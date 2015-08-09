@@ -4,7 +4,7 @@ import com.fkxpjj.mikoto.model.MsgType;
 import com.fkxpjj.mikoto.model.ReqText;
 import com.fkxpjj.mikoto.model.RespText;
 
-public class Passive {
+public class PassiveApi {
 	public RespText getRespText(ReqText reqText, String content){
 		RespText respText = new RespText();
 		respText.setFromUserName(reqText.getToUserName());

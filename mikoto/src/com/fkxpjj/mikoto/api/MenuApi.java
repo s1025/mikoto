@@ -36,7 +36,7 @@ public class MenuApi {
 	 * @param accessToken 有效的access_token 
 	 * @return 0表示成功，其他值表示失败 
 	 */
-	public static String createMenu(Menu menu) {  
+	public static String createMenu(MenuApi menu) {  
 	    Gson gson = new Gson();
 	    // 拼装创建菜单的url  
 	    String url = menu_create_url.replace("ACCESS_TOKEN", Mikoto.accessTokenApi.getAccessToken().getAccess_token());  
