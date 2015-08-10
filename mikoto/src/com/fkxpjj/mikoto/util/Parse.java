@@ -1,5 +1,6 @@
 package com.fkxpjj.mikoto.util;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.dom4j.Document;
+import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
@@ -26,19 +28,26 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public class Parse {
 	
-	public ReqBase getReq(HttpServletRequest req) throws Exception{
-		Map<String, String> map = parseXML(req);
+	public ReqBase getReq(HttpServletRequest req) throws IOException{
+		Map<String, String> map = new HashMap<String, String>();
 		ReqBase reqBase = new ReqBase();
-		String type = map.get("MsgType");
-		if (MsgType.TEXT.equals(type)){
-			reqBase = XMLtoText(map);
+		try {
+			map = parseXML(req);
+			String type = map.get("MsgType");
+			if (MsgType.TEXT.equals(type)){
+				reqBase = XMLtoText(map);
+			}
+		} catch (DocumentException e) {
+			e.printStackTrace();
+			reqBase.setMsgType(MsgType.NONE);
 		}
+		
 		return reqBase;
 	}
 	
-	public Map<String, String> parseXML(HttpServletRequest req) throws Exception{
+	public Map<String, String> parseXML(HttpServletRequest req) throws IOException, DocumentException{
 		Map<String, String> map = new HashMap<String, String>();
-		
+		req.setCharacterEncoding("UTF-8");
 		InputStream inputStream = req.getInputStream();
 		SAXReader reader = new SAXReader();
 		Document document = reader.read(inputStream);
