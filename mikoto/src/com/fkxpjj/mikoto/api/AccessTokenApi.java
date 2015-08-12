@@ -29,7 +29,21 @@ public class AccessTokenApi {
 	}
 	
     public final String access_token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";  
-      
+     
+    
+    public String getAccessToken() {
+    	
+    	Calendar cal = Calendar.getInstance();
+    	cal.add(Calendar.HOUR_OF_DAY, -1);
+    	
+    	if(time == null || cal.after(time)){
+    		accessToken = obtainAccessToken(Mikoto.app);
+        	time = Calendar.getInstance();
+        }
+        
+    	return accessToken.getAccess_token();
+    }
+    
     /** 
      * ªÒ»°access_token 
      *  
@@ -37,14 +51,13 @@ public class AccessTokenApi {
      * @param appsecret √‹‘ø 
      * @return 
      */  
-    public AccessToken getAccessToken() {
-    	App app = Mikoto.appApi.getApp();
+    public AccessToken getAccessToken(boolean o) {
     	
     	Calendar cal = Calendar.getInstance();
     	cal.add(Calendar.HOUR_OF_DAY, -1);
     	
     	if(time == null || cal.after(time)){
-    		accessToken = obtainAccessToken(app);
+    		accessToken = obtainAccessToken(Mikoto.app);
         	time = Calendar.getInstance();
         }
         

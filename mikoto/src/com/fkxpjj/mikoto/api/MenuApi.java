@@ -39,7 +39,7 @@ public class MenuApi {
 	public static String createMenu(MenuApi menu) {  
 	    Gson gson = new Gson();
 	    // 拼装创建菜单的url  
-	    String url = menu_create_url.replace("ACCESS_TOKEN", Mikoto.accessTokenApi.getAccessToken().getAccess_token());  
+	    String url = menu_create_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());  
 	    // 将菜单对象转换成json字符串  
 	    String jsonMenu = gson.toJson(menu);  
 	    
@@ -51,7 +51,7 @@ public class MenuApi {
 	
 	public static String deleteMenu() { 
 		
-		String url = menu_delete_url.replace("ACCESS_TOKEN", Mikoto.accessTokenApi.getAccessToken().getAccess_token());
+		String url = menu_delete_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
 		
 		String response = HttpCon.httpRequest(url, "GET", null);
 		

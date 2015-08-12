@@ -13,21 +13,21 @@ public class KfApi {
 	public String get_kf_list_url = "https://api.weixin.qq.com/cgi-bin/customservice/getkflist?access_token=ACCESS_TOKEN";
 	
 	public String sendCustomText(String openid, String content) {
-		String url = send_custom_url.replace("ACCESS_TOKEN", Mikoto.accessTokenApi.getAccessToken().getAccess_token());
+		String url = send_custom_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
 		String post = "{\"touser\":\""+openid+"\",\"msgtype\":\"text\",\"text\":{\"content\":\""+content+"\"}}";
 		String response = HttpCon.httpRequest(url, "POST", post);
 		return response;
 	}
 	
 	public String sendCustomImage(String openid, String mediaId) {
-		String url = send_custom_url.replace("ACCESS_TOKEN", Mikoto.accessTokenApi.getAccessToken().getAccess_token());
+		String url = send_custom_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
 		String post = "{\"touser\":\""+openid+"\",\"msgtype\":\"image\",\"image\":{\"media_id\":\""+mediaId+"\"}}";
 		String response = HttpCon.httpRequest(url, "POST", post);
 		return response;
 	}
 	
 	public String sendCustomVoice(String openid, String mediaId) {
-		String url = send_custom_url.replace("ACCESS_TOKEN", Mikoto.accessTokenApi.getAccessToken().getAccess_token());
+		String url = send_custom_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
 		String post = "{\"touser\":\""+openid+"\",\"msgtype\":\"voice\",\"voice\":{\"media_id\":\""+mediaId+"\"}}";
 		String response = HttpCon.httpRequest(url, "POST", post);
 		return response;
@@ -37,14 +37,14 @@ public class KfApi {
 		Gson gson = new Gson();
 		String json = gson.toJson(list);
 		json = json.toLowerCase();
-		String url = send_custom_url.replace("ACCESS_TOKEN", Mikoto.accessTokenApi.getAccessToken().getAccess_token());
+		String url = send_custom_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
 		String post = "{\"touser\":\""+openid+"\",\"msgtype\":\"news\",\"news\":{\"articles\":"+json+"}}";
 		String response = HttpCon.httpRequest(url, "POST", post);
 		return response;
 	}
 	
 	public String addKf(String account, String name, String password){
-		String url = add_kf_url.replace("ACCESS_TOKEN", Mikoto.accessTokenApi.getAccessToken().getAccess_token());
+		String url = add_kf_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
 		String post = "{"+
                          "\"kf_account\" : \""+account+"\","+
                          "\"nickname\" : \""+name+"\","+
@@ -55,7 +55,7 @@ public class KfApi {
 	}
 	
 	public String getKfList(){
-		String url = get_kf_list_url.replace("ACCESS_TOKEN", Mikoto.accessTokenApi.getAccessToken().getAccess_token());
+		String url = get_kf_list_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
 		String response = HttpCon.httpRequest(url, "GET", null);
 		return response;
 	}

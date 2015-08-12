@@ -1,6 +1,7 @@
 package com.fkxpjj.mikoto.util;
 
 import com.fkxpjj.mikoto.Mikoto;
+import com.fkxpjj.mikoto.api.AppApi;
 import com.fkxpjj.mikoto.model.App;
 
 public class Builder {
@@ -10,10 +11,9 @@ public class Builder {
 		app.setAppID(appid);
 		app.setAppSecret(appsecret);
 		setApp(app);
-		System.out.println(app);
 	}
 	
 	public void setApp(App app){
-		Mikoto.appApi.setApp(app);
+		AppApi.getAppApi().setApp(app);;
 	}
 }
