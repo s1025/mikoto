@@ -1,4 +1,4 @@
-package com.fkxpjj.mikoto.model;
+package com.fkxpjj.mikoto.model.resp;
 
 public class RespText extends RespBase{
 	private String Content;

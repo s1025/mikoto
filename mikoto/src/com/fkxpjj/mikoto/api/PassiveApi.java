@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fkxpjj.mikoto.Mikoto;
 import com.fkxpjj.mikoto.model.MsgType;
-import com.fkxpjj.mikoto.model.ReqBase;
-import com.fkxpjj.mikoto.model.ReqText;
-import com.fkxpjj.mikoto.model.RespNews;
-import com.fkxpjj.mikoto.model.RespText;
+import com.fkxpjj.mikoto.model.req.ReqBase;
+import com.fkxpjj.mikoto.model.req.ReqText;
+import com.fkxpjj.mikoto.model.resp.RespNews;
+import com.fkxpjj.mikoto.model.resp.RespText;
 
 public class PassiveApi {
 	public RespText getRespText(ReqBase reqBase, String content){

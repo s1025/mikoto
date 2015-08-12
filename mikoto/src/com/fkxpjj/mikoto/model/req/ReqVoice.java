@@ -1,4 +1,4 @@
-package com.fkxpjj.mikoto.model;
+package com.fkxpjj.mikoto.model.req;
 
 public class ReqVoice extends ReqBase{
 	private String MediaId;

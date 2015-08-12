@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fkxpjj.mikoto.Mikoto;
-import com.fkxpjj.mikoto.model.RespArticle;
-import com.fkxpjj.mikoto.model.RespNews;
+import com.fkxpjj.mikoto.model.resp.RespArticle;
+import com.fkxpjj.mikoto.model.resp.RespNews;
 import com.fkxpjj.mikoto.util.Builder;
 import com.fkxpjj.mikoto.util.Parse;
 import com.google.gson.Gson;

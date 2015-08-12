@@ -1,4 +1,4 @@
-package com.fkxpjj.mikoto.model;
+package com.fkxpjj.mikoto.model.button;
 
 public class BaseButton extends Button{
 	private String name;

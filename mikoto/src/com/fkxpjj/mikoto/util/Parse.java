@@ -15,11 +15,11 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import com.fkxpjj.mikoto.model.MsgType;
-import com.fkxpjj.mikoto.model.ReqBase;
-import com.fkxpjj.mikoto.model.ReqImg;
-import com.fkxpjj.mikoto.model.ReqText;
-import com.fkxpjj.mikoto.model.RespBase;
-import com.fkxpjj.mikoto.model.RespText;
+import com.fkxpjj.mikoto.model.req.ReqBase;
+import com.fkxpjj.mikoto.model.req.ReqImg;
+import com.fkxpjj.mikoto.model.req.ReqText;
+import com.fkxpjj.mikoto.model.resp.RespBase;
+import com.fkxpjj.mikoto.model.resp.RespText;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;

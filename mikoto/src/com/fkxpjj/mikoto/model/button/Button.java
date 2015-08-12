@@ -1,4 +1,4 @@
-package com.fkxpjj.mikoto.model;
+package com.fkxpjj.mikoto.model.button;
 
 /**
  * 按钮类，用于配置微信下方菜单上的按钮。

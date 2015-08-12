@@ -1,4 +1,5 @@
-package com.fkxpjj.mikoto.model;
+package com.fkxpjj.mikoto.model.button;
+
 
 public class ViewButton extends BaseButton{
 	

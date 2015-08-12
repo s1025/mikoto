@@ -1,15 +1,11 @@
-package com.fkxpjj.mikoto.model;
-/**
- * 回复消息的基类，所有消息类型继承此类。
- * 
- * @author fkxpjj
- *
- */
-public  class RespBase {
-	public String ToUserName;
+package com.fkxpjj.mikoto.model.req;
+
+public class ReqBase {
+	private String ToUserName;
 	private String FromUserName;
 	private long CreateTime;
 	private String MsgType;
+	private String MsgId;
 	public String getToUserName() {
 		return ToUserName;
 	}
@@ -28,19 +24,19 @@ public  class RespBase {
 	public void setMsgType(String msgType) {
 		MsgType = msgType;
 	}
+	public String getMsgId() {
+		return MsgId;
+	}
+	public void setMsgId(String msgId) {
+		MsgId = msgId;
+	}
 	public long getCreateTime() {
 		return CreateTime;
 	}
 	public void setCreateTime(long createTime) {
 		CreateTime = createTime;
 	}
-	@Override
-	public String toString() {
-		return "RespBase [ToUserName=" + ToUserName + ", FromUserName="
-				+ FromUserName + ", CreateTime=" + CreateTime + ", MsgType="
-				+ MsgType + "]";
-	}
-
+	
 	
 	
 }

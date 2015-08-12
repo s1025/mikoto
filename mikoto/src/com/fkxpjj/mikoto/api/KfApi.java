@@ -3,7 +3,7 @@ package com.fkxpjj.mikoto.api;
 import java.util.List;
 
 import com.fkxpjj.mikoto.Mikoto;
-import com.fkxpjj.mikoto.model.RespArticle;
+import com.fkxpjj.mikoto.model.resp.RespArticle;
 import com.fkxpjj.mikoto.util.HttpCon;
 import com.google.gson.Gson;
 
@@ -12,9 +12,23 @@ public class KfApi {
 	public String add_kf_url = "https://api.weixin.qq.com/customservice/kfaccount/add?access_token=ACCESS_TOKEN";
 	public String get_kf_list_url = "https://api.weixin.qq.com/cgi-bin/customservice/getkflist?access_token=ACCESS_TOKEN";
 	
-	public String sendCustom(String openid, String type, String content) {
+	public String sendCustomText(String openid, String content) {
 		String url = send_custom_url.replace("ACCESS_TOKEN", Mikoto.accessTokenApi.getAccessToken().getAccess_token());
-		String post = "{\"touser\":\""+openid+"\",\"msgtype\":\""+type+"\",\"text\":{\"content\":\""+content+"\"}}";
+		String post = "{\"touser\":\""+openid+"\",\"msgtype\":\"text\",\"text\":{\"content\":\""+content+"\"}}";
+		String response = HttpCon.httpRequest(url, "POST", post);
+		return response;
+	}
+	
+	public String sendCustomImage(String openid, String mediaId) {
+		String url = send_custom_url.replace("ACCESS_TOKEN", Mikoto.accessTokenApi.getAccessToken().getAccess_token());
+		String post = "{\"touser\":\""+openid+"\",\"msgtype\":\"image\",\"image\":{\"media_id\":\""+mediaId+"\"}}";
+		String response = HttpCon.httpRequest(url, "POST", post);
+		return response;
+	}
+	
+	public String sendCustomVoice(String openid, String mediaId) {
+		String url = send_custom_url.replace("ACCESS_TOKEN", Mikoto.accessTokenApi.getAccessToken().getAccess_token());
+		String post = "{\"touser\":\""+openid+"\",\"msgtype\":\"voice\",\"voice\":{\"media_id\":\""+mediaId+"\"}}";
 		String response = HttpCon.httpRequest(url, "POST", post);
 		return response;
 	}
@@ -25,7 +39,6 @@ public class KfApi {
 		json = json.toLowerCase();
 		String url = send_custom_url.replace("ACCESS_TOKEN", Mikoto.accessTokenApi.getAccessToken().getAccess_token());
 		String post = "{\"touser\":\""+openid+"\",\"msgtype\":\"news\",\"news\":{\"articles\":"+json+"}}";
-		System.out.println(post);
 		String response = HttpCon.httpRequest(url, "POST", post);
 		return response;
 	}

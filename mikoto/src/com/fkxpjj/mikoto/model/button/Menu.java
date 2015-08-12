@@ -1,4 +1,4 @@
-package com.fkxpjj.mikoto.model;
+package com.fkxpjj.mikoto.model.button;
 
 import java.util.ArrayList;
 import java.util.List;

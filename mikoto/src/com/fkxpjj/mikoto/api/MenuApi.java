@@ -3,8 +3,8 @@ package com.fkxpjj.mikoto.api;
 import java.util.List;
 
 import com.fkxpjj.mikoto.Mikoto;
-import com.fkxpjj.mikoto.model.Button;
-import com.fkxpjj.mikoto.model.Menu;
+import com.fkxpjj.mikoto.model.button.Button;
+import com.fkxpjj.mikoto.model.button.Menu;
 import com.fkxpjj.mikoto.util.HttpCon;
 import com.google.gson.Gson;
 /**
