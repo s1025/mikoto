@@ -2,6 +2,9 @@ package com.fkxpjj.mikoto.demo;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fkxpjj.mikoto.Mikoto;
 import com.fkxpjj.mikoto.api.UserApi;
 import com.fkxpjj.mikoto.util.Builder;
@@ -55,7 +58,15 @@ public class Test {
 		//String s = MenuApi.deleteMenu();
 		//System.out.println(s);
 		
-		String s = Mikoto.api.user.infoUser("oVW-oszd62QE_kT66ilsRuuOJspA", null);
+		//String s = Mikoto.api.user.infoUser("oVW-oszd62QE_kT66ilsRuuOJspA");
+		//System.out.println(s);
+		
+		List<String> openids = new ArrayList<String>();
+		openids.add("oVW-os9UkORwWvVlp09R4hAaPCF4");
+		openids.add("oVW-oszd62QE_kT66ilsRuuOJspA");
+		
+		String s = Mikoto.api.user.usersList("oVW-os9UkORwWvVlp09R4hAaPCF4");
+		
 		System.out.println(s);
 	}
 }

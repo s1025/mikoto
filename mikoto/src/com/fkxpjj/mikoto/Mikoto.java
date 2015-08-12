@@ -17,6 +17,7 @@ import java.util.List;
 
 
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,6 +30,7 @@ import com.fkxpjj.mikoto.api.PassiveApi;
 import com.fkxpjj.mikoto.api.UserApi;
 import com.fkxpjj.mikoto.model.App;
 import com.fkxpjj.mikoto.model.button.Button;
+import com.fkxpjj.mikoto.util.Builder;
 import com.fkxpjj.mikoto.util.Dev;
 import com.fkxpjj.mikoto.util.Parse;
 
@@ -40,6 +42,11 @@ public class Mikoto {
 	
 	public static boolean validate(HttpServletRequest req, HttpServletResponse resp) throws IOException{
 		return Dev.validate(req, resp);
+	}
+	
+	public void build(String appid, String appsecret, String token){
+		new Builder().build(appid, appsecret);
+		Mikoto.token = token;
 	}
 	
 	public static class api{
