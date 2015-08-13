@@ -10,9 +10,7 @@ public class MaterialTest {
 		String path="d://1.mp4";
 		
 		String s = Mikoto.api.material.addMaterialVideo(path, "vtest1", "vintro1");
-		String d = Mikoto.api.material.materialCount();
 		System.out.println(s);
-		System.out.println(d);
 	}
 
 }

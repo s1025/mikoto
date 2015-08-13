@@ -56,7 +56,7 @@ public class MaterialApi {
 		Map<String, String> resp = new HashMap<String, String>();
 		resp.put("title", title);
 		resp.put("introduction", intro);
-		String response = HttpCon.upload(url, null, map);
+		String response = HttpCon.upload(url, resp, map);
 		return response;
 	}
 	
