@@ -7,8 +7,8 @@ import com.fkxpjj.mikoto.util.Builder;
 public class KfTest {
 	public static void main (String[] args){
 		new Builder().build("wx591b08daf676e085", "921057ddd269c0ec8481430db96cc1bc");
-		
-		String s =Mikoto.api.kf.addKf("f445334303@gh_4fabcd229559", "fk", "96e79218965eb72c92a549dd5a330112");
+		//oVW-oszd62QE_kT66ilsRuuOJspA
+		String s =Mikoto.api.kf.sendCustomImage("oVW-oszd62QE_kT66ilsRuuOJspA", "UGNBhy32X--4JOvF5J2mytPmu8Jm9Ful9LRtsHCNJV0");
 		//String s = KfApi.getKfList();
 		System.out.println(s);
 	}

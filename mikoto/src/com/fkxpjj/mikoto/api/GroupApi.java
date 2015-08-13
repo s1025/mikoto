@@ -5,6 +5,11 @@ import java.util.List;
 import com.fkxpjj.mikoto.Mikoto;
 import com.fkxpjj.mikoto.util.HttpCon;
 
+/**
+ * 用户分组.
+ * @author fkxpjj
+ *
+ */
 public class GroupApi {
 	
 	/**

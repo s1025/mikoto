@@ -5,6 +5,12 @@ import java.util.List;
 import com.fkxpjj.mikoto.Mikoto;
 import com.fkxpjj.mikoto.util.HttpCon;
 
+/**
+ * 用户管理.
+ * 
+ * @author fkxpjj
+ *
+ */
 public class UserApi {
 	/**
 	 * 设置用户备注名的url。

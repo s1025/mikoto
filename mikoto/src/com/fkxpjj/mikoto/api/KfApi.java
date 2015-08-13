@@ -33,6 +33,14 @@ public class KfApi {
 		return response;
 	}
 	
+	public String sendCustomVideo(String openid, String mediaId, String thumbMediaId, String title, String desc) {
+		String url = send_custom_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
+		String post = "{\"touser\":\""+openid+"\",\"msgtype\":\"video\",\"video\":"
+				+ "{\"media_id\":\""+mediaId+"\",\"thumb_media_id\":\""+thumbMediaId+"\",\"title\":\""+title+"\",\"description\":\""+desc+"\"}}";
+		String response = HttpCon.httpRequest(url, "POST", post);
+		return response;
+	}
+	
 	public String sendCustomNews(String openid, List<RespArticle> list){
 		Gson gson = new Gson();
 		String json = gson.toJson(list);

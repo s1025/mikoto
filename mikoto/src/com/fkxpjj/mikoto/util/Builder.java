@@ -1,6 +1,5 @@
 package com.fkxpjj.mikoto.util;
 
-import com.fkxpjj.mikoto.Mikoto;
 import com.fkxpjj.mikoto.api.AppApi;
 import com.fkxpjj.mikoto.model.App;
 
