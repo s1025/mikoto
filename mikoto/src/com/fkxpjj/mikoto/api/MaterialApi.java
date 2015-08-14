@@ -22,8 +22,18 @@ public class MaterialApi {
 	 */
 	public String material_add = "https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=ACCESS_TOKEN";
 	
+	/**
+	 * 删除永久素材的url。
+	 */
 	public String material_delete = "https://api.weixin.qq.com/cgi-bin/material/del_material?access_token=ACCESS_TOKEN";
 	
+	public String add_news_img = "https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=ACCESS_TOKEN";
+	
+	/**
+	 * 删除永久素材。
+	 * @param mediaId 素材id
+	 * @return 返回json
+	 */
 	public String delMaterial(String mediaId){
 		String url = material_delete.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
 		String post = "{\"media_id\":\""+mediaId+"\"}";
@@ -34,7 +44,7 @@ public class MaterialApi {
 	
 	/**
 	 * 上传永久素材
-	 * @param type 类型：image、voice、video、thumb
+	 * @param type 类型：image、voice、thumb
 	 * @param path 文件路径
 	 * @return 返回json
 	 */
@@ -81,6 +91,14 @@ public class MaterialApi {
 		String url = material_list_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
 		String post = "{\"type\":\""+type+"\",\"offset\":"+offset+",\"count\":"+count+"}";
 		String response = HttpCon.httpRequest(url, "POST", post);
+		return response;
+	}
+	
+	public String addNewsImg(String path){
+		String url = add_news_img.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("rrr", path);
+		String response = HttpCon.upload(url, null, map);
 		return response;
 	}
 }

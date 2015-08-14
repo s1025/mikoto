@@ -144,8 +144,10 @@ public class HttpCon {
                     strBuf.append("Content-Disposition: form-data; name=\""  
                             + inputName + "\"\r\n\r\n");  
                     strBuf.append(inputValue);  
+                    
                 }  
-                out.write(strBuf.toString().getBytes());  
+                out.write(strBuf.toString().getBytes("UTF-8"));  
+                System.out.println(strBuf.toString());
             }  
             
             // file  
@@ -178,7 +180,7 @@ public class HttpCon {
                     strBuf.append("Content-Type:" + contentType + "\r\n\r\n");  
   
                     out.write(strBuf.toString().getBytes());  
-  
+                    System.out.println(strBuf.toString());
                     DataInputStream in = new DataInputStream(  
                             new FileInputStream(file));  
                     int bytes = 0;  

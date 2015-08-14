@@ -7,9 +7,9 @@ public class MaterialTest {
 	public static void main(String[] args) throws Exception{
 		new Builder().build("wx591b08daf676e085", "921057ddd269c0ec8481430db96cc1bc");
 		
-		String path="d://1.mp4";
+		String path="d://2.jpg";
 		
-		String s = Mikoto.api.material.addMaterialVideo(path, "vtest1", "vintro1");
+		String s = Mikoto.api.material.materialCount();
 		System.out.println(s);
 	}
 
