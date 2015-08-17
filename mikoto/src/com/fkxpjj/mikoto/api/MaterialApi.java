@@ -61,12 +61,12 @@ public class MaterialApi {
 	public String addMaterialVideo(String path, String title, String intro){
 		String url = material_add.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
 		url = url.replace("TYPE", "video");
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("rrr", path);
+		Map<String, String> file = new HashMap<String, String>();
 		Map<String, String> resp = new HashMap<String, String>();
-		resp.put("title", title);
-		resp.put("introduction", intro);
-		String response = HttpCon.upload(url, resp, map);
+		file.put("media", path);
+		String json = "{\"title\":"+title+",\"introduction\":"+intro+"}";
+		resp.put("json", json);
+		String response = HttpCon.upload(url, resp, file);
 		return response;
 	}
 	

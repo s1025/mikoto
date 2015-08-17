@@ -23,6 +23,7 @@ public class PassiveApi {
 		return respText;
 	}
 	
+	
 	public RespNews getRespNews(ReqBase reqBase){
 		RespNews respNews = new RespNews();
 		respNews.setFromUserName(reqBase.getToUserName());
