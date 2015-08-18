@@ -3,14 +3,14 @@ package com.fkxpjj.mikoto.demo;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fkxpjj.mikoto.Mikoto;
-import com.fkxpjj.mikoto.model.active.ArticleKf;
-import com.fkxpjj.mikoto.model.active.ArticleMaterial;
-import com.fkxpjj.mikoto.model.resp.RespArticle;
-import com.fkxpjj.mikoto.model.resp.RespNews;
-import com.fkxpjj.mikoto.util.Builder;
-import com.fkxpjj.mikoto.util.Parse;
 import com.google.gson.Gson;
+import com.s1025.mikoto.Mikoto;
+import com.s1025.mikoto.model.active.ArticleKf;
+import com.s1025.mikoto.model.active.ArticleMaterial;
+import com.s1025.mikoto.model.resp.RespArticle;
+import com.s1025.mikoto.model.resp.RespNews;
+import com.s1025.mikoto.util.Builder;
+import com.s1025.mikoto.util.Parse;
 
 public class NewsTest {
 	public static void main (String[] args){

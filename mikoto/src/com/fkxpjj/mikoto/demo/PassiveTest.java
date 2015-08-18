@@ -3,14 +3,14 @@ package com.fkxpjj.mikoto.demo;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fkxpjj.mikoto.Mikoto;
-import com.fkxpjj.mikoto.model.req.ReqText;
-import com.fkxpjj.mikoto.model.resp.Media;
-import com.fkxpjj.mikoto.model.resp.RespArticle;
-import com.fkxpjj.mikoto.model.resp.RespImg;
-import com.fkxpjj.mikoto.model.resp.RespNews;
-import com.fkxpjj.mikoto.model.resp.RespText;
-import com.fkxpjj.mikoto.model.resp.RespVoice;
+import com.s1025.mikoto.Mikoto;
+import com.s1025.mikoto.model.req.ReqText;
+import com.s1025.mikoto.model.resp.Media;
+import com.s1025.mikoto.model.resp.RespArticle;
+import com.s1025.mikoto.model.resp.RespImg;
+import com.s1025.mikoto.model.resp.RespNews;
+import com.s1025.mikoto.model.resp.RespText;
+import com.s1025.mikoto.model.resp.RespVoice;
 
 public class PassiveTest {
 	public static void main(String[] args){

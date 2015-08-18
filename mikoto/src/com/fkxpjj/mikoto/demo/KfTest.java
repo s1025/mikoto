@@ -3,11 +3,11 @@ package com.fkxpjj.mikoto.demo;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fkxpjj.mikoto.Mikoto;
-import com.fkxpjj.mikoto.api.KfApi;
-import com.fkxpjj.mikoto.model.active.ArticleKf;
-import com.fkxpjj.mikoto.util.Builder;
 import com.google.gson.Gson;
+import com.s1025.mikoto.Mikoto;
+import com.s1025.mikoto.api.KfApi;
+import com.s1025.mikoto.model.active.ArticleKf;
+import com.s1025.mikoto.util.Builder;
 
 public class KfTest {
 	public static void main (String[] args){

@@ -2,9 +2,9 @@ package com.fkxpjj.mikoto.demo;
 
 import java.io.IOException;
 
-import com.fkxpjj.mikoto.Mikoto;
-import com.fkxpjj.mikoto.util.Builder;
-import com.fkxpjj.mikoto.util.HttpCon;
+import com.s1025.mikoto.Mikoto;
+import com.s1025.mikoto.util.Builder;
+import com.s1025.mikoto.util.HttpCon;
 
 public class MediaTest {
 	public static void main (String[] args) throws IOException{

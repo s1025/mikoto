@@ -1,11 +1,11 @@
 package com.fkxpjj.mikoto.demo;
 
-import com.fkxpjj.mikoto.Mikoto;
-import com.fkxpjj.mikoto.api.KfApi;
-import com.fkxpjj.mikoto.api.UserApi;
-import com.fkxpjj.mikoto.model.resp.RespText;
-import com.fkxpjj.mikoto.util.Builder;
-import com.fkxpjj.mikoto.util.Parse;
+import com.s1025.mikoto.Mikoto;
+import com.s1025.mikoto.api.KfApi;
+import com.s1025.mikoto.api.UserApi;
+import com.s1025.mikoto.model.resp.RespText;
+import com.s1025.mikoto.util.Builder;
+import com.s1025.mikoto.util.Parse;
 
 public class RespTest {
 	public static void main(String[] args){

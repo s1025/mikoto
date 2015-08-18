@@ -1,7 +1,7 @@
 package com.fkxpjj.mikoto.demo;
 
-import com.fkxpjj.mikoto.Mikoto;
-import com.fkxpjj.mikoto.util.Builder;
+import com.s1025.mikoto.Mikoto;
+import com.s1025.mikoto.util.Builder;
 
 public class MassTest {
 	public static void main(String[] args){

@@ -1,12 +1,12 @@
 package com.fkxpjj.mikoto.demo;
 
-import com.fkxpjj.mikoto.Mikoto;
-import com.fkxpjj.mikoto.builder.MenuBuilder;
-import com.fkxpjj.mikoto.model.button.ButtonClick;
-import com.fkxpjj.mikoto.model.button.ButtonSub;
-import com.fkxpjj.mikoto.model.button.ButtonType;
-import com.fkxpjj.mikoto.model.button.ButtonView;
-import com.fkxpjj.mikoto.util.Builder;
+import com.s1025.mikoto.Mikoto;
+import com.s1025.mikoto.builder.MenuBuilder;
+import com.s1025.mikoto.model.button.ButtonClick;
+import com.s1025.mikoto.model.button.ButtonSub;
+import com.s1025.mikoto.model.button.ButtonType;
+import com.s1025.mikoto.model.button.ButtonView;
+import com.s1025.mikoto.util.Builder;
 
 public class MenuTest {
 

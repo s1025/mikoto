@@ -5,9 +5,9 @@ package com.fkxpjj.mikoto.demo;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fkxpjj.mikoto.Mikoto;
-import com.fkxpjj.mikoto.api.UserApi;
-import com.fkxpjj.mikoto.util.Builder;
+import com.s1025.mikoto.Mikoto;
+import com.s1025.mikoto.api.UserApi;
+import com.s1025.mikoto.util.Builder;
 
 public class Test {
 	public static void main(String[] args){
