@@ -156,6 +156,7 @@ public class PassiveApi {
 		String xml = Mikoto.parse.RespToXML(respNews);
 		resp.setCharacterEncoding("UTF-8");
 		PrintWriter out = resp.getWriter();
+		System.out.println(xml);
 		out.write(xml);
 		out.close();
 	}

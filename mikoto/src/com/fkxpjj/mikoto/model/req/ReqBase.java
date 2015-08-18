@@ -36,6 +36,12 @@ public class ReqBase {
 	public void setCreateTime(long createTime) {
 		CreateTime = createTime;
 	}
+	@Override
+	public String toString() {
+		return "ReqBase [ToUserName=" + ToUserName + ", FromUserName="
+				+ FromUserName + ", CreateTime=" + CreateTime + ", MsgType="
+				+ MsgType + ", MsgId=" + MsgId + "]";
+	}
 	
 	
 	

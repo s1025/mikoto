@@ -17,4 +17,9 @@ public class RespNews extends RespBase{
 	public void setArticles(List<RespArticle> articles) {
 		Articles = articles;
 	}
+	@Override
+	public String toString() {
+		return "RespNews [ArticleCount=" + ArticleCount + ", Articles="
+				+ Articles + ", toString()=" + super.toString() + "]";
+	}
 }

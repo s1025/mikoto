@@ -29,6 +29,11 @@ public class RespArticle {
 	public void setUrl(String url) {
 		Url = url;
 	}
+	@Override
+	public String toString() {
+		return "RespArticle [Title=" + Title + ", Description=" + Description
+				+ ", PicUrl=" + PicUrl + ", Url=" + Url + "]";
+	}
 	
 	
 }

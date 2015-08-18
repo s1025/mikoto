@@ -6,6 +6,7 @@ import com.fkxpjj.mikoto.model.req.ReqImg;
 import com.fkxpjj.mikoto.model.req.ReqLink;
 import com.fkxpjj.mikoto.model.req.ReqLocation;
 import com.fkxpjj.mikoto.model.req.ReqShortVideo;
+import com.fkxpjj.mikoto.model.req.ReqSubscribe;
 import com.fkxpjj.mikoto.model.req.ReqText;
 import com.fkxpjj.mikoto.model.req.ReqVideo;
 import com.fkxpjj.mikoto.model.req.ReqVoice;
@@ -95,5 +96,15 @@ public class ReqBuilder {
 		reqLink.setDescription(map.get("Description"));
 		reqLink.setUrl(map.get("Url"));
 		return reqLink;
+	}
+	
+	public ReqSubscribe XMLtoSubscribe(Map<String, String> map){
+		ReqSubscribe reqSubscribe = new ReqSubscribe();
+		reqSubscribe.setFromUserName(map.get("FromUserName"));
+		reqSubscribe.setToUserName(map.get("ToUserName"));
+		reqSubscribe.setMsgType(map.get("MsgType"));
+		reqSubscribe.setCreateTime(Long.parseLong(map.get("CreateTime")));
+		reqSubscribe.setEvent(map.get("Event"));
+		return reqSubscribe;
 	}
 }

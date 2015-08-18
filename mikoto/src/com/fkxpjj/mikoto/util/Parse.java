@@ -15,6 +15,7 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import com.fkxpjj.mikoto.Mikoto;
+import com.fkxpjj.mikoto.model.Event;
 import com.fkxpjj.mikoto.model.MsgType;
 import com.fkxpjj.mikoto.model.req.ReqBase;
 import com.fkxpjj.mikoto.model.req.ReqImg;
@@ -34,6 +35,7 @@ public class Parse {
 		ReqBase reqBase = new ReqBase();
 		try {
 			map = parseXML(req);
+			System.out.println(map.get("MsgType"));
 			String type = map.get("MsgType");
 			if (MsgType.TEXT.equals(type)){
 				reqBase = Mikoto.builder.req.XMLtoText(map);
@@ -49,6 +51,11 @@ public class Parse {
 				reqBase = Mikoto.builder.req.XMLtoLocation(map);
 			}else if(MsgType.LINK.equals(type)){
 				reqBase = Mikoto.builder.req.XMLtoLink(map);
+			}else if(MsgType.EVENT.equals(type)){
+				String event = map.get("Event");
+				if(Event.SUBSCRIBE.endsWith(event)){
+					reqBase = Mikoto.builder.req.XMLtoSubscribe(map);
+				}
 			} else reqBase.setMsgType(MsgType.NONE);
 		} catch (DocumentException e) {
 			e.printStackTrace();
@@ -78,7 +85,9 @@ public class Parse {
 	
 	public String RespToXML(RespBase resp){
 		xstream.alias("xml", resp.getClass());  
-	    return xstream.toXML(resp);  
+	    String xml = xstream.toXML(resp);
+	    xml = xml.replaceAll("com.fkxpjj.mikoto.model.resp.RespArticle", "item");
+	    return xml;
 	}
 	
 	private XStream xstream = new XStream(new XppDriver() {  

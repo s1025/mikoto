@@ -1,24 +1,34 @@
 package com.fkxpjj.mikoto.demo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fkxpjj.mikoto.Mikoto;
 import com.fkxpjj.mikoto.model.req.ReqText;
 import com.fkxpjj.mikoto.model.resp.Media;
+import com.fkxpjj.mikoto.model.resp.RespArticle;
 import com.fkxpjj.mikoto.model.resp.RespImg;
+import com.fkxpjj.mikoto.model.resp.RespNews;
 import com.fkxpjj.mikoto.model.resp.RespText;
 import com.fkxpjj.mikoto.model.resp.RespVoice;
 
 public class PassiveTest {
 	public static void main(String[] args){
-		RespVoice respImg = new RespVoice();
-		respImg.setFromUserName("111");
-		respImg.setToUserName("222");
-		respImg.setMsgType("image");
-		respImg.setCreateTime(123);
-	    Media med = new Media();
-	    med.setMediaId("mmm");
-		respImg.setVoice(med);
-		String xml = Mikoto.parse.RespToXML(respImg);
-		System.out.println(xml);
+		
+		ReqText reqText = new ReqText();
+		reqText.setFromUserName("1");
+		reqText.setToUserName("1");
+		reqText.setCreateTime(3);
+		
+		RespArticle a1 = Mikoto.api.passive.getRespArticle("a1t", "a1d", "http://mmbiz.qpic.cn/mmbiz/CedLmsO1IMHWRrKiawKXWZI5GpN4S7Ilbv8suCyWgntjGyYPBGrGTLBF8aMLfLUugm4G2XIic2HQwFS2wvefySiaA/0", "http://baidu.com");
+		RespArticle a2 = Mikoto.api.passive.getRespArticle("a2t", "a2d", "http://mmbiz.qpic.cn/mmbiz/CedLmsO1IMHWRrKiawKXWZI5GpN4S7Ilbv8suCyWgntjGyYPBGrGTLBF8aMLfLUugm4G2XIic2HQwFS2wvefySiaA/0", "http://baidu.com");
+		
+		List<RespArticle> list = new ArrayList<RespArticle>();
+		list.add(a1);
+		list.add(a2);
+		RespNews news = Mikoto.api.passive.getRespNews(reqText, 2, list);
+		
+		System.out.println(news);
 	}
 
 }
