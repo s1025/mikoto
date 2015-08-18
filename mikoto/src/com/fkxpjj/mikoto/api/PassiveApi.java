@@ -106,12 +106,57 @@ public class PassiveApi {
 		return respArticle;
 	}
 	
-	public void sendRespText(ReqText reqText, String content, HttpServletResponse resp) throws IOException{
-		RespText respText = getRespText(reqText, content);
+	public void sendRespText(ReqBase reqBase, String content, HttpServletResponse resp) throws IOException{
+		RespText respText = getRespText(reqBase, content);
 		String xml = Mikoto.parse.RespToXML(respText);
 		resp.setCharacterEncoding("UTF-8");
 		PrintWriter out = resp.getWriter();
 		out.print(xml);
+		out.close();
+	}
+	
+	public void sendRespImg(ReqBase reqBase, String mediaId, HttpServletResponse resp) throws IOException{
+		RespImg respImg = getRespImg(reqBase, mediaId);
+		String xml = Mikoto.parse.RespToXML(respImg);
+		resp.setCharacterEncoding("UTF-8");
+		PrintWriter out = resp.getWriter();
+		out.write(xml);
+		out.close();
+	}
+	
+	public void sendRespVoice(ReqBase reqBase, String mediaId, HttpServletResponse resp) throws IOException{
+		RespVoice respVoice = getRespVoice(reqBase, mediaId);
+		String xml = Mikoto.parse.RespToXML(respVoice);
+		resp.setCharacterEncoding("UTF-8");
+		PrintWriter out = resp.getWriter();
+		out.write(xml);
+		out.close();
+	}
+	
+	public void sendRespVideo(ReqBase reqBase, String mediaId, String title, String desc, HttpServletResponse resp) throws IOException{
+		RespVideo respVideo = getRespVideo(reqBase, mediaId, title, desc);
+		String xml = Mikoto.parse.RespToXML(respVideo);
+		resp.setCharacterEncoding("UTF-8");
+		PrintWriter out = resp.getWriter();
+		out.write(xml);
+		out.close();
+	}
+	
+	public void sendRespMusic(ReqBase reqBase, String title, String desc, String musicUrl, String hQMusicUrl, String thumb, HttpServletResponse resp) throws IOException{
+		RespMusic respMusic = getRespMusic(reqBase, title, desc, musicUrl, hQMusicUrl, thumb);
+		String xml = Mikoto.parse.RespToXML(respMusic);
+		resp.setCharacterEncoding("UTF-8");
+		PrintWriter out = resp.getWriter();
+		out.write(xml);
+		out.close();
+	}
+	
+	public void sendRespNews(ReqBase reqBase, int count, List<RespArticle> articles, HttpServletResponse resp) throws IOException{
+		RespNews respNews = getRespNews(reqBase, count, articles);
+		String xml = Mikoto.parse.RespToXML(respNews);
+		resp.setCharacterEncoding("UTF-8");
+		PrintWriter out = resp.getWriter();
+		out.write(xml);
 		out.close();
 	}
 }

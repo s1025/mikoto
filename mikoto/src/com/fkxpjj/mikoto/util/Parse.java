@@ -14,6 +14,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.fkxpjj.mikoto.Mikoto;
 import com.fkxpjj.mikoto.model.MsgType;
 import com.fkxpjj.mikoto.model.req.ReqBase;
 import com.fkxpjj.mikoto.model.req.ReqImg;
@@ -35,8 +36,20 @@ public class Parse {
 			map = parseXML(req);
 			String type = map.get("MsgType");
 			if (MsgType.TEXT.equals(type)){
-				reqBase = XMLtoText(map);
-			}
+				reqBase = Mikoto.builder.req.XMLtoText(map);
+			} else if(MsgType.IMAGE.equals(type)){
+				reqBase = Mikoto.builder.req.XMLtoImg(map);
+			}else if(MsgType.VOICE.equals(type)){
+				reqBase = Mikoto.builder.req.XMLtoVoice(map);
+			}else if(MsgType.VIDEO.equals(type)){
+				reqBase = Mikoto.builder.req.XMLtoVideo(map);
+			}else if(MsgType.SHORTVIDEO.equals(type)){
+				reqBase = Mikoto.builder.req.XMLtoShortVideo(map);
+			}else if(MsgType.LOCATION.equals(type)){
+				reqBase = Mikoto.builder.req.XMLtoLocation(map);
+			}else if(MsgType.LINK.equals(type)){
+				reqBase = Mikoto.builder.req.XMLtoLink(map);
+			} else reqBase.setMsgType(MsgType.NONE);
 		} catch (DocumentException e) {
 			e.printStackTrace();
 			reqBase.setMsgType(MsgType.NONE);
@@ -61,34 +74,6 @@ public class Parse {
 		inputStream = null;
 		
 		return map;
-	}
-	
-	public ReqText XMLtoText( Map<String, String> map){
-		ReqText text = new ReqText();
-		text.setFromUserName(map.get("FromUserName"));
-		text.setToUserName(map.get("ToUserName"));
-		text.setMsgType(map.get("MsgType"));
-		text.setMsgId(map.get("MsgId"));
-		text.setCreateTime(Long.parseLong(map.get("CreateTime")));
-		text.setContent(map.get("Content"));
-		return text;
-	}
-	
-	public ReqImg XMLtoImg(Map<String, String> map){
-		ReqImg img = new ReqImg();
-		img.setFromUserName(map.get("FromUserName"));
-		img.setToUserName(map.get("ToUserName"));
-		img.setMsgType(map.get("MsgType"));
-		img.setMsgId(map.get("MsgId"));
-		img.setCreateTime(Long.parseLong(map.get("CreateTime")));
-		img.setMediaId(map.get("MediaId"));
-		img.setPicUrl(map.get("PicUrl"));
-		return img;
-	}
-	
-	public String RespTextToXML(RespText respText){
-		xstream.alias("xml", respText.getClass());  
-	    return xstream.toXML(respText);  
 	}
 	
 	public String RespToXML(RespBase resp){

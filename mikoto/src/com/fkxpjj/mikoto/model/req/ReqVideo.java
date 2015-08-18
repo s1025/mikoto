@@ -1,6 +1,6 @@
 package com.fkxpjj.mikoto.model.req;
 
-public class ReqVideo {
+public class ReqVideo extends ReqBase{
 
 	private String MediaId;
 	private String ThumbMediaId;

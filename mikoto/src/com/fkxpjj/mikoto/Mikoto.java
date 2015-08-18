@@ -14,6 +14,7 @@ import com.fkxpjj.mikoto.api.MediaApi;
 import com.fkxpjj.mikoto.api.MenuApi;
 import com.fkxpjj.mikoto.api.PassiveApi;
 import com.fkxpjj.mikoto.api.UserApi;
+import com.fkxpjj.mikoto.builder.ReqBuilder;
 import com.fkxpjj.mikoto.model.App;
 import com.fkxpjj.mikoto.util.Builder;
 import com.fkxpjj.mikoto.util.Dev;
@@ -43,5 +44,9 @@ public class Mikoto {
 		public static MenuApi menu = new MenuApi();
 		public static PassiveApi passive = new PassiveApi();
 		public static UserApi user = new UserApi();
+	}
+	
+	public static class builder{
+		public static ReqBuilder req = new ReqBuilder();
 	}
 }
