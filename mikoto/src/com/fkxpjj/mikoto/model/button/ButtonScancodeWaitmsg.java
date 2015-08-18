@@ -1,7 +1,6 @@
 package com.fkxpjj.mikoto.model.button;
 
-public class ClickButton extends BaseButton{
-	
+public class ButtonScancodeWaitmsg extends ButtonBase{
 	private String type;
 	private String key;
 	public String getType() {
@@ -16,11 +15,10 @@ public class ClickButton extends BaseButton{
 	public void setKey(String key) {
 		this.key = key;
 	}
-	@Override
-	public String toString() {
-		return "ClickButton [type=" + type + ", key=" + key + "]";
+	
+	public String toJson(){
+		return "{\"type\":\""+type+"\","
+				+ "\"name\":\""+this.getName()+"\","
+				+ "\"key\":\""+key+"\"}";
 	}
-	
-	
-
 }

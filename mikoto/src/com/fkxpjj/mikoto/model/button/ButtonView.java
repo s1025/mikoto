@@ -1,7 +1,7 @@
 package com.fkxpjj.mikoto.model.button;
 
 
-public class ViewButton extends BaseButton{
+public class ButtonView extends ButtonBase{
 	
 	private String type;
 	private String url;
@@ -22,4 +22,9 @@ public class ViewButton extends BaseButton{
 		this.type = type;
 	}
 
+	public String toJson(){
+		return "{\"type\":\""+type+"\","
+				+ "\"name\":\""+this.getName()+"\","
+				+ "\"url\":\""+url+"\"}";
+	}
 }

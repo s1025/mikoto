@@ -1,8 +1,8 @@
 package com.fkxpjj.mikoto.api;
 
 import com.fkxpjj.mikoto.Mikoto;
+import com.fkxpjj.mikoto.builder.MenuBuilder;
 import com.fkxpjj.mikoto.util.HttpCon;
-import com.fkxpjj.mikoto.util.MenuBuilder;
 import com.google.gson.Gson;
 /**
  * 菜单工具类。
@@ -33,11 +33,9 @@ public class MenuApi {
 	 * @param menu 菜单对象
 	 * @return 返回json
 	 */
-	public static String createMenu(MenuBuilder menu) {  
-	    Gson gson = new Gson();  
-	    String url = menu_create_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());  
-	    String jsonMenu = gson.toJson(menu);  
-	    String response = HttpCon.httpRequest(url, "POST", jsonMenu);   
+	public static String createMenu(String menu) {   
+	    String url = menu_create_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());    
+	    String response = HttpCon.httpRequest(url, "POST", menu);   
 	    return response;  
 	}  
 	

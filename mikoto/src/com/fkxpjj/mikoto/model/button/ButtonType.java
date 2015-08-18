@@ -8,7 +8,7 @@ package com.fkxpjj.mikoto.model.button;
  * @author fkxpjj
  * @version 0.0.1
  */
-public class Button {
+public class ButtonType {
 	
 	/**
 	 * 点击推送事件。
@@ -84,5 +84,4 @@ public class Button {
 	 * 此按钮含有子按钮。
 	 */
 	public static String SUBBUTTON = "sub_button";
-	
 }

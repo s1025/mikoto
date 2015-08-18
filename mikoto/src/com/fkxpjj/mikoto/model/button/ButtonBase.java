@@ -1,6 +1,6 @@
 package com.fkxpjj.mikoto.model.button;
 
-public class BaseButton extends Button{
+public class ButtonBase{
 	private String name;
 
 	public String getName() {
@@ -9,5 +9,14 @@ public class BaseButton extends Button{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String toJson(){
+		return "json";
+	}
+
+	@Override
+	public String toString() {
+		return "ButtonBase [name=" + name + "]";
 	}
 }
