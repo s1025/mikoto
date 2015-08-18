@@ -65,7 +65,7 @@ public class Test {
 		openids.add("oVW-os9UkORwWvVlp09R4hAaPCF4");
 		openids.add("oVW-oszd62QE_kT66ilsRuuOJspA");
 		
-		String s = Mikoto.api.user.usersList("oVW-os9UkORwWvVlp09R4hAaPCF4");
+		String s = Mikoto.api.group.getGroup();
 		
 		System.out.println(s);
 	}

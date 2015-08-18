@@ -9,6 +9,7 @@ import com.fkxpjj.mikoto.api.AccessTokenApi;
 import com.fkxpjj.mikoto.api.AppApi;
 import com.fkxpjj.mikoto.api.GroupApi;
 import com.fkxpjj.mikoto.api.KfApi;
+import com.fkxpjj.mikoto.api.MassApi;
 import com.fkxpjj.mikoto.api.MaterialApi;
 import com.fkxpjj.mikoto.api.MediaApi;
 import com.fkxpjj.mikoto.api.MenuApi;
@@ -39,6 +40,7 @@ public class Mikoto {
 		public static AccessTokenApi access = AccessTokenApi.getAccessTokenApi();
 		public static GroupApi group = new GroupApi();
 		public static KfApi kf = new KfApi();
+		public static MassApi mass = new MassApi();
 		public static MaterialApi material = new MaterialApi();
 		public static MediaApi media = new MediaApi();
 		public static MenuApi menu = new MenuApi();

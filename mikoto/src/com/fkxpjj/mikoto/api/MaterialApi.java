@@ -1,10 +1,13 @@
 package com.fkxpjj.mikoto.api;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.fkxpjj.mikoto.Mikoto;
+import com.fkxpjj.mikoto.model.active.ArticleMaterial;
 import com.fkxpjj.mikoto.util.HttpCon;
+import com.google.gson.Gson;
 
 public class MaterialApi {
 	/**
@@ -28,6 +31,8 @@ public class MaterialApi {
 	public String material_delete = "https://api.weixin.qq.com/cgi-bin/material/del_material?access_token=ACCESS_TOKEN";
 	
 	public String add_news_img = "https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=ACCESS_TOKEN";
+	
+	public String add_news = "https://api.weixin.qq.com/cgi-bin/material/add_news?access_token=ACCESS_TOKEN";
 	
 	/**
 	 * É¾³ýÓÀ¾ÃËØ²Ä¡£
@@ -99,6 +104,15 @@ public class MaterialApi {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("rrr", path);
 		String response = HttpCon.upload(url, null, map);
+		return response;
+	}
+	
+	public String addNews(List<ArticleMaterial> articles){
+		String url = add_news.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
+		Gson gson = new Gson();
+		String as = gson.toJson(articles);
+		String post = "{\"articles\": "+as+"}";
+		String response = HttpCon.httpRequest(url, "POST", post);
 		return response;
 	}
 }
