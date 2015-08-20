@@ -1,4 +1,4 @@
-package com.fkxpjj.mikoto.demo;
+package com.fkxpjj.demo;
 
 import com.s1025.mikoto.Mikoto;
 import com.s1025.mikoto.builder.MenuBuilder;
