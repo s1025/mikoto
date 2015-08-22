@@ -1,4 +1,4 @@
-package com.s1025.kuroko.result;
+package com.s1025.kuroko.model.result;
 
 public class ThumbMediaResult extends ResultBase{
 	private String type;

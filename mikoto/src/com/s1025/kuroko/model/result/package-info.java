@@ -5,4 +5,4 @@
  * @author fkxpjj
  *
  */
-package com.s1025.kuroko.result;
+package com.s1025.kuroko.model.result;

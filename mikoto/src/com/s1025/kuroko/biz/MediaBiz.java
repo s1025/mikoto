@@ -3,11 +3,11 @@ package com.s1025.kuroko.biz;
 import java.io.IOException;
 
 import com.google.gson.Gson;
-import com.s1025.kuroko.result.ErrCode;
-import com.s1025.kuroko.result.MediaResult;
-import com.s1025.kuroko.result.ResultBase;
-import com.s1025.kuroko.result.ResultType;
-import com.s1025.kuroko.result.ThumbMediaResult;
+import com.s1025.kuroko.model.result.ErrCode;
+import com.s1025.kuroko.model.result.MediaResult;
+import com.s1025.kuroko.model.result.ResultBase;
+import com.s1025.kuroko.model.result.ResultType;
+import com.s1025.kuroko.model.result.ThumbMediaResult;
 import com.s1025.mikoto.Mikoto;
 
 public class MediaBiz {
