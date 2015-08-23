@@ -3,11 +3,10 @@ package com.fkxpjj.demo;
 import java.io.IOException;
 
 import com.s1025.kuroko.biz.MediaBiz;
-import com.s1025.kuroko.result.ErrCode;
-import com.s1025.kuroko.result.MediaResult;
-import com.s1025.kuroko.result.ResultBase;
-import com.s1025.kuroko.result.ResultType;
-import com.s1025.mikoto.Mikoto;
+import com.s1025.kuroko.model.result.ErrCode;
+import com.s1025.kuroko.model.result.MediaResult;
+import com.s1025.kuroko.model.result.ResultBase;
+import com.s1025.kuroko.model.result.ResultType;
 import com.s1025.mikoto.util.Builder;
 
 public class KMediaTest {
