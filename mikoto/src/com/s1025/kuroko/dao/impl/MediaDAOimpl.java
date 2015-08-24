@@ -6,36 +6,38 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.s1025.kuroko.dao.DB;
-import com.s1025.kuroko.dao.IAdminDAO;
-import com.s1025.kuroko.model.Admin;
+import com.s1025.kuroko.dao.IMediaDAO;
+import com.s1025.kuroko.model.Media;
 
-public class AdminDAOimpl implements IAdminDAO{
+public class MediaDAOimpl implements IMediaDAO{
 	Connection con;
 
 	@Override
-	public int insert(Admin admin) {
-		String sql = "insert into admin(aid,passwd,name,email,registered,lv,status,openid) values(?,?,?,?,now(),?,?,?)";
+	public int insert(Media media) {
+		String sql = "insert into media(media_id,url,type,permanent,created_at) values(?,?,?,?,?)";
+		con = DB.getCon();
 		PreparedStatement pstmt = null;
 		int re = 0;
-		con = DB.getCon();
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, admin.getAid());
-			pstmt.setString(2, admin.getPasswd());
-			pstmt.setString(3, admin.getName());
-			pstmt.setString(4, admin.getEmail());
-			pstmt.setInt(5, admin.getLv());
-			pstmt.setInt(6, admin.getStatus());
-			pstmt.setString(7, admin.getOpenid());
+			pstmt.setString(1, media.getMediaId());
+			pstmt.setString(2, media.getUrl());
+			pstmt.setString(3, media.getType());
+			pstmt.setInt(4, media.getPermanent());
+			pstmt.setString(5, media.getCreatedAt());
 			re = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			try {
-				if (pstmt != null){
+		} finally{
+			if(pstmt!=null)
+				try {
 					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
+			try {
 				con.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -46,25 +48,23 @@ public class AdminDAOimpl implements IAdminDAO{
 	}
 
 	@Override
-	public Admin select(String aid) {
-		String sql = "select * from admin where aid = ?";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+	public Media select(int mid) {
+		String sql = "select * from media where mid = ?";
 		con = DB.getCon();
-		Admin admin = new Admin();
+		Media media = new Media();
+		PreparedStatement pstmt= null;
+		ResultSet rs = null;
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, aid);
+			pstmt.setInt(1, mid);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				admin.setAid(rs.getString("aid"));
-				admin.setPasswd(rs.getString("passwd"));
-				admin.setName(rs.getString("name"));
-				admin.setEmail(rs.getString("email"));
-				admin.setRegistered(rs.getString("registered"));
-				admin.setLv(rs.getInt("lv"));
-				admin.setStatus(rs.getInt("status"));
-				admin.setOpenid(rs.getString("openid"));
+				media.setMid(mid);
+				media.setMediaId(rs.getString("media_id"));
+				media.setUrl(rs.getString("url"));
+				media.setType(rs.getString("type"));
+				media.setPermanent(rs.getInt("permanent"));
+				media.setCreatedAt(rs.getString("created_at"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -91,18 +91,18 @@ public class AdminDAOimpl implements IAdminDAO{
 				e.printStackTrace();
 			}
 		}
-		return admin;
+		return media;
 	}
 
 	@Override
-	public int delete(String aid) {
-		String sql = "delete from admin where aid = ?";
-		int re = 0;
+	public int delete(int mid) {
+		String sql = "delete from media where mid = ?";
 		con = DB.getCon();
+		int re = 0;
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, aid);
+			pstmt.setInt(1, mid);
 			re = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -126,21 +126,19 @@ public class AdminDAOimpl implements IAdminDAO{
 	}
 
 	@Override
-	public int update(Admin admin) {
-		String sql = "update admin set passwd=?, name=?, email=?, registered=?, lv=?, status=?, openid=? where aid=?";
-		int re = 0;
+	public int update(Media media) {
+		String sql = "update media set media_id=?, url=?, type=?, permanent=?, created_at=? where mid=?";
 		con = DB.getCon();
+		int re = 0;
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, admin.getPasswd());
-			pstmt.setString(2, admin.getName());
-			pstmt.setString(3, admin.getEmail());
-			pstmt.setString(4, admin.getRegistered());
-			pstmt.setInt(5, admin.getLv());
-			pstmt.setInt(6, admin.getStatus());
-			pstmt.setString(7, admin.getOpenid());
-			pstmt.setString(8, admin.getAid());
+			pstmt.setString(1, media.getMediaId());
+			pstmt.setString(2, media.getUrl());
+			pstmt.setString(3, media.getType());
+			pstmt.setInt(4, media.getPermanent());
+			pstmt.setString(5, media.getCreatedAt());
+			pstmt.setInt(6, media.getMid());
 			re = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -162,5 +160,4 @@ public class AdminDAOimpl implements IAdminDAO{
 		}
 		return re;
 	}
-
 }
