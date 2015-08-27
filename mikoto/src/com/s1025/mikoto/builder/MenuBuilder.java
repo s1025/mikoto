@@ -23,11 +23,12 @@ public class MenuBuilder {
 		this.menu = menu;
 	}
 
-	public void add(ButtonBase button){
+	public MenuBuilder add(ButtonBase button){
 		menu.add(button);
+		return this;
 	}
 	
-	public void add(ButtonBase button, int index){
+	public MenuBuilder add(ButtonBase button, int index){
 		if(index>=menu.size()) menu.add(button);
 		else if(index<menu.size()){
 			ButtonBase buttonBase = menu.get(index);
@@ -39,52 +40,59 @@ public class MenuBuilder {
 				menu.add(index,button);
 			}
 		}
+		return this;
 	}
 	
-	public void addClick(String name, String key, int index){
+	public MenuBuilder addClick(String name, String key, int index){
 		ButtonClick button = new ButtonClick();
 		button.setType(ButtonType.CLICK);
 		button.setName(name);
 		button.setKey(key);
 		this.add(button, index);
+		return this;
 	}
 	
-	public void addView(String name, String url, int index){
+	public MenuBuilder addView(String name, String url, int index){
 		ButtonView button = new ButtonView();
 		button.setType(ButtonType.VIEW);
 		button.setName(name);
 		button.setUrl(url);
 		this.add(button, index);
+		return this;
 	}
 	
-	public void addSub(String name, int index){
+	public MenuBuilder addSub(String name, int index){
 		ButtonSub button = new ButtonSub();
 		button.setName(name);
 		this.add(button, index);
+		return this;
 	}
 	
-	public void addMedia(String name, String mediaId, int index){
+	public MenuBuilder addMedia(String name, String mediaId, int index){
 		ButtonMedia button = new ButtonMedia();
 		button.setName(name);
 		button.setType(ButtonType.MEDIAID);
 		button.setMediaId(mediaId);
 		this.add(button, index);
+		return this;
 	}
 	
-	public void addScancodePush(String name, String key, int index){
+	public MenuBuilder addScancodePush(String name, String key, int index){
 		ButtonScancodePush button = new ButtonScancodePush();
 		button.setName(name);
 		button.setType(ButtonType.SCANCODEPUSH);
 		button.setKey(key);
 		this.add(button, index);
+		return this;
 	}
 	
-	public void addScancodeWaitmsg(String name, String key, int index){
+	public MenuBuilder addScancodeWaitmsg(String name, String key, int index){
 		ButtonScancodeWaitmsg button = new ButtonScancodeWaitmsg();
 		button.setName(name);
 		button.setType(ButtonType.SCANCODEWAITMSG);
 		button.setKey(key);
 		this.add(button, index);
+		return this;
 	}
 
 	public String toJson(){
