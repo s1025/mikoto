@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.s1025.kuroko.plugin.router.Router;
 import com.s1025.mikoto.api.AccessTokenApi;
 import com.s1025.mikoto.api.AppApi;
 import com.s1025.mikoto.api.GroupApi;
@@ -17,6 +18,7 @@ import com.s1025.mikoto.api.PassiveApi;
 import com.s1025.mikoto.api.UserApi;
 import com.s1025.mikoto.builder.ReqBuilder;
 import com.s1025.mikoto.model.App;
+import com.s1025.mikoto.plugin.IRouter;
 import com.s1025.mikoto.util.Builder;
 import com.s1025.mikoto.util.Dev;
 import com.s1025.mikoto.util.Parse;
@@ -29,6 +31,10 @@ public class Mikoto {
 	
 	public static boolean validate(HttpServletRequest req, HttpServletResponse resp) throws IOException{
 		return Dev.validate(req, resp);
+	}
+	
+	public static boolean router(HttpServletRequest req, HttpServletResponse resp){
+		return true;
 	}
 	
 	public void build(String appid, String appsecret, String token){
@@ -46,6 +52,10 @@ public class Mikoto {
 		public static MenuApi menu = new MenuApi();
 		public static PassiveApi passive = new PassiveApi();
 		public static UserApi user = new UserApi();
+	}
+	
+	public static class plugin{
+		public static IRouter router = new Router();
 	}
 	
 	public static class builder{

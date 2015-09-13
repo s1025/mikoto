@@ -1,8 +1,6 @@
 package com.s1025.mikoto.api;
 
-import com.google.gson.Gson;
 import com.s1025.mikoto.Mikoto;
-import com.s1025.mikoto.builder.MenuBuilder;
 import com.s1025.mikoto.util.HttpCon;
 /**
  * 菜单工具类。

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.s1025.mikoto.Mikoto;
 import com.s1025.mikoto.model.MsgType;
 import com.s1025.mikoto.model.req.ReqBase;
-import com.s1025.mikoto.model.req.ReqText;
 import com.s1025.mikoto.model.resp.Media;
 import com.s1025.mikoto.model.resp.MediaMusic;
 import com.s1025.mikoto.model.resp.MediaVideo;
