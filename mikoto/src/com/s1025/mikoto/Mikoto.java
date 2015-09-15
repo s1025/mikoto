@@ -34,7 +34,7 @@ public class Mikoto {
 	}
 	
 	public static boolean router(HttpServletRequest req, HttpServletResponse resp){
-		return true;
+		return plugin.router.service(req, resp);
 	}
 	
 	public void build(String appid, String appsecret, String token){
