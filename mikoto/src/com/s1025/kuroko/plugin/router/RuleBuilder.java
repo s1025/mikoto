@@ -85,6 +85,107 @@ public class RuleBuilder {
 	}
 	
 	/**
+	 * 设置规则名.
+	 * @param name 规则名
+	 * @return 本构建器
+	 */
+	public RuleBuilder setName(String name){
+		rule.setName(name);
+		return this;
+	}
+	
+	/**
+	 * 设置是否回复全部.
+	 * 默认为否。
+	 * @param respAll 是否回复全部
+	 * @return 本构建器
+	 */
+	public RuleBuilder setRespAll(boolean respAll){
+		rule.setRespAll(respAll);
+		return this;
+	}
+	
+	/**
+	 * 设置优先级.
+	 * 默认为10。
+	 * @param pri 优先级
+	 * @return 本构建器
+	 */
+	public RuleBuilder setPri(int pri){
+		rule.setPri(pri);
+		return this;
+	}
+	
+	/**
+	 * 设置是否立即回复.
+	 * 默认为否。
+	 * @param now 是否立即回复
+	 * @return 本构建器
+	 */
+	public RuleBuilder setNow(boolean now){
+		rule.setNow(now);
+		return this;
+	}
+	
+	/**
+	 * 设置是否立即结束.
+	 * 默认为否。
+	 * @param end 是否立即结束
+	 * @return 本构建器
+	 */
+	public RuleBuilder setEnd(boolean end){
+		rule.setEnd(end);
+		return this;
+	}
+	
+	/**
+	 * 使用自己的key列表.
+	 * @param keys key列表
+	 * @return 本构建器
+	 */
+	public RuleBuilder setKeys(List<Key> keys){
+		this.keys = keys;
+		return this;
+	}
+	
+	/**
+	 * 使用自己的reply列表.
+	 * @param replys reply列表
+	 * @return 本构建器
+	 */
+	public RuleBuilder setReplys(List<Reply> replys){
+		this.replys = replys;
+		return this;
+	}
+	
+	/**
+	 * 更改是否回复全部.
+	 * @return 本构建器
+	 */
+	public RuleBuilder changeRespAll(){
+		rule.setRespAll(!rule.getRespAll());
+		return this;
+	}
+	
+	/**
+	 * 更改是否立即回复.
+	 * @return 本构建器
+	 */
+	public RuleBuilder changeNow(){
+		rule.setNow(!rule.getNow());
+		return this;
+	}
+	
+	/**
+	 * 更改是否立即结束.
+	 * @return 本构建器。
+	 */
+	public RuleBuilder changeEnd(){
+		rule.setEnd(!rule.getEnd());
+		return this;
+	}
+	
+	/**
 	 * 获得构建的规则对象.
 	 * @return 规则
 	 */

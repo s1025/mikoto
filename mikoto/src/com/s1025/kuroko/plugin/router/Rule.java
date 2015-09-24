@@ -11,6 +11,12 @@ public class Rule {
 	private int pri;                                            //优先级
 	private boolean now;                                        //立即回复吗？
 	private boolean end;                                        //立即结束吗？
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public List<Key> getKeys() {
 		return keys;
 	}
@@ -23,7 +29,7 @@ public class Rule {
 	public void setReplys(List<Reply> replys) {
 		this.replys = replys;
 	}
-	public boolean isRespAll() {
+	public boolean getRespAll() {
 		return respAll;
 	}
 	public void setRespAll(boolean respAll) {
@@ -35,30 +41,17 @@ public class Rule {
 	public void setPri(int pri) {
 		this.pri = pri;
 	}
-	public boolean isNow() {
+	public boolean getNow() {
 		return now;
 	}
 	public void setNow(boolean now) {
 		this.now = now;
 	}
-	public boolean isEnd() {
+	public boolean getEnd() {
 		return end;
 	}
 	public void setEnd(boolean end) {
 		this.end = end;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	
-	public void addKey(Key key){
-		this.keys.add(key);
-	}
-	
-	public void addReply(Reply reply){
-		this.replys.add(reply);
-	}
 }

@@ -10,7 +10,7 @@ import com.s1025.mikoto.plugin.IRouter;
 
 /**
  * 路由类 提供复杂的关键字回复功能.
- * 
+ * 包含一个规则列表和一个默认规则构建器。
  * @author fkxpjj
  *
  */
@@ -91,5 +91,9 @@ public class Router implements IRouter{
 	public Router addRule(Rule rule){
 		this.rules.add(rule);
 		return this;
+	}
+	
+	public void initFromDB(){
+		
 	}
 }
