@@ -29,8 +29,10 @@ public class RouterKeyDAOimpl implements IRouterKeyDAO{
 			e.printStackTrace();
 		} finally {
 			try {
-				pstmt.close();
-				con.close();
+				if(pstmt != null)
+					pstmt.close();
+				if(con != null)
+					con.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -60,9 +62,12 @@ public class RouterKeyDAOimpl implements IRouterKeyDAO{
 			e.printStackTrace();
 		} finally {
 			try {
-				rs.close();
-				pstmt.close();
-				con.close();
+				if (rs != null)
+					rs.close();
+				if(pstmt != null)
+					pstmt.close();
+				if(con != null)
+					con.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -74,22 +79,24 @@ public class RouterKeyDAOimpl implements IRouterKeyDAO{
 
 	@Override
 	public int update(Key key) {
-		String sql = "update router_key set content = ?, totally=? where rname = ?";
+		String sql = "update router_key set totally=? where rname = ? and content = ?";
 		PreparedStatement pstmt = null;
 		int re = 0;
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, key.getContent());
-			pstmt.setInt(2, key.getTotally());
-			pstmt.setString(3, key.getRname());
+			pstmt.setInt(1, key.getTotally());
+			pstmt.setString(2, key.getRname());
+			pstmt.setString(3, key.getContent());
 			re = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
-				pstmt.close();
-				con.close();
+				if(pstmt != null)
+					pstmt.close();
+				if(con != null)
+					con.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -113,8 +120,10 @@ public class RouterKeyDAOimpl implements IRouterKeyDAO{
 			e.printStackTrace();
 		} finally {
 			try {
-				pstmt.close();
-				con.close();
+				if(pstmt != null)
+					pstmt.close();
+				if(con != null)
+					con.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
