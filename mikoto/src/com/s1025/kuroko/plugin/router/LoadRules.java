@@ -1,8 +1,6 @@
-package com.s1025.kuroko.dao;
+package com.s1025.kuroko.plugin.router;
 
 import java.util.List;
-
-import com.s1025.kuroko.plugin.router.Rule;
 
 public class LoadRules {
 	
