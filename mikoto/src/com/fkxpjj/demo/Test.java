@@ -3,11 +3,11 @@ package com.fkxpjj.demo;
 import java.util.Map;
 
 import com.s1025.kuroko.biz.Util;
-import com.s1025.mikoto.util.Builder;
+import com.s1025.mikoto.Mikoto;
 
 public class Test {
 	public static void main(String[] args){
-		new Builder().build("wx591b08daf676e085", "921057ddd269c0ec8481430db96cc1bc");
+		Mikoto.build("wx591b08daf676e085", "921057ddd269c0ec8481430db96cc1bc");
 		
 		String json ="{'a':1,'b':2}";
 		Map<String, String> map = Util.fromJson(json);

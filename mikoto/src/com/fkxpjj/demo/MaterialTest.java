@@ -1,11 +1,11 @@
 package com.fkxpjj.demo;
 
 import com.s1025.mikoto.Mikoto;
-import com.s1025.mikoto.util.Builder;
+import com.s1025.mikoto.util.Dev;
 
 public class MaterialTest {
 	public static void main(String[] args) throws Exception{
-		new Builder().build("wx591b08daf676e085", "921057ddd269c0ec8481430db96cc1bc");
+		Mikoto.build("wx591b08daf676e085", "921057ddd269c0ec8481430db96cc1bc");
 		
 		String path="d://1.jpg";
 		

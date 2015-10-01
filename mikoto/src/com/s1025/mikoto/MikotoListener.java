@@ -4,7 +4,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import com.s1025.mikoto.util.Builder;
+import com.s1025.mikoto.util.Dev;
+
+
 
 public class MikotoListener implements ServletContextListener{
 
@@ -19,8 +21,7 @@ public class MikotoListener implements ServletContextListener{
 		String appid = servletContext.getInitParameter("appid");
 		String appsecret = servletContext.getInitParameter("appsecret");
 		String token = servletContext.getInitParameter("token");
-		new Builder().build(appid, appsecret);
-		Mikoto.token = token;
+		Mikoto.build(appid, appsecret, token);
 	}
 
 }

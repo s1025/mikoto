@@ -10,14 +10,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.s1025.mikoto.Mikoto;
+import com.s1025.mikoto.model.App;
 
+/**
+ * 一些基础函数.
+ * 服务器接入，app初始化。
+ * @author fkxpjj
+ *
+ */
 public class Dev {
-	public static boolean validate(HttpServletRequest req, HttpServletResponse resp) throws IOException{
-		String signature = req.getParameter("signature");
-		String timestamp = req.getParameter("timestamp");
-		String nonce = req.getParameter("nonce");
-		String echostr = req.getParameter("echostr");
-		String token = Mikoto.token;
+	
+	/**
+	 * 验证服务器地址有效性.
+	 * 接入服务器，只有接入成功后微信才能主动发送信息到服务器上。
+	 * @param signature
+	 * @param timestamp
+	 * @param nonce
+	 * @param echostr
+	 * @param token
+	 * @return 是否接入成功
+	 */
+	public static boolean validate(String signature, String timestamp, String nonce, String echostr, String token){
 		String[] arr = new String[] { token, timestamp, nonce };  
 		Arrays.sort(arr);  
 		StringBuilder content = new StringBuilder();  
@@ -35,13 +48,7 @@ public class Dev {
 				}  
 		content = null;  
 		boolean val = tmpStr != null ? tmpStr.equals(signature.toUpperCase()) : false;
-		if(val) {
-			PrintWriter out = resp.getWriter();
-			out.print(echostr);
-			out.close();
-		}
 		return val;
-		
 	}
 	
 	private static String byteToStr(byte[] byteArray) {  
@@ -61,4 +68,5 @@ public class Dev {
         String s = new String(tempArr);  
         return s;  
     }  
+	
 }

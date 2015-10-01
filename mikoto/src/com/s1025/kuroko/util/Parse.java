@@ -1,4 +1,4 @@
-package com.s1025.mikoto.util;
+package com.s1025.kuroko.util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +14,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.s1025.kuroko.Kuroko;
 import com.s1025.mikoto.Mikoto;
 import com.s1025.mikoto.model.Event;
 import com.s1025.mikoto.model.MsgType;
@@ -35,23 +36,23 @@ public class Parse {
 			System.out.println(map.get("MsgType"));
 			String type = map.get("MsgType");
 			if (MsgType.TEXT.equals(type)){
-				reqBase = Mikoto.builder.req.XMLtoText(map);
+				reqBase = Kuroko.builder.req.XMLtoText(map);
 			} else if(MsgType.IMAGE.equals(type)){
-				reqBase = Mikoto.builder.req.XMLtoImg(map);
+				reqBase = Kuroko.builder.req.XMLtoImg(map);
 			}else if(MsgType.VOICE.equals(type)){
-				reqBase = Mikoto.builder.req.XMLtoVoice(map);
+				reqBase = Kuroko.builder.req.XMLtoVoice(map);
 			}else if(MsgType.VIDEO.equals(type)){
-				reqBase = Mikoto.builder.req.XMLtoVideo(map);
+				reqBase = Kuroko.builder.req.XMLtoVideo(map);
 			}else if(MsgType.SHORTVIDEO.equals(type)){
-				reqBase = Mikoto.builder.req.XMLtoShortVideo(map);
+				reqBase = Kuroko.builder.req.XMLtoShortVideo(map);
 			}else if(MsgType.LOCATION.equals(type)){
-				reqBase = Mikoto.builder.req.XMLtoLocation(map);
+				reqBase = Kuroko.builder.req.XMLtoLocation(map);
 			}else if(MsgType.LINK.equals(type)){
-				reqBase = Mikoto.builder.req.XMLtoLink(map);
+				reqBase = Kuroko.builder.req.XMLtoLink(map);
 			}else if(MsgType.EVENT.equals(type)){
 				String event = map.get("Event");
 				if(Event.SUBSCRIBE.endsWith(event)){
-					reqBase = Mikoto.builder.req.XMLtoSubscribe(map);
+					reqBase = Kuroko.builder.req.XMLtoSubscribe(map);
 				}
 			} else reqBase.setMsgType(MsgType.NONE);
 		} catch (DocumentException e) {

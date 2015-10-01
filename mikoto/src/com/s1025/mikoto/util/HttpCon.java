@@ -20,7 +20,13 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 
-
+/**
+ * HTTP连接类.
+ * 用于HTTP的连接，提供了普通http传输和文件http传输函数。
+ * 
+ * @author fkxpjj
+ *
+ */
 public class HttpCon {
 	
 	//private static Logger log = LoggerFactory.getLogger(AccessTokenApiImpl.class);  
