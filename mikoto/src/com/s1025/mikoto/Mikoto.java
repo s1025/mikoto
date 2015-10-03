@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.s1025.kuroko.plugin.router.Router;
 import com.s1025.kuroko.util.Parse;
 import com.s1025.mikoto.api.AccessTokenApi;
+import com.s1025.mikoto.api.DatacubeApi;
 import com.s1025.mikoto.api.GroupApi;
 import com.s1025.mikoto.api.KfApi;
 import com.s1025.mikoto.api.MassApi;
@@ -29,7 +30,7 @@ public class Mikoto {
 	public static App app;
 	
 	/**
-	 * 
+	 * 服务端接入验证的字段，初始化时注入。
 	 */
 	public static String token;
 	
@@ -52,6 +53,7 @@ public class Mikoto {
 		public static MenuApi menu = new MenuApi();
 		public static PassiveApi passive = new PassiveApi();
 		public static UserApi user = new UserApi();
+		public static DatacubeApi datacube = new DatacubeApi();
 	}
 	
 	public static class plugin{
