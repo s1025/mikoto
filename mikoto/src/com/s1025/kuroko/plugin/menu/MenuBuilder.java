@@ -1,4 +1,4 @@
-package com.s1025.kuroko.builder;
+package com.s1025.kuroko.plugin.menu;
 
 import java.util.ArrayList;
 import java.util.List;
