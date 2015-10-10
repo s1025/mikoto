@@ -7,5 +7,4 @@ public class Kuroko {
 	public static class builder{
 		public static ReqBuilder req = new ReqBuilder();
 	}
-
 }

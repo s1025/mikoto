@@ -2,7 +2,7 @@ package com.fkxpjj.demo;
 
 import java.util.Map;
 
-import com.s1025.kuroko.biz.Util;
+import com.s1025.kuroko.module.KuUtil;
 import com.s1025.mikoto.Mikoto;
 
 public class Test {
@@ -10,7 +10,7 @@ public class Test {
 		Mikoto.build("wx591b08daf676e085", "921057ddd269c0ec8481430db96cc1bc");
 		
 		String json ="{'a':1,'b':2}";
-		Map<String, String> map = Util.fromJson(json);
+		Map<String, String> map = KuUtil.fromJson(json);
 		String a = map.get("a");
 		String b = map.get("b");
 		String c = map.get("c");

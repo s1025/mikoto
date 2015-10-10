@@ -138,6 +138,7 @@ public class GroupApi {
 		String url = group_delete_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
 		String post = "{\"group\":{\"id\":"+groupid+"}}";
 		String response = HttpCon.httpRequest(url, "POST", post);
+		System.out.println(response);
 		return response;
 	}
 }
