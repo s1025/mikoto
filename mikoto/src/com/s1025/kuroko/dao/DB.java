@@ -2,7 +2,10 @@ package com.s1025.kuroko.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DB {
 	public static String url = "jdbc:mysql://localhost:3306/kuroko?useUnicode=true&characterEncoding=utf-8";
@@ -27,6 +30,26 @@ public class DB {
 			e.printStackTrace();
 		}
 		return con;
+	}
+	
+	public static void close(Connection conn, PreparedStatement pstmt, ResultSet rs){
+		try {
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(conn!=null) conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void close(Connection conn, Statement stmt, ResultSet rs){
+		try {
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+			if(conn!=null) conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

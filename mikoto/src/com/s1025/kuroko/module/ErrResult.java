@@ -1,6 +1,6 @@
 package com.s1025.kuroko.module;
 
-public class ErrResult extends Result{
+public class ErrResult{
 	
 	private String errcode;
 	private String errmsg;

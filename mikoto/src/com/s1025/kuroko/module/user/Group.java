@@ -1,8 +1,6 @@
 package com.s1025.kuroko.module.user;
 
-import com.s1025.kuroko.module.Result;
-
-public class ResultGroup extends Result{
+public class Group{
 	private int id;
 	private String name;
 	private int count;
