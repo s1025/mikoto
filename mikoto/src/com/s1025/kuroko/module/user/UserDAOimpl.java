@@ -54,13 +54,32 @@ public class UserDAOimpl implements UserDAO{
 	public User select(String openid) {
 		conn = DB.getCon();
 		String sql = "select * from users where openid=?";
+		User user = new User();
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, openid);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				user.setOpenid(rs.getString("openid"));
+				user.setSubscribe(rs.getInt("subscribe"));
+				user.setNickname(rs.getString("nickname"));
+				user.setSex(rs.getInt("sex"));
+				user.setLanguage(rs.getString("language"));
+				user.setCity(rs.getString("city"));
+				user.setProvince(rs.getString("province"));
+				user.setCountry(rs.getString("country"));
+				user.setHeadimgurl(rs.getString("headimgurl"));
+				user.setSubscribe_time(rs.getString("subscribe_time"));
+				user.setUnionid(rs.getString("unionid"));
+				user.setRemark(rs.getString("remark"));
+				user.setGroupid(rs.getInt("groupid"));
+			}
+			DB.close(conn, pstmt, rs);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return user;
 	}
 
 	@Override
@@ -123,6 +142,42 @@ public class UserDAOimpl implements UserDAO{
 			stmt = conn.createStatement();
 			re = stmt.executeUpdate(sql);
 			DB.close(conn, stmt, rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return re;
+	}
+
+	@Override
+	public int selectGroupUserNum(int groupid) {
+		conn = DB.getCon();
+		String sql = "select count(*) as count from users where groupid = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, groupid);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				re = rs.getInt("count");
+			}
+			DB.close(conn, pstmt, rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return re;
+	}
+
+	@Override
+	public int updateUserGroup(int groupid, int groupid2) {
+		conn = DB.getCon();
+		String sql = "update users set groupid = ? where groupid = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, groupid2);
+			pstmt.setInt(2, groupid);
+			re = pstmt.executeUpdate();
+			DB.close(conn, pstmt, rs);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

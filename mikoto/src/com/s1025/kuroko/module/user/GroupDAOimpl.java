@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.s1025.kuroko.dao.DB;
@@ -122,6 +123,29 @@ public class GroupDAOimpl implements GroupDAO{
 			e.printStackTrace();
 		}
 		return re;
+	}
+
+	@Override
+	public List<Group> select() {
+		conn = DB.getCon();
+		String sql = "select * from groups";
+		List<Group> groups = new ArrayList<Group>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()){
+				Group group = new Group();
+				group.setId(rs.getInt("id"));
+				group.setName(rs.getString("name"));
+				group.setCount(rs.getInt("count"));
+				groups.add(group);
+			}
+			DB.close(conn, pstmt, rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return groups;
 	}
 
 	

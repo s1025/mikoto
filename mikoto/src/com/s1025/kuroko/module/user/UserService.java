@@ -1,6 +1,5 @@
 package com.s1025.kuroko.module.user;
 
-import java.util.Date;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -15,6 +14,12 @@ public class UserService {
 	GroupDAO groupDAO = new GroupDAOimpl();
 	UserDAO userDAO = new UserDAOimpl();
 	
+	/**
+	 * 创建一个新的用户分组.
+	 * 同时将写入数据库中，用户数默认为0。
+	 * @param name 分组名，最多30个字
+	 * @return
+	 */
 	public Result<Group> createGroup(String name){
 		String re = Mikoto.api.group.createGroup(name);
 		if(KuUtil.isResultSuccess(re)){
@@ -31,15 +36,25 @@ public class UserService {
 		}
 	}
 	
+	/**
+	 * 删除分组，用户会进入默认分组.
+	 * 同时从数据库中删除,并将用户移入默认组，修改默认组人数。
+	 * @param id 要删除的分组id
+	 * @return
+	 */
 	public Result<Group> deleteGroup(int id){
-		String re = Mikoto.api.group.deleteGroup(id);System.out.println(re);
+		String re = Mikoto.api.group.deleteGroup(id);
 		if(KuUtil.isResultSuccess(re)){
 			ErrResult er = new ErrResult();
 			er.setErrcode("0");
 			er.setErrmsg("ok");
 			Result<Group> rs = new Result<Group>(er);
 			
+			Group group = groupDAO.select(0);
+			group.setCount(group.getCount()+userDAO.selectGroupUserNum(id));
 			groupDAO.delete(id);
+			userDAO.updateUserGroup(id, 0);
+			groupDAO.update(group);
 			
 			return rs;
 		}else{
@@ -49,6 +64,13 @@ public class UserService {
 		}
 	}
 	
+	/**
+	 * 更改分组名.
+	 * 同时写入数据库。
+	 * @param id
+	 * @param name
+	 * @return
+	 */
 	public Result<Group> changeGroupName(int id, String name){
 		String re = Mikoto.api.group.updateGroup(id, name);
 		
@@ -62,25 +84,47 @@ public class UserService {
 		return rs;
 	}
 	
-	public Result<Group> getAllGroup(){
-		String re = Mikoto.api.group.getGroup();
-		
-		if(KuUtil.isResultSuccess(re)){
-			Groups groups = gson.fromJson(re, Groups.class);
-			Result<Group> rs = new Result<Group>(groups.getGroups());
-			
-			List<Group> list = groups.getGroups();
-			groupDAO.clean();
-			for(Group group:list){
-				groupDAO.insert(group);
+	/**
+	 * 更改用户所在分组.
+	 * 同时更改数据库信息，更改用户的groupid和两个分组的人数。
+	 * @param openid 用户的openid
+	 * @param groupid 新分组的id
+	 * @return
+	 */
+	public Result<Group> changeUserGroup(String openid, int groupid){
+		User user = userDAO.select(openid);
+		Group group = groupDAO.select(groupid);
+		Group ogroup = groupDAO.select(user.getGroupid());
+		Result<Group> re = new Result<Group>();
+		re.setErrCode(-1);
+		re.setErrMsg("未知错误");
+		if(!group.getName().equals("")){
+			String json = Mikoto.api.group.updateGroup(openid, groupid);
+			if(KuUtil.isResultSuccess(json)){
+				user.setGroupid(groupid);
+				group.setCount(group.getCount()+1);
+				ogroup.setCount(ogroup.getCount()-1);
+				userDAO.update(user);
+				groupDAO.update(group);
+				groupDAO.update(ogroup);
+				re.setErrCode(0);
+				re.setErrMsg("ok");
 			}
-			
-			return rs;
-		}else{
-			ErrResult er = gson.fromJson(re, ErrResult.class);
-			Result<Group> rs = new Result<Group>(er);
-			return rs;
 		}
+		return re;
+	}
+	
+	/**
+	 * 获取所有分组.
+	 * 从数据库中直接获得。
+	 * @return
+	 */
+	public Result<Group> getAllGroup(){
+		List<Group> groups = groupDAO.select();
+		Result<Group> re = new Result<Group>(groups);
+		re.setErrCode(0);
+		re.setErrMsg("ok");
+		return re;
 	}
 	
 	/**
@@ -101,12 +145,16 @@ public class UserService {
 			
 			return false;
 		}else{
-			ErrResult er = gson.fromJson(re, ErrResult.class);
 			return false;
 		}
 	}
 	
-	public boolean syncUserIdList(){
+	/**
+	 * 同步所有用户信息.
+	 * 拉取所有用户的openid，并委托其他函数进行信息拉取。
+	 * @return 是否同步成功
+	 */
+	public boolean syncAllUsers(){
 		String re = Mikoto.api.user.usersList(null);
 		if(KuUtil.isResultSuccess(re)){
 			userDAO.clean();
@@ -136,7 +184,6 @@ public class UserService {
 			}
 			return true;
 		}else{
-			ErrResult er = gson.fromJson(re, ErrResult.class);
 			return false;
 		}
 	}
@@ -153,5 +200,29 @@ public class UserService {
 				return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * 同步所有分组信息.
+	 * @return 同步是否成功
+	 */
+	public boolean syncAllGroups(){
+		String re = Mikoto.api.group.getGroup();
+		
+		if(KuUtil.isResultSuccess(re)){
+			Groups groups = gson.fromJson(re, Groups.class);
+			
+			List<Group> list = groups.getGroups();
+			groupDAO.clean();
+			for(Group group:list){
+				if(groupDAO.insert(group)<1){
+					return false;
+				}
+			}
+			
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

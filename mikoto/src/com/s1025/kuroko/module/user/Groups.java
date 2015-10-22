@@ -12,4 +12,9 @@ public class Groups {
 	public void setGroups(List<Group> groups) {
 		this.groups = groups;
 	}
+
+	@Override
+	public String toString() {
+		return "Groups [groups=" + groups + "]";
+	}
 }

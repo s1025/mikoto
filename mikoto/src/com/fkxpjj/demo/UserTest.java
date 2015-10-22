@@ -16,9 +16,10 @@ public class UserTest {
 		//System.out.println(s);
 		DB.init();
 		UserService s = new UserService();
-		//boolean rs = s.syncUser("oVW-os9UkORwWvVlp09R4hAaPCF4");
-		UserDAO userDAO = new UserDAOimpl();
-		boolean rs = s.syncUserIdList();
-		System.out.println(rs);
+		//Result<Group> rs = s.deleteGroup(113);
+		//System.out.println(rs);
+		boolean rs = s.syncAllUsers();
+		//System.out.println(rs);
+		//s.getAllGroup();
 	}
 }
