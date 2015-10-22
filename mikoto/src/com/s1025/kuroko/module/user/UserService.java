@@ -1,5 +1,6 @@
 package com.s1025.kuroko.module.user;
 
+import java.util.Date;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -12,6 +13,7 @@ public class UserService {
 	
 	Gson gson = new Gson();
 	GroupDAO groupDAO = new GroupDAOimpl();
+	UserDAO userDAO = new UserDAOimpl();
 	
 	public Result<Group> createGroup(String name){
 		String re = Mikoto.api.group.createGroup(name);
@@ -81,12 +83,75 @@ public class UserService {
 		}
 	}
 	
-	public Result<User> getUser(String openid){
+	/**
+	 * 同步单个用户信息.
+	 * 对单个用户的信息进行同步，将拉取用户信息到数据库中。
+	 * @param openid 用户openid
+	 * @return 是否成功
+	 */
+	public boolean syncUser(String openid){
 		String re = Mikoto.api.user.infoUser(openid);
-		return null;
+		
+		if(KuUtil.isResultSuccess(re)){
+			User user = gson.fromJson(re, User.class);
+			
+			if(userDAO.update(user)>0){
+				return true;
+			}
+			
+			return false;
+		}else{
+			ErrResult er = gson.fromJson(re, ErrResult.class);
+			return false;
+		}
 	}
 	
-	public Result<User> getUserList(){
-		return null;
+	public boolean syncUserIdList(){
+		String re = Mikoto.api.user.usersList(null);
+		if(KuUtil.isResultSuccess(re)){
+			userDAO.clean();
+			UserList userList = gson.fromJson(re, UserList.class);
+			List<String> openids = userList.getData().getOpenid();
+			
+			userDAO.insertOpenids(openids);
+			if(!syncUsers(openids)){
+				return false;
+			}
+			
+			
+			int time = userList.getTotal()/10000;
+			
+			for(int i = 0;i<time;i++){
+				re = Mikoto.api.user.usersList(openids.get(openids.size()-1));
+				if(!KuUtil.isResultSuccess(re)){
+					return false;
+				} else {
+					userList = gson.fromJson(re, UserList.class);
+					openids = userList.getData().getOpenid();
+					userDAO.insertOpenids(openids);
+					if(!syncUsers(openids)){
+						return false;
+					}
+				}
+			}
+			return true;
+		}else{
+			ErrResult er = gson.fromJson(re, ErrResult.class);
+			return false;
+		}
+	}
+	
+	/**
+	 * 同步多个用户信息.
+	 * 接受一个openid集合，然后逐个调用同步用户信息函数。
+	 * @param openids openid集合
+	 * @return 是否成功
+	 */
+	public boolean syncUsers(List<String> openids){
+		for(String openid:openids){
+			if(!syncUser(openid))
+				return false;
+		}
+		return true;
 	}
 }

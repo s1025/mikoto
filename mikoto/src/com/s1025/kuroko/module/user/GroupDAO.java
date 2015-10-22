@@ -1,5 +1,7 @@
 package com.s1025.kuroko.module.user;
 
+import java.util.List;
+
 public interface GroupDAO {
 	public int insert(Group group);
 	public int delete(int id);

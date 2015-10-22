@@ -1,8 +1,8 @@
 package com.s1025.kuroko.module.user;
 
 public class User {
-	private int subscribe;
 	private String openid;
+	private int subscribe;
 	private String nickname;
 	private int sex;
 	private String language;

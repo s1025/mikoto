@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import com.s1025.kuroko.dao.DB;
 
@@ -122,5 +123,7 @@ public class GroupDAOimpl implements GroupDAO{
 		}
 		return re;
 	}
+
+	
 
 }
