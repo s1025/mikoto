@@ -1,6 +1,6 @@
-package com.s1025.kuroko.plugin.menu.model;
+package com.s1025.kuroko.module.menu.button;
 
-public class ButtonBase{
+public abstract class Button{
 	private String name;
 
 	public String getName() {
@@ -10,13 +10,11 @@ public class ButtonBase{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public String toJson(){
-		return "json";
-	}
 
 	@Override
 	public String toString() {
 		return "ButtonBase [name=" + name + "]";
 	}
+	
+	public abstract String toJson();
 }

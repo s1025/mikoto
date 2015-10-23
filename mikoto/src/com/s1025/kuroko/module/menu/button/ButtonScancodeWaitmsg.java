@@ -1,6 +1,6 @@
-package com.s1025.kuroko.plugin.menu.model;
+package com.s1025.kuroko.module.menu.button;
 
-public class ButtonScancodePush extends ButtonBase{
+public class ButtonScancodeWaitmsg extends Button{
 	private String type;
 	private String key;
 	public String getType() {

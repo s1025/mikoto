@@ -1,7 +1,7 @@
-package com.s1025.kuroko.plugin.menu.model;
+package com.s1025.kuroko.module.menu.button;
 
 
-public class ButtonView extends ButtonBase{
+public class ButtonView extends Button{
 	
 	private String type;
 	private String url;

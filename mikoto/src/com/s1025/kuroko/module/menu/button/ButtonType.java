@@ -1,4 +1,4 @@
-package com.s1025.kuroko.plugin.menu.model;
+package com.s1025.kuroko.module.menu.button;
 
 /**
  * 按钮类，用于配置微信下方菜单上的按钮。

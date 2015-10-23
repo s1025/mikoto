@@ -1,43 +1,43 @@
-package com.s1025.kuroko.plugin.menu;
+package com.s1025.kuroko.module.menu;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.s1025.mikoto.model.button.ButtonBase;
-import com.s1025.mikoto.model.button.ButtonClick;
-import com.s1025.mikoto.model.button.ButtonMedia;
-import com.s1025.mikoto.model.button.ButtonScancodePush;
-import com.s1025.mikoto.model.button.ButtonScancodeWaitmsg;
-import com.s1025.mikoto.model.button.ButtonSub;
-import com.s1025.mikoto.model.button.ButtonType;
-import com.s1025.mikoto.model.button.ButtonView;
+import com.s1025.kuroko.module.menu.button.Button;
+import com.s1025.kuroko.module.menu.button.ButtonClick;
+import com.s1025.kuroko.module.menu.button.ButtonMedia;
+import com.s1025.kuroko.module.menu.button.ButtonScancodePush;
+import com.s1025.kuroko.module.menu.button.ButtonScancodeWaitmsg;
+import com.s1025.kuroko.module.menu.button.ButtonSub;
+import com.s1025.kuroko.module.menu.button.ButtonType;
+import com.s1025.kuroko.module.menu.button.ButtonView;
 
 public class MenuBuilder {
-	private List<ButtonBase> menu = new ArrayList<ButtonBase>();
+	private List<Button> menu = new ArrayList<Button>();
 	
-	public List<ButtonBase> getMenu() {
+	public List<Button> getMenu() {
 		return menu;
 	}
 
-	public void setMenu(List<ButtonBase> menu) {
+	public void setMenu(List<Button> menu) {
 		this.menu = menu;
 	}
 
-	public MenuBuilder add(ButtonBase button){
+	public MenuBuilder add(Button button){
 		menu.add(button);
 		return this;
 	}
 	
-	public MenuBuilder add(ButtonBase button, int index){
-		if(index>=menu.size()) menu.add(button);
-		else if(index<menu.size()){
-			ButtonBase buttonBase = menu.get(index);
+	public MenuBuilder add(Button button, int index){
+		if(index>menu.size()) menu.add(button);
+		else if(index<=menu.size()){
+			Button buttonBase = menu.get(index-1);
 			if(buttonBase instanceof ButtonSub){
 				ButtonSub sub = (ButtonSub) buttonBase;
 				sub.add(button);
 			} else {
-				menu.remove(index);
-				menu.add(index,button);
+				menu.remove(index-1);
+				menu.add(index-1,button);
 			}
 		}
 		return this;
@@ -98,7 +98,7 @@ public class MenuBuilder {
 	public String toJson(){
 		String sub = "";
 		for(int i =0; i<menu.size(); i++){
-			ButtonBase button = menu.get(i);
+			Button button = menu.get(i);
 			sub += button.toJson();
 			if(i!=menu.size()-1){
 				sub += ",";

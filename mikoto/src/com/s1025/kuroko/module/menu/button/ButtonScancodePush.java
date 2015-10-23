@@ -1,7 +1,6 @@
-package com.s1025.kuroko.plugin.menu.model;
+package com.s1025.kuroko.module.menu.button;
 
-public class ButtonClick extends ButtonBase{
-	
+public class ButtonScancodePush extends Button{
 	private String type;
 	private String key;
 	public String getType() {
@@ -16,16 +15,10 @@ public class ButtonClick extends ButtonBase{
 	public void setKey(String key) {
 		this.key = key;
 	}
-
 	
-	@Override
-	public String toString() {
-		return "ButtonClick [type=" + type + ", key=" + key + "]";
-	}
 	public String toJson(){
 		return "{\"type\":\""+type+"\","
 				+ "\"name\":\""+this.getName()+"\","
 				+ "\"key\":\""+key+"\"}";
 	}
-
 }

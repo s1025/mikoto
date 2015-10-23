@@ -1,6 +1,6 @@
-package com.s1025.kuroko.plugin.menu.model;
+package com.s1025.kuroko.module.menu.button;
 
-public class ButtonMedia extends ButtonBase{
+public class ButtonMedia extends Button{
 	private String type;
 	private String mediaId;
 	public String getType() {

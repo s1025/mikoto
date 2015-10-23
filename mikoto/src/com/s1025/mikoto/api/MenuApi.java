@@ -31,7 +31,7 @@ public class MenuApi {
 	 * @param menu 菜单对象
 	 * @return 返回json
 	 */
-	public static String createMenu(String menu) {   
+	public String createMenu(String menu) {   
 	    String url = menu_create_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());    
 	    String response = HttpCon.httpRequest(url, "POST", menu);   
 	    return response;  
@@ -41,7 +41,7 @@ public class MenuApi {
 	 * 菜单查询
 	 * @return 返回json
 	 */
-	public static String getMenu(){
+	public String getMenu(){
 		String url = menu_get_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
 		String response = HttpCon.httpRequest(url, "GET", null);
 		return response;
@@ -51,7 +51,7 @@ public class MenuApi {
 	 * 删除菜单
 	 * @return 返回json
 	 */
-	public static String deleteMenu() { 
+	public String deleteMenu() { 
 		String url = menu_delete_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
 		String response = HttpCon.httpRequest(url, "GET", null);
 		return response;
