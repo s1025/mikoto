@@ -16,9 +16,9 @@ public class UserTest {
 		//System.out.println(s);
 		DB.init();
 		UserService s = new UserService();
-		//Result<Group> rs = s.deleteGroup(113);
-		//System.out.println(rs);
-		boolean rs = s.syncAllUsers();
+		Result<User> rs = s.getPageUsers(2, 2);
+		System.out.println(rs);
+		//boolean rs = s.syncAllUsers();
 		//System.out.println(rs);
 		//s.getAllGroup();
 	}

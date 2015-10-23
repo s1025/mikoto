@@ -8,6 +8,15 @@ import com.s1025.kuroko.module.KuUtil;
 import com.s1025.kuroko.module.Result;
 import com.s1025.mikoto.Mikoto;
 
+/**
+ * 用户管理.
+ * 本类中的函数会对用户以及分组进行管理。
+ * sync开头的函数将会拉取微信服务器的数据到本地数据库，建议初始化的时候拉取一次，一般返回一个布尔值。
+ * get开头的函数为直接在数据库中获取数据,一般会返回Result<User> 或 Result<Group> 对象
+ * 其他大部分函数会同时更新微信和本地数据,一般会返回Result<User> 或 Result<Group> 对象
+ * @author fkxpjj
+ *
+ */
 public class UserService {
 	
 	Gson gson = new Gson();
@@ -115,6 +124,23 @@ public class UserService {
 	}
 	
 	/**
+	 * 修改用户备注.
+	 * 同时将信息写入数据库。
+	 * @param openid 要修改的用户的id
+	 * @param remark 备注
+	 * @return
+	 */
+	public Result<User> changeUserRemark(String openid, String remark){
+		String re = Mikoto.api.user.updateUser(openid, remark);
+		if(KuUtil.isResultSuccess(re)){
+			userDAO.updateUserRemark(openid, remark);
+		}
+		ErrResult er = gson.fromJson(re, ErrResult.class);
+		Result<User> rs = new Result<User>(er);
+		return rs;
+	}
+	
+	/**
 	 * 获取所有分组.
 	 * 从数据库中直接获得。
 	 * @return
@@ -124,6 +150,63 @@ public class UserService {
 		Result<Group> re = new Result<Group>(groups);
 		re.setErrCode(0);
 		re.setErrMsg("ok");
+		return re;
+	}
+	
+	/**
+	 * 获取单个用户信息.
+	 * @param openid 用户id
+	 * @return
+	 */
+	public Result<User> getUser(String openid){
+		User user = userDAO.select(openid);
+		Result<User> re = new Result<User>(user);
+		if(!(user.getOpenid()==null)){
+			re.setErrCode(0);
+			re.setErrMsg("ok");
+		} else {
+			re.setErrCode(-1);
+			re.setErrMsg("数据库读取失败");
+		}
+		return re;
+	}
+	
+	/**
+	 * 获取某一分组下所有人信息.
+	 * @param groupid 分组id
+	 * @return
+	 */
+	public Result<User> getGroupUsers(int groupid){
+		List<User> users = userDAO.selectGroupUsers(groupid);
+		Result<User> re = new Result<User> (users);
+		if(users.size()>0){
+			re.setErrCode(0);
+			re.setErrMsg("ok");
+		} else {
+			re.setErrCode(-1);
+			re.setErrMsg("数据库读取失败");
+		}
+		return re;
+	}
+	
+	/**
+	 * 获得分页用户.
+	 * 注意在同一页面下每页人数不要改变，只改变页数就行了。
+	 * @param page 页数
+	 * @param row 每页人数
+	 * @return
+	 */
+	public Result<User> getPageUsers(int page, int row){
+		int offset = (page-1)*row;
+		List<User> users = userDAO.selectPageUsers(offset, row);
+		Result<User> re = new Result<User> (users);
+		if(users.size()>0){
+			re.setErrCode(0);
+			re.setErrMsg("ok");
+		} else {
+			re.setErrCode(-1);
+			re.setErrMsg("数据库读取失败");
+		}
 		return re;
 	}
 	

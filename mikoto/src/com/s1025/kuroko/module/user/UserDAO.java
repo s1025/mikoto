@@ -11,4 +11,7 @@ public interface UserDAO {
 	public int insertOpenids(List<String> openids);
 	public int selectGroupUserNum(int groupid);  //获取某一分组的用户数
 	public int updateUserGroup(int groupid, int groupid2); //将某一分组的用户全部改为另一分组
+	public int updateUserRemark(String openid, String remark);
+	public List<User> selectGroupUsers(int groupid); //获取某一分组的所有用户
+	public List<User> selectPageUsers(int offset, int rows); //分页查询
 }

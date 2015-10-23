@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.s1025.kuroko.dao.DB;
@@ -183,6 +184,90 @@ public class UserDAOimpl implements UserDAO{
 			e.printStackTrace();
 		}
 		return re;
+	}
+
+	@Override
+	public int updateUserRemark(String openid, String remark) {
+		conn = DB.getCon();
+		String sql = "update users set remark = ? where openid = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, remark);
+			pstmt.setString(2, openid);
+			re = pstmt.executeUpdate();
+			DB.close(conn, pstmt, rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return re;
+	}
+
+	@Override
+	public List<User> selectGroupUsers(int groupid) {
+		conn = DB.getCon();
+		String sql = "select * from users where groupid = ?";
+		List<User> users = new ArrayList<User>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, groupid);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				User user = new User();
+				user.setOpenid(rs.getString("openid"));
+				user.setSubscribe(rs.getInt("subscribe"));
+				user.setNickname(rs.getString("nickname"));
+				user.setSex(rs.getInt("sex"));
+				user.setLanguage(rs.getString("language"));
+				user.setCity(rs.getString("city"));
+				user.setProvince(rs.getString("province"));
+				user.setCountry(rs.getString("country"));
+				user.setHeadimgurl(rs.getString("headimgurl"));
+				user.setSubscribe_time(rs.getString("subscribe_time"));
+				user.setUnionid(rs.getString("unionid"));
+				user.setRemark(rs.getString("remark"));
+				user.setGroupid(rs.getInt("groupid"));
+				users.add(user);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return users;
+	}
+
+	@Override
+	public List<User> selectPageUsers(int offset, int rows) {
+		conn = DB.getCon();
+		String sql = "select * from users limit ?,?";
+		List<User> users = new ArrayList<User>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, offset);
+			pstmt.setInt(2, rows);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				User user = new User();
+				user.setOpenid(rs.getString("openid"));
+				user.setSubscribe(rs.getInt("subscribe"));
+				user.setNickname(rs.getString("nickname"));
+				user.setSex(rs.getInt("sex"));
+				user.setLanguage(rs.getString("language"));
+				user.setCity(rs.getString("city"));
+				user.setProvince(rs.getString("province"));
+				user.setCountry(rs.getString("country"));
+				user.setHeadimgurl(rs.getString("headimgurl"));
+				user.setSubscribe_time(rs.getString("subscribe_time"));
+				user.setUnionid(rs.getString("unionid"));
+				user.setRemark(rs.getString("remark"));
+				user.setGroupid(rs.getInt("groupid"));
+				users.add(user);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return users;
 	}
 
 }
