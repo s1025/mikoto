@@ -69,8 +69,9 @@ public class MaterialApi {
 		Map<String, String> file = new HashMap<String, String>();
 		Map<String, String> resp = new HashMap<String, String>();
 		file.put("media", path);
-		String json = "{\"title\":"+title+",\"introduction\":"+intro+"}";
-		resp.put("json", json);
+		String json = "description='{\"title\":"+title+",\"introduction\":"+intro+"}'";
+		resp.put("title", title);
+		resp.put("introduction", intro);
 		String response = HttpCon.upload(url, resp, file);
 		return response;
 	}

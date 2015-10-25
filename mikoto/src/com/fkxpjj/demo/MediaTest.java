@@ -2,6 +2,9 @@ package com.fkxpjj.demo;
 
 import java.io.IOException;
 
+import com.s1025.kuroko.Kuroko;
+import com.s1025.kuroko.module.Result;
+import com.s1025.kuroko.module.media.Media;
 import com.s1025.mikoto.Mikoto;
 import com.s1025.mikoto.util.Dev;
 import com.s1025.mikoto.util.HttpCon;
@@ -12,7 +15,7 @@ public class MediaTest {
 		
 		String path = "D:\\1.mp3";
 		
-		String s = Mikoto.api.media.uploadMedia("voice", path);
+		Result<Media> s = Kuroko.service.media.addVoice("t", path);
 		System.out.println(s);
 	}
 
