@@ -5,4 +5,4 @@
  * @author fkxpjj
  *
  */
-package com.s1025.kuroko.plugin.passive;
+package com.s1025.kuroko.module.kf;

@@ -21,6 +21,7 @@ public class MediaService {
 		String re = Mikoto.api.material.addMaterial("image", path);
 		if(KuUtil.isResultSuccess(re)){
 			Media media = gson.fromJson(re, Media.class);
+			media.setName(name);
 			media.setTemp(0);
 			media.setType("image");
 			mediaDAO.insert(media);
@@ -45,6 +46,7 @@ public class MediaService {
 		String re = Mikoto.api.material.addMaterial("thumb", path);
 		if(KuUtil.isResultSuccess(re)){
 			Media media = gson.fromJson(re, Media.class);
+			media.setName(name);
 			media.setTemp(0);
 			media.setType("thumb");
 			mediaDAO.insert(media);
@@ -69,6 +71,7 @@ public class MediaService {
 		String re = Mikoto.api.material.addMaterial("voice", path);
 		if(KuUtil.isResultSuccess(re)){
 			Media media = gson.fromJson(re, Media.class);
+			media.setName(name);
 			media.setTemp(0);
 			media.setType("voice");
 			mediaDAO.insert(media);

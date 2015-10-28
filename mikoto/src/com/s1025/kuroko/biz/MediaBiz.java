@@ -3,14 +3,10 @@ package com.s1025.kuroko.biz;
 import java.io.IOException;
 
 import com.google.gson.Gson;
-import com.s1025.kuroko.model.result.ErrCode;
-import com.s1025.kuroko.model.result.MediaResult;
-import com.s1025.kuroko.model.result.ResultBase;
-import com.s1025.kuroko.model.result.ResultType;
-import com.s1025.kuroko.model.result.ThumbMediaResult;
 import com.s1025.mikoto.Mikoto;
 
 public class MediaBiz {
+	/**
 	public static ResultBase uploadMedia(String path, boolean thumb) throws IOException{
 		String end = path.substring(path.lastIndexOf(".")+1);
 		String type = "";
@@ -80,4 +76,5 @@ public class MediaBiz {
 		
 		return new ResultBase(ResultType.NONE);
 	}
+	**/
 }

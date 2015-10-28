@@ -1,6 +1,12 @@
 package com.fkxpjj.demo;
 
 
+import com.s1025.kuroko.Kuroko;
+import com.s1025.kuroko.module.Result;
+import com.s1025.kuroko.module.kf.KfMessage;
+import com.s1025.kuroko.module.media.Media;
+import com.s1025.kuroko.module.media.MediaDAO;
+import com.s1025.kuroko.module.media.MediaDAOimpl;
 import com.s1025.mikoto.Mikoto;
 import com.s1025.mikoto.api.KfApi;
 import com.s1025.mikoto.model.active.ArticleKf;
@@ -13,8 +19,12 @@ public class KfTest {
 		//String s = Mikoto.api.kf.addKf("", name, password);
 		//System.out.println(s);
 		
-		String s = Mikoto.api.kf.sendCustomMusic("oVW-oszd62QE_kT66ilsRuuOJspA", "ttt", "ddd", "http://mikoto.fkxpjj.com/mikototest/music/cxjd.mp3", "http://mikoto.fkxpjj.com/mikototest/music/cxjd.mp3", "11");
-		//String s = Mikoto.api.kf.sendCustomImage("oVW-oszd62QE_kT66ilsRuuOJspA", "H9aR8TJsPEnsKDB7vuR7tANXBW2g7V35mm8QY_OuN4i69Ug8HIks3HEDGM7X1yFw");
+		//MediaDAO mediaDAO = new MediaDAOimpl();
+		
+		//Media s = mediaDAO.select(4);
+		
+		//String s = Mikoto.api.kf.sendCustomMusic("oVW-oszd62QE_kT66ilsRuuOJspA", "ttt", "ddd", "http://mikoto.fkxpjj.com/mikototest/music/cxjd.mp3", "http://mikoto.fkxpjj.com/mikototest/music/cxjd.mp3", "11");
+		Result<KfMessage> s = Kuroko.service.kf.sendVoice("oVW-oszd62QE_kT66ilsRuuOJspA", "n7C3YkFO-5TRbRla3CbGVvTyP1APhik9XN7pd3fCazM");
 		System.out.println(s);
 	}
 
