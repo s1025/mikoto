@@ -3,32 +3,51 @@ package com.fkxpjj.demo;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.s1025.kuroko.module.passive.req.ReqText;
+import com.s1025.kuroko.module.passive.resp.RespArticle;
+import com.s1025.kuroko.module.passive.resp.RespNews;
+import com.s1025.kuroko.module.router.Key;
+import com.s1025.kuroko.module.router.Reply;
+import com.s1025.kuroko.module.router.Rule;
+import com.s1025.kuroko.module.router.RuleDAO;
+import com.s1025.kuroko.module.router.RuleDAOimpl;
 import com.s1025.mikoto.Mikoto;
-import com.s1025.mikoto.model.req.ReqText;
-import com.s1025.mikoto.model.resp.Media;
-import com.s1025.mikoto.model.resp.RespArticle;
-import com.s1025.mikoto.model.resp.RespImg;
-import com.s1025.mikoto.model.resp.RespNews;
-import com.s1025.mikoto.model.resp.RespText;
-import com.s1025.mikoto.model.resp.RespVoice;
 
 public class PassiveTest {
 	public static void main(String[] args){
 		
-		ReqText reqText = new ReqText();
-		reqText.setFromUserName("1");
-		reqText.setToUserName("1");
-		reqText.setCreateTime(3);
+		RuleDAOimpl ruleDAO = new RuleDAOimpl();
 		
-		RespArticle a1 = Mikoto.api.passive.getRespArticle("a1t", "a1d", "http://mmbiz.qpic.cn/mmbiz/CedLmsO1IMHWRrKiawKXWZI5GpN4S7Ilbv8suCyWgntjGyYPBGrGTLBF8aMLfLUugm4G2XIic2HQwFS2wvefySiaA/0", "http://baidu.com");
-		RespArticle a2 = Mikoto.api.passive.getRespArticle("a2t", "a2d", "http://mmbiz.qpic.cn/mmbiz/CedLmsO1IMHWRrKiawKXWZI5GpN4S7Ilbv8suCyWgntjGyYPBGrGTLBF8aMLfLUugm4G2XIic2HQwFS2wvefySiaA/0", "http://baidu.com");
+		Rule rule = new Rule();
+		List<Rule> rules = new ArrayList<Rule>();
+		List<Key> keys = new ArrayList<Key>();
+		List<Reply> replys = new ArrayList<Reply>();
 		
-		List<RespArticle> list = new ArrayList<RespArticle>();
-		list.add(a1);
-		list.add(a2);
-		RespNews news = Mikoto.api.passive.getRespNews(reqText, 2, list);
+		rule.setName("t1");
+		rule.setPri(5);
+		rule.setRespAll(false);
 		
-		System.out.println(news);
+		for(int i = 0; i<3; i++){
+			Key key = new Key();
+			key.setRname(rule.getName());
+			key.setContent("tk"+i);
+			key.setTotally(true);
+			keys.add(key);
+		}
+		
+		for(int j = 0; j<4; j++){
+			Reply reply = new Reply();
+			reply.setRname(rule.getName());
+			reply.setType("text");
+			reply.setContent("haha"+j);
+			replys.add(reply);
+		}
+		
+		rule.setKeys(keys);
+		rule.setReplys(replys);
+
+		rules = ruleDAO.selectAll();
+		System.out.println(rules);
 	}
 
 }

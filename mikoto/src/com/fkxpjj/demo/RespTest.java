@@ -1,10 +1,9 @@
 package com.fkxpjj.demo;
 
-import com.s1025.kuroko.util.Parse;
+import com.s1025.kuroko.module.passive.Parse;
 import com.s1025.mikoto.Mikoto;
 import com.s1025.mikoto.api.KfApi;
 import com.s1025.mikoto.api.UserApi;
-import com.s1025.mikoto.model.resp.RespText;
 
 public class RespTest {
 	public static void main(String[] args){

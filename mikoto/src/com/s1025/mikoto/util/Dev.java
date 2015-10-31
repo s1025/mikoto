@@ -1,16 +1,8 @@
 package com.s1025.mikoto.util;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.s1025.mikoto.Mikoto;
-import com.s1025.mikoto.model.App;
 
 /**
  * 一些基础函数.

@@ -4,8 +4,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import com.s1025.mikoto.util.Dev;
-
 
 
 public class MikotoListener implements ServletContextListener{

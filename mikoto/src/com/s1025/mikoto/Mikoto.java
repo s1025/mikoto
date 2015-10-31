@@ -1,13 +1,7 @@
 package com.s1025.mikoto;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.s1025.kuroko.plugin.router.Router;
-import com.s1025.kuroko.util.Parse;
 import com.s1025.mikoto.api.AccessTokenApi;
 import com.s1025.mikoto.api.DatacubeApi;
 import com.s1025.mikoto.api.GroupApi;
@@ -16,10 +10,8 @@ import com.s1025.mikoto.api.MassApi;
 import com.s1025.mikoto.api.MaterialApi;
 import com.s1025.mikoto.api.MediaApi;
 import com.s1025.mikoto.api.MenuApi;
-import com.s1025.mikoto.api.PassiveApi;
 import com.s1025.mikoto.api.UserApi;
 import com.s1025.mikoto.model.App;
-import com.s1025.mikoto.plugin.IRouter;
 import com.s1025.mikoto.util.Dev;
 
 public class Mikoto {
@@ -34,15 +26,6 @@ public class Mikoto {
 	 */
 	public static String token;
 	
-	/**
-	 * 
-	 */
-	public static Parse parse = new Parse();
-	
-	public static boolean router(HttpServletRequest req, HttpServletResponse resp){
-		return plugin.router.service(req, resp);
-	}
-	
 	public static class api{
 		public static AccessTokenApi access = AccessTokenApi.getAccessTokenApi();
 		public static GroupApi group = new GroupApi();
@@ -51,35 +34,8 @@ public class Mikoto {
 		public static MaterialApi material = new MaterialApi();
 		public static MediaApi media = new MediaApi();
 		public static MenuApi menu = new MenuApi();
-		public static PassiveApi passive = new PassiveApi();
 		public static UserApi user = new UserApi();
 		public static DatacubeApi datacube = new DatacubeApi();
-	}
-	
-	public static class plugin{
-		public static IRouter router = new Router();
-	}
-	
-	/**
-	 * 验证服务器地址有效性.
-	 * 将调用Dev中的验证函数。
-	 * @param req http请求
-	 * @param resp http响应
-	 * @return 是否接入成功
-	 * @throws IOException
-	 */
-	public static boolean validate(HttpServletRequest req, HttpServletResponse resp) throws IOException{
-		String signature = req.getParameter("signature");
-		String timestamp = req.getParameter("timestamp");
-		String nonce = req.getParameter("nonce");
-		String echostr = req.getParameter("echostr");
-		boolean val = Dev.validate(signature, timestamp, nonce, echostr, token);
-		if(val) {
-			PrintWriter out = resp.getWriter();
-			out.print(echostr);
-			out.close();
-		}
-		return val;
 	}
 	
 	/**
@@ -106,5 +62,19 @@ public class Mikoto {
 	public static void build(String appid, String appsecret, String token){
 		build(appid, appsecret);
 		Mikoto.token = token;
+	}
+	
+	/**
+	 * 服务器接入验证.
+	 * 获取四个相关参数，并反回是否验证成功
+	 * @param signature
+	 * @param timestamp
+	 * @param nonce
+	 * @param echostr
+	 * @return 返回是否成功，布尔型
+	 * @throws IOException
+	 */
+	public static boolean validate(String signature, String timestamp, String nonce, String echostr) throws IOException{
+		return Dev.validate(signature, timestamp, nonce, echostr, token);
 	}
 }
