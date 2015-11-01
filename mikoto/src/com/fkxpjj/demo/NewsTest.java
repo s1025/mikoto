@@ -6,13 +6,14 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.s1025.kuroko.module.passive.Parse;
 import com.s1025.mikoto.Mikoto;
+import com.s1025.mikoto.model.App;
 import com.s1025.mikoto.model.active.ArticleKf;
 import com.s1025.mikoto.model.active.ArticleMaterial;
 import com.s1025.mikoto.util.Dev;
 
 public class NewsTest {
 	public static void main (String[] args){
-		Mikoto.build("wx591b08daf676e085", "921057ddd269c0ec8481430db96cc1bc");
+		Mikoto.app = new App("wx591b08daf676e085", "921057ddd269c0ec8481430db96cc1bc");
 		/*
 		Parse parse = new Parse();
 		ArticleKf a1 = new ArticleKf();

@@ -22,6 +22,7 @@ import com.s1025.kuroko.module.passive.req.ReqText;
 public class Router implements IRouter{
 	private List<Rule> rules = new ArrayList<Rule>();
 	private RuleBuilder ruleBuilder;
+	private RuleDAO ruleDAO = new RuleDAOimpl();
 
 	@Override
 	public boolean service(HttpServletRequest req, HttpServletResponse resp) {
@@ -81,8 +82,7 @@ public class Router implements IRouter{
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
-		
+		rules = ruleDAO.selectAll();
 	}
 
 	@Override
@@ -146,9 +146,5 @@ public class Router implements IRouter{
 	public Router addRule(Rule rule){
 		this.rules.add(rule);
 		return this;
-	}
-	
-	public void initFromDB(){
-		
 	}
 }

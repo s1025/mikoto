@@ -7,6 +7,17 @@ package com.s1025.mikoto.model;
 public class App {
 	private String appID;
 	private String appSecret;
+	
+	public App() {
+		super();
+	}
+
+	public App(String appID, String appSecret) {
+		super();
+		this.appID = appID;
+		this.appSecret = appSecret;
+	}
+	
 	public String getAppID() {
 		return appID;
 	}

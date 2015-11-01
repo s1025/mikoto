@@ -1,8 +1,12 @@
 package com.s1025.mikoto.util;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.Properties;
 
 /**
  * 一些基础函数.
@@ -60,5 +64,7 @@ public class Dev {
         String s = new String(tempArr);  
         return s;  
     }  
+	
+
 	
 }

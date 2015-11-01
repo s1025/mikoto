@@ -5,10 +5,11 @@ import com.s1025.kuroko.module.menu.Menu;
 import com.s1025.kuroko.module.menu.MenuBuilder;
 import com.s1025.kuroko.module.menu.MenuService;
 import com.s1025.mikoto.Mikoto;
+import com.s1025.mikoto.model.App;
 
 public class MenuTest {
 	public static void main(String[] args){
-		Mikoto.build("wx591b08daf676e085", "921057ddd269c0ec8481430db96cc1bc");
+		Mikoto.app = new App("wx591b08daf676e085", "921057ddd269c0ec8481430db96cc1bc");
 		MenuBuilder mb = new MenuBuilder();
 		
 		MenuService ms = new MenuService();

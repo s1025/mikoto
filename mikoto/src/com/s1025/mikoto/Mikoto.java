@@ -1,6 +1,7 @@
 package com.s1025.mikoto;
 
 import java.io.IOException;
+import java.util.Properties;
 
 import com.s1025.mikoto.api.AccessTokenApi;
 import com.s1025.mikoto.api.DatacubeApi;
@@ -17,7 +18,9 @@ import com.s1025.mikoto.util.Dev;
 public class Mikoto {
 	
 	/**
-	 * 
+	 * 调用所需参数.
+	 * 需初始化。
+	 * 可使用 new APP(appid, appsecret) 形式赋值
 	 */
 	public static App app;
 	
@@ -26,6 +29,11 @@ public class Mikoto {
 	 */
 	public static String token;
 	
+	/**
+	 * api类，包含了api包下的实例.
+	 * @author fkxpjj
+	 *
+	 */
 	public static class api{
 		public static AccessTokenApi access = AccessTokenApi.getAccessTokenApi();
 		public static GroupApi group = new GroupApi();
@@ -37,32 +45,7 @@ public class Mikoto {
 		public static UserApi user = new UserApi();
 		public static DatacubeApi datacube = new DatacubeApi();
 	}
-	
-	/**
-	 * 初始化.
-	 * 每个微信公众号都含有appid和appsecret，所有的调用都需要这两个参数。
-	 * 此函数只能用于本地测试主动调用。
-	 * @param appid
-	 * @param appsecret
-	 */
-	public static void build(String appid, String appsecret){
-		App app = new App();
-		app.setAppID(appid);
-		app.setAppSecret(appsecret);
-		Mikoto.app = app;
-	}
-	
-	/**
-	 * 初始化.
-	 * 多含有一个token参数，进行服务器验证。
-	 * @param appid
-	 * @param appsecret
-	 * @param token
-	 */
-	public static void build(String appid, String appsecret, String token){
-		build(appid, appsecret);
-		Mikoto.token = token;
-	}
+
 	
 	/**
 	 * 服务器接入验证.

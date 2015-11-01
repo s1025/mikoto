@@ -8,9 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DB {
-	public static String url = "jdbc:mysql://localhost:3306/kuroko?useUnicode=true&characterEncoding=utf-8";
-	public static String user = "root";
-	public static String passwd = "pjjclub209";
+	static DBConfig dbConfig = DBConfig.get();
 	
 	public static void init(){
 		try {
@@ -24,7 +22,7 @@ public class DB {
 	public static Connection getCon(){
 		Connection con = null;
 		try {
-			con = DriverManager.getConnection(url,user,passwd);
+			con = DriverManager.getConnection(dbConfig.getUrl(),dbConfig.getUser(),dbConfig.getPasswd());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
