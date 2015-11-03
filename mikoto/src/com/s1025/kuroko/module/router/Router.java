@@ -26,9 +26,30 @@ public class Router implements IRouter{
 
 	@Override
 	public boolean service(HttpServletRequest req, HttpServletResponse resp) {
+		ReqBase reqBase = Kuroko.parse.getReq(req);
+		List<Reply> mateReply = mate(reqBase);
+		
+		for(Reply reply:mateReply){
+			try{
+				if(MsgType.TEXT.equals(reply.getType())){
+					Kuroko.service.passive.sendRespText(reqBase, reply.getContent(), resp);
+				} else if(MsgType.IMAGE.equals(reply.getType())){
+					Kuroko.service.passive.sendRespImg(reqBase, reply.getContent(), resp);
+				} else if(MsgType.VOICE.equals(reply.getType())){
+					Kuroko.service.passive.sendRespVoice(reqBase, reply.getContent(), resp);
+				}
+			} catch (IOException e){
+				e.printStackTrace();
+			}
+		}
+		
+		return false;
+	}
+	
+	public List<Reply> mate(ReqBase reqBase){
+		System.out.println(rules);
 		List<Rule> mateRule = new ArrayList<Rule>();
 		List<Reply> mateReply = new ArrayList<Reply>();
-		ReqBase reqBase = Kuroko.parse.getReq(req);
 		String reqKey = "";
 		if(reqBase.getMsgType().equals(MsgType.TEXT)){
 			ReqText reqText = (ReqText)reqBase;
@@ -49,6 +70,8 @@ public class Router implements IRouter{
 			
 		}
 		
+		System.out.println(mateRule.size());
+		
 		for(Rule rule:mateRule){
 			List<Reply> replys = rule.getReplys();
 			if(rule.isRespAll()){
@@ -59,21 +82,7 @@ public class Router implements IRouter{
 			}
 		}
 		
-		for(Reply reply:mateReply){
-			try{
-				if(MsgType.TEXT.equals(reply.getType())){
-					Kuroko.service.passive.sendRespText(reqBase, reply.getContent(), resp);
-				} else if(MsgType.IMAGE.equals(reply.getType())){
-					Kuroko.service.passive.sendRespImg(reqBase, reply.getContent(), resp);
-				} else if(MsgType.VOICE.equals(reply.getType())){
-					Kuroko.service.passive.sendRespVoice(reqBase, reply.getContent(), resp);
-				}
-			} catch (IOException e){
-				e.printStackTrace();
-			}
-		}
-		
-		return false;
+		return mateReply;
 	}
 	
 	public void send(List<Reply> replys, boolean respAll){
@@ -83,6 +92,7 @@ public class Router implements IRouter{
 	@Override
 	public void init() {
 		rules = ruleDAO.selectAll();
+		System.out.println(rules);
 	}
 
 	@Override
@@ -123,6 +133,7 @@ public class Router implements IRouter{
 	 */
 	public Router addRule(){
 		this.rules.add(ruleBuilder.getRule());
+		ruleDAO.insert(ruleBuilder.getRule());
 		return this;
 	}
 	
@@ -134,6 +145,7 @@ public class Router implements IRouter{
 	 */
 	public Router addRule(RuleBuilder ruleBuilder){
 		this.rules.add(ruleBuilder.getRule());
+		ruleDAO.insert(ruleBuilder.getRule());
 		return this;
 	}
 	
@@ -145,6 +157,7 @@ public class Router implements IRouter{
 	 */
 	public Router addRule(Rule rule){
 		this.rules.add(rule);
+		ruleDAO.insert(ruleBuilder.getRule());
 		return this;
 	}
 }

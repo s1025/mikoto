@@ -150,7 +150,7 @@ public class HttpCon {
                     
                 }  
                 out.write(strBuf.toString().getBytes("UTF-8"));  
-                System.out.println(strBuf.toString());
+                //System.out.println(strBuf.toString());
             }  
             
             // file  
@@ -183,7 +183,7 @@ public class HttpCon {
                     strBuf.append("Content-Type:" + contentType + "\r\n\r\n");  
   
                     out.write(strBuf.toString().getBytes());  
-                    System.out.println(strBuf.toString());
+                    //System.out.println(strBuf.toString());
                     DataInputStream in = new DataInputStream(  
                             new FileInputStream(file));  
                     int bytes = 0;  

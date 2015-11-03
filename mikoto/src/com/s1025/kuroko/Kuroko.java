@@ -12,15 +12,13 @@ import com.s1025.kuroko.module.menu.MenuService;
 import com.s1025.kuroko.module.passive.Parse;
 import com.s1025.kuroko.module.passive.PassiveService;
 import com.s1025.kuroko.module.passive.ReqBuilder;
+import com.s1025.kuroko.module.router.IRouter;
+import com.s1025.kuroko.module.router.Router;
 import com.s1025.kuroko.module.user.UserService;
 import com.s1025.mikoto.Mikoto;
 import com.s1025.mikoto.util.Dev;
 
 public class Kuroko {
-	
-	public static class builder{
-		public static ReqBuilder req = new ReqBuilder();
-	}
 	
 	public static class service{
 		public static UserService user = new UserService();
@@ -29,6 +27,13 @@ public class Kuroko {
 		public static KfService kf = new KfService();
 		public static PassiveService passive = new PassiveService();
 	}
+	
+	public static class builder{
+		public static ReqBuilder req = new ReqBuilder();
+	}
+	
+	public static IRouter router = new Router();
+	public static Parse parse = new Parse();
 	
 	/**
 	 * 验证服务器地址有效性.
@@ -52,5 +57,7 @@ public class Kuroko {
 		return val;
 	}
 	
-	public static Parse parse = new Parse();
+	public static void router(HttpServletRequest req, HttpServletResponse resp){
+		router.service(req, resp);
+	}
 }
