@@ -22,6 +22,9 @@ public class AccessTokenApi {
 	private Calendar time;
 	private Gson gson = new Gson();
     
+	private String tmpAccessToken;
+	private boolean debug = false;
+	
 	private AccessTokenApi(){};
 	
 	public static AccessTokenApi getAccessTokenApi() {
@@ -33,8 +36,7 @@ public class AccessTokenApi {
     
     public String getAccessToken() {
     	
-    	//String tmp = "mp1agkzRYpRG7SNDmCy7pf_phFK-n49SBw0NPO3RXrHq-Gz8MmFXyDJBlCMm9VLYGPBZlgvrgatEu-m3MtN-U55iy9YWvcjX9_D-kCxLBXg";
-    	//if(tmp!=null) return tmp;
+    	if(debug) return tmpAccessToken;
     	
     	Calendar cal = Calendar.getInstance();
     	cal.add(Calendar.HOUR_OF_DAY, -1);
@@ -81,5 +83,21 @@ public class AccessTokenApi {
         return accessToken; 
     	
     }
+
+	public String getTmpAccessToken() {
+		return tmpAccessToken;
+	}
+
+	public void setTmpAccessToken(String tmpAccessToken) {
+		this.tmpAccessToken = tmpAccessToken;
+	}
+
+	public boolean isDebug() {
+		return debug;
+	}
+
+	public void setDebug(boolean debug) {
+		this.debug = debug;
+	}
      
 }  

@@ -63,7 +63,7 @@ public class DatacubeApi {
 	 * @return
 	 */
 	public String getarticlesummary(String begin_date, String end_date){
-		String url = getarticletotal_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
+		String url = getarticlesummary_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
 		return datacubeBase(url, begin_date, end_date);
 	}
 	
