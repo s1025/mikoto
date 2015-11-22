@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.s1025.kuroko.module.action.Action;
 import com.s1025.kuroko.module.kf.KfService;
 import com.s1025.kuroko.module.media.MediaService;
 import com.s1025.kuroko.module.menu.MenuService;
@@ -33,6 +34,7 @@ public class Kuroko {
 	}
 	
 	public static IRouter router = new Router();
+	public static Action action = new Action();
 	public static Parse parse = new Parse();
 	
 	/**

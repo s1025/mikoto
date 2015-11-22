@@ -47,7 +47,6 @@ public class Router implements IRouter{
 	}
 	
 	public List<Reply> mate(ReqBase reqBase){
-		System.out.println(rules);
 		List<Rule> mateRule = new ArrayList<Rule>();
 		List<Reply> mateReply = new ArrayList<Reply>();
 		String reqKey = "";
@@ -70,8 +69,6 @@ public class Router implements IRouter{
 			
 		}
 		
-		System.out.println(mateRule.size());
-		
 		for(Rule rule:mateRule){
 			List<Reply> replys = rule.getReplys();
 			if(rule.isRespAll()){
@@ -92,7 +89,6 @@ public class Router implements IRouter{
 	@Override
 	public void init() {
 		rules = ruleDAO.selectAll();
-		System.out.println(rules);
 	}
 
 	@Override

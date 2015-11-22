@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+	<action>
+		<content>a</content>
+		<class>b</class>
+	</action>
+	<action>
+		<content>c</content>
+		<class>d</class>
+	</action>
+</actions>
