@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<!-- 多个action 
+	content为匹配内容
+	class为处理类的包名+类名
+
+	<action>
+		<content></content>
+		<class></class>
+	</action>
+-->
+
+</actions>

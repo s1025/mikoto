@@ -47,7 +47,6 @@ public class KurokoListener implements ServletContextListener{
 		String user = pps.getProperty("user");
 		String passwd = pps.getProperty("passwd");
 		
-
 		DBConfig dbConfig = DBConfig.get();
 		dbConfig.setUrl(url);
 		dbConfig.setUser(user);

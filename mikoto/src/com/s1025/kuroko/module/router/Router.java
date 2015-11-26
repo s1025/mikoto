@@ -37,6 +37,8 @@ public class Router implements IRouter{
 					Kuroko.service.passive.sendRespImg(reqBase, reply.getContent(), resp);
 				} else if(MsgType.VOICE.equals(reply.getType())){
 					Kuroko.service.passive.sendRespVoice(reqBase, reply.getContent(), resp);
+				} else if(MsgType.ACTION.equals(reply.getType())){
+					Kuroko.action.dispose(reqBase, reply.getContent(), resp);
 				}
 			} catch (IOException e){
 				e.printStackTrace();

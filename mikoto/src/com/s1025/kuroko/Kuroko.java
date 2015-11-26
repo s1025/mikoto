@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.s1025.kuroko.module.account.AccountService;
 import com.s1025.kuroko.module.action.Action;
 import com.s1025.kuroko.module.kf.KfService;
 import com.s1025.kuroko.module.media.MediaService;
@@ -27,6 +28,7 @@ public class Kuroko {
 		public static MediaService media = new MediaService();
 		public static KfService kf = new KfService();
 		public static PassiveService passive = new PassiveService();
+		public static AccountService account = new AccountService();
 	}
 	
 	public static class builder{

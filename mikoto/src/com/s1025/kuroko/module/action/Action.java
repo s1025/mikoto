@@ -4,18 +4,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.s1025.kuroko.module.passive.req.ReqBase;
+import com.s1025.kuroko.module.passive.req.ReqText;
+
 public class Action {
 	public static final Map<String,IAction> actions = new HashMap<String,IAction>();
 	
-	public void dispose(String content){
+	public void dispose(ReqBase reqBase, String content, HttpServletResponse resp){
 		IAction action = actions.get(content);
 		if(action != null){
-			action.service();
+			action.service((ReqText)reqBase, resp);
 		}
 	}
 	
