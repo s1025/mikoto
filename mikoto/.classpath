@@ -2,10 +2,10 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="D:/work/code/git/mikoto/mikoto/lib/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="D:/work/code/git/mikoto/mikoto/lib/gson-2.3.1.jar"/>
-	<classpathentry kind="lib" path="D:/work/code/git/mikoto/mikoto/lib/mysql-connector-java-5.1.7-bin.jar"/>
-	<classpathentry kind="lib" path="D:/work/code/git/mikoto/mikoto/lib/xstream-1.3.1.jar"/>
-	<classpathentry kind="lib" path="D:/work/code/git/mikoto/mikoto/lib2/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/soft/work/CODE/eclipseEE/mikoto/mikoto/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/soft/work/CODE/eclipseEE/mikoto/mikoto/lib/gson-2.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/soft/work/CODE/eclipseEE/mikoto/mikoto/lib/mysql-connector-java-5.1.7-bin.jar"/>
+	<classpathentry kind="lib" path="C:/soft/work/CODE/eclipseEE/mikoto/mikoto/lib/xstream-1.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/soft/work/CODE/eclipseEE/mikoto/mikoto/lib2/servlet-api.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

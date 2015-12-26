@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.s1025.kuroko.ks.UserKs;
+import com.s1025.kuroko.ks.impl.UserKsImpl;
 import com.s1025.kuroko.module.account.AccountService;
 import com.s1025.kuroko.module.action.Action;
 import com.s1025.kuroko.module.kf.KfService;
@@ -29,6 +31,10 @@ public class Kuroko {
 		public static KfService kf = new KfService();
 		public static PassiveService passive = new PassiveService();
 		public static AccountService account = new AccountService();
+	}
+	
+	public static class ks{
+		public static UserKs userKs = new UserKsImpl();
 	}
 	
 	public static class builder{
