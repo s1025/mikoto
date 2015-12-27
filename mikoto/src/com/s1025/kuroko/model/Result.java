@@ -1,6 +1,8 @@
 package com.s1025.kuroko.model;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 public class Result<T> {
 	private int errcode;
@@ -45,6 +47,10 @@ public class Result<T> {
 		this.errmsg = errmsg;
 		this.data = data;
 		this.datas = datas;
+	}
+	public Result(ErrResult er){
+		this.errcode = Integer.parseInt(er.getErrcode());
+		this.errmsg = er.getErrmsg();
 	}
 	
 	

@@ -2,6 +2,7 @@ package com.fkxpjj.demo;
 
 import java.util.List;
 
+import com.s1025.kuroko.Kuroko;
 import com.s1025.kuroko.dao.DB;
 import com.s1025.kuroko.dao.DBConfig;
 import com.s1025.kuroko.ks.UserKs;
@@ -17,18 +18,9 @@ import com.s1025.mikoto.model.App;
 
 public class UserTest {
 	public static void main(String[] args){
-		Mikoto.app = new App("wx591b08daf676e085", "921057ddd269c0ec8481430db96cc1bc");
-		//String s = Mikoto.api.group.getGroup();
-		//System.out.println(s);
-		DBConfig dbc = DBConfig.get();
-
-		dbc.setUrl("jdbc:mysql://127.0.0.1:3306/kuroko?characterEncoding=UTF-8");
-		dbc.setUser("root");
-		dbc.setPasswd("pjjclub209");
-		DB.init();
-		UserKs u = new UserKsImpl();
-		String l = u.getGroups(true).toString();
-		System.out.println(l);
+		Init.init();
+		
+		System.out.println(Kuroko.ks.userKs.deleteGroup(117));
 		//boolean rs = s.syncAllUsers();
 		//System.out.println(rs);
 		//s.getAllGroup();
