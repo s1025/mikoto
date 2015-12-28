@@ -1,5 +1,6 @@
 package com.fkxpjj.demo;
 
+import com.s1025.kuroko.Kuroko;
 import com.s1025.kuroko.module.passive.Parse;
 import com.s1025.mikoto.Mikoto;
 import com.s1025.mikoto.api.KfApi;
@@ -8,10 +9,9 @@ import com.s1025.mikoto.model.App;
 
 public class RespTest {
 	public static void main(String[] args){
-		Mikoto.app = new App("wx591b08daf676e085", "921057ddd269c0ec8481430db96cc1bc");
-
+		Init.init();
 		
-		String s = Mikoto.api.kf.sendCustomText("oVW-oszd62QE_kT66ilsRuuOJspA", "hello");
+		int s = Kuroko.ks.messageKs.sendText("oVW-oszd62QE_kT66ilsRuuOJspA","admin", "hi");
 		
 		
 		System.out.println(s);

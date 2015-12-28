@@ -14,17 +14,12 @@ import com.s1025.mikoto.util.HttpCon;
 
 public class MediaTest {
 	public static void main (String[] args) throws IOException{
-		Mikoto.app = new App("wx591b08daf676e085", "921057ddd269c0ec8481430db96cc1bc");
-		DBConfig dbc = DBConfig.get();
-
-		dbc.setUrl("jdbc:mysql://127.0.0.1:3306/kuroko?characterEncoding=UTF-8");
-		dbc.setUser("root");
-		dbc.setPasswd("pjjclub209");
+		Init.init();
 		
 		
-		String path = "D:\\1.mp3";
+		String path = "D:\\1.jpg";
 		
-		Result<Media> s = Kuroko.service.media.addVoice("t", path);
+		int s = Kuroko.ks.mediaKs.addImage("a", path);
 		System.out.println(s);
 	}
 
