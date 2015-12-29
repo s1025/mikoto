@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
-import com.s1025.kuroko.module.passive.Parse;
 import com.s1025.mikoto.Mikoto;
 import com.s1025.mikoto.model.App;
 import com.s1025.mikoto.model.active.ArticleKf;

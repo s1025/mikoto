@@ -2,7 +2,8 @@ package com.s1025.kuroko.module.action;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.s1025.kuroko.module.passive.req.ReqText;
+import com.s1025.kuroko.model.req.ReqText;
+
 
 public interface IAction {
 	public void init();

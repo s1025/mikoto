@@ -11,8 +11,10 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import com.s1025.kuroko.module.passive.req.ReqBase;
-import com.s1025.kuroko.module.passive.req.ReqText;
+import com.s1025.kuroko.model.req.ReqBase;
+import com.s1025.kuroko.model.req.ReqText;
+
+
 
 public class Action {
 	public static final Map<String,IAction> actions = new HashMap<String,IAction>();

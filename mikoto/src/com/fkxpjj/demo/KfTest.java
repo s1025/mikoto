@@ -2,8 +2,7 @@ package com.fkxpjj.demo;
 
 
 import com.s1025.kuroko.Kuroko;
-import com.s1025.kuroko.module.Result;
-import com.s1025.kuroko.module.kf.KfMessage;
+import com.s1025.kuroko.model.KfMessage;
 import com.s1025.kuroko.module.media.Media;
 import com.s1025.kuroko.module.media.MediaDAO;
 import com.s1025.kuroko.module.media.MediaDAOimpl;
@@ -25,8 +24,8 @@ public class KfTest {
 		//Media s = mediaDAO.select(4);
 		
 		//String s = Mikoto.api.kf.sendCustomMusic("oVW-oszd62QE_kT66ilsRuuOJspA", "ttt", "ddd", "http://mikoto.fkxpjj.com/mikototest/music/cxjd.mp3", "http://mikoto.fkxpjj.com/mikototest/music/cxjd.mp3", "11");
-		Result<KfMessage> s = Kuroko.service.kf.sendVoice("oVW-oszd62QE_kT66ilsRuuOJspA", "n7C3YkFO-5TRbRla3CbGVvTyP1APhik9XN7pd3fCazM");
-		System.out.println(s);
+		//Result<KfMessage> s = Kuroko.service.kf.sendVoice("oVW-oszd62QE_kT66ilsRuuOJspA", "n7C3YkFO-5TRbRla3CbGVvTyP1APhik9XN7pd3fCazM");
+		//System.out.println(s);
 	}
 
 }

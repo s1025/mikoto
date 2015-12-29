@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.s1025.kuroko.Kuroko;
 import com.s1025.kuroko.model.Reply;
-import com.s1025.kuroko.module.passive.Parse;
 import com.s1025.mikoto.Mikoto;
 import com.s1025.mikoto.api.KfApi;
 import com.s1025.mikoto.api.UserApi;

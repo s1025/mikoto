@@ -3,9 +3,8 @@ package com.fkxpjj.demo;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.s1025.kuroko.module.passive.req.ReqText;
-import com.s1025.kuroko.module.passive.resp.RespArticle;
-import com.s1025.kuroko.module.passive.resp.RespNews;
+import com.s1025.kuroko.Kuroko;
+import com.s1025.kuroko.ks.RuleBuilder;
 import com.s1025.kuroko.module.router.Key;
 import com.s1025.kuroko.module.router.Reply;
 import com.s1025.kuroko.module.router.Rule;
@@ -16,38 +15,17 @@ import com.s1025.mikoto.Mikoto;
 public class PassiveTest {
 	public static void main(String[] args){
 		
-		RuleDAOimpl ruleDAO = new RuleDAOimpl();
+		Init.init();
 		
-		Rule rule = new Rule();
-		List<Rule> rules = new ArrayList<Rule>();
-		List<Key> keys = new ArrayList<Key>();
-		List<Reply> replys = new ArrayList<Reply>();
+		RuleBuilder rb = new RuleBuilder("tp");
 		
-		rule.setName("t1");
-		rule.setPri(5);
-		rule.setRespAll(false);
+		rb.addKey("pl");
+		rb.addKey("pm");
 		
-		for(int i = 0; i<3; i++){
-			Key key = new Key();
-			key.setRname(rule.getName());
-			key.setContent("tk"+i);
-			key.setTotally(true);
-			keys.add(key);
-		}
+		rb.addReply("込込込");
+		rb.addReply("細細");
 		
-		for(int j = 0; j<4; j++){
-			Reply reply = new Reply();
-			reply.setRname(rule.getName());
-			reply.setType("text");
-			reply.setContent("haha"+j);
-			replys.add(reply);
-		}
-		
-		rule.setKeys(keys);
-		rule.setReplys(replys);
-
-		rules = ruleDAO.selectAll();
-		System.out.println(rules);
+		Kuroko.ks.messageKs.addRule(rb.getRule());
 	}
 
 }

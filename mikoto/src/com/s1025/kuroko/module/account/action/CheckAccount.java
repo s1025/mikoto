@@ -6,14 +6,16 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.s1025.kuroko.Kuroko;
+import com.s1025.kuroko.ks.Passive;
+import com.s1025.kuroko.model.req.ReqText;
 import com.s1025.kuroko.module.account.Account;
 import com.s1025.kuroko.module.account.AccountDAO;
 import com.s1025.kuroko.module.account.AccountDAOimpl;
 import com.s1025.kuroko.module.action.IAction;
-import com.s1025.kuroko.module.passive.req.ReqText;
 
 public class CheckAccount implements IAction{
 	AccountDAO accountDAO = new AccountDAOimpl();
+	Passive passive = new Passive();
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
@@ -35,7 +37,7 @@ public class CheckAccount implements IAction{
 		}
 		
 		try {
-			Kuroko.service.passive.sendRespText(reqText, re, resp);
+			passive.sendRespText(reqText, re, resp);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

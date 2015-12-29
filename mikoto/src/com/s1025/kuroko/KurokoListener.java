@@ -40,7 +40,7 @@ public class KurokoListener implements ServletContextListener{
 		Mikoto.app = new App(appid,appsecret);
 		Mikoto.token = token;
 		
-		Kuroko.action.init(servletContext.getRealPath("/WEB-INF/actions.xml"));
+		//Kuroko.action.init(servletContext.getRealPath("/WEB-INF/actions.xml"));
 		
 		//数据库信息初始化
 		String url = pps.getProperty("url");
@@ -53,7 +53,6 @@ public class KurokoListener implements ServletContextListener{
 		dbConfig.setPasswd(passwd);
 		
 		DB.init();
-		Kuroko.router.init();
 	}
 
 }

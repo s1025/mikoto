@@ -26,7 +26,7 @@ public class RuleDAOimpl implements RuleDAO{
 		conn = DB.getCon();
 		List<Key> keys = rule.getKeys();
 		List<Reply> replys = rule.getReplys();
-		String sql = "insert into router_rule values(?,?,?)";
+		String sql = "insert into router_rule values(?,?)";
 		
 		try {
 			conn.setAutoCommit(false);
@@ -42,8 +42,7 @@ public class RuleDAOimpl implements RuleDAO{
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, rule.getName());
-			pstmt.setInt(2, rule.getPri());
-			pstmt.setInt(3, rule.getRespAll());
+			pstmt.setInt(2, rule.getRespAll());
 			re = pstmt.executeUpdate();
 			
 			conn.commit();
@@ -102,7 +101,6 @@ public class RuleDAOimpl implements RuleDAO{
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				rule.setName(rs.getString("name"));
-				rule.setPri(rs.getInt("pri"));
 				rule.setRespAll(rs.getInt("resp_all"));
 			}
 			rule.setKeys(selectKeys(name));
@@ -268,7 +266,6 @@ public class RuleDAOimpl implements RuleDAO{
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				rule.setName(rs.getString("name"));
-				rule.setPri(rs.getInt("pri"));
 				rule.setRespAll(rs.getInt("resp_all"));
 			}
 		} catch (SQLException e) {

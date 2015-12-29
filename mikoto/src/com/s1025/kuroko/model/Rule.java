@@ -7,8 +7,7 @@ public class Rule {
 	private String name;                                        //规则名
 	private List<Key> keys = new ArrayList<Key>();              //关键字列表
 	private List<Reply> replys = new ArrayList<Reply>();        //回复列表
-	private boolean respAll;                                    //回复全部吗？
-	private int pri;                                            //优先级
+	private boolean respAll;                                    //回复全部吗？                                           //优先级
 	public String getName() {
 		return name;
 	}
@@ -45,16 +44,9 @@ public class Rule {
 		else
 			return 0;
 	}
-	public int getPri() {
-		return pri;
-	}
-	public void setPri(int pri) {
-		this.pri = pri;
-	}
 	@Override
 	public String toString() {
-		return "Rule [name=" + name + ", keys=" + keys + ", replys=" + replys
-				+ ", respAll=" + respAll + ", pri=" + pri + "]";
+		return "Rule [name=" + name + ", keys=" + keys + ", replys=" + replys + ", respAll=" + respAll + "]";
 	}
-	
+
 }

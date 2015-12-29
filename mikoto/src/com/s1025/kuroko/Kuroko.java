@@ -14,26 +14,11 @@ import com.s1025.kuroko.ks.impl.MessageKsImpl;
 import com.s1025.kuroko.ks.impl.UserKsImpl;
 import com.s1025.kuroko.module.account.AccountService;
 import com.s1025.kuroko.module.action.Action;
-import com.s1025.kuroko.module.kf.KfService;
-import com.s1025.kuroko.module.media.MediaService;
-import com.s1025.kuroko.module.menu.MenuService;
-import com.s1025.kuroko.module.passive.Parse;
-import com.s1025.kuroko.module.passive.PassiveService;
-import com.s1025.kuroko.module.passive.ReqBuilder;
-import com.s1025.kuroko.module.router.IRouter;
-import com.s1025.kuroko.module.router.Router;
-import com.s1025.kuroko.module.user.UserService;
 import com.s1025.mikoto.Mikoto;
-import com.s1025.mikoto.util.Dev;
 
 public class Kuroko {
 	
 	public static class service{
-		public static UserService user = new UserService();
-		public static MenuService menu = new MenuService();
-		public static MediaService media = new MediaService();
-		public static KfService kf = new KfService();
-		public static PassiveService passive = new PassiveService();
 		public static AccountService account = new AccountService();
 	}
 	
@@ -44,13 +29,8 @@ public class Kuroko {
 		//menu
 	}
 	
-	public static class builder{
-		public static ReqBuilder req = new ReqBuilder();
-	}
 	
-	public static IRouter router = new Router();
 	public static Action action = new Action();
-	public static Parse parse = new Parse();
 	
 	/**
 	 * 验证服务器地址有效性.
@@ -75,6 +55,6 @@ public class Kuroko {
 	}
 	
 	public static void router(HttpServletRequest req, HttpServletResponse resp){
-		router.service(req, resp);
+		Kuroko.ks.messageKs.router(req, resp);
 	}
 }

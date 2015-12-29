@@ -5,7 +5,6 @@ import java.io.IOException;
 import com.s1025.kuroko.Kuroko;
 import com.s1025.kuroko.dao.DB;
 import com.s1025.kuroko.dao.DBConfig;
-import com.s1025.kuroko.module.Result;
 import com.s1025.kuroko.module.media.Media;
 import com.s1025.mikoto.Mikoto;
 import com.s1025.mikoto.model.App;
