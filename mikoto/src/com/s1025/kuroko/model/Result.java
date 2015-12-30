@@ -34,10 +34,7 @@ public class Result<T> {
 	public void setDatas(List<T> datas) {
 		this.datas = datas;
 	}
-	@Override
-	public String toString() {
-		return "Result [errcode=" + errcode + ", errmsg=" + errmsg + ", data=" + data + ", datas=" + datas + "]";
-	}
+
 	public Result() {
 		super();
 	}
@@ -52,6 +49,11 @@ public class Result<T> {
 		this.errcode = Integer.parseInt(er.getErrcode());
 		this.errmsg = er.getErrmsg();
 	}
+	@Override
+	public String toString() {
+		return "Result [errcode=" + errcode + ", errmsg=" + errmsg + ", data=" + data + ", datas=" + datas + "]";
+	}
+	
 	
 	
 }

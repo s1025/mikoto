@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.s1025.kuroko.Kuroko;
 
-public class WebChatServlet extends HttpServlet{
+public class KurokoServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

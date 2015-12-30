@@ -24,7 +24,11 @@ public class MenuApi {
 	 * 菜单删除接口
 	 */
 	public static String menu_delete_url = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=ACCESS_TOKEN";
-	  
+	 
+	/**
+	 * 个性菜单创建接口
+	 */
+	public static String cmenu_create_url = "https://api.weixin.qq.com/cgi-bin/menu/addconditional?access_token=ACCESS_TOKEN";
 
 	/**
 	 * 创建菜单。（有点问题）
@@ -55,5 +59,15 @@ public class MenuApi {
 		String url = menu_delete_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
 		String response = HttpCon.httpRequest(url, "GET", null);
 		return response;
+	}
+	
+	/**
+	 * 创建个性菜单
+	 * @return
+	 */
+	public String createCMenu(String menu){
+	    String url = cmenu_create_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());    
+	    String response = HttpCon.httpRequest(url, "POST", menu);   
+	    return response;  
 	}
 }

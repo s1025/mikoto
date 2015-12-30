@@ -18,7 +18,7 @@ public class UserTest {
 	public static void main(String[] args){
 		Init.init();
 		
-		System.out.println(Kuroko.ks.userKs.deleteGroup(117));
+		System.out.println(Kuroko.ks.userKs.changeUserGroup("oVW-oszd62QE_kT66ilsRuuOJspA", 118));
 		//boolean rs = s.syncAllUsers();
 		//System.out.println(rs);
 		//s.getAllGroup();
