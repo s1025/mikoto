@@ -3,7 +3,9 @@ package com.fkxpjj.demo;
 import java.util.List;
 
 import com.s1025.kuroko.Kuroko;
+import com.s1025.kuroko.model.KfMessage;
 import com.s1025.kuroko.model.Reply;
+import com.s1025.kuroko.model.Result;
 import com.s1025.mikoto.Mikoto;
 import com.s1025.mikoto.api.KfApi;
 import com.s1025.mikoto.api.UserApi;
@@ -13,8 +15,8 @@ public class RespTest {
 	public static void main(String[] args){
 		Init.init();
 		
-		//int s = Kuroko.ks.messageKs.sendText("oVW-oszd62QE_kT66ilsRuuOJspA","admin", "hi");
-		List<Reply> s = Kuroko.ks.messageKs.matchRule("²é");
+		Result<KfMessage> s = Kuroko.ks.messageKs.sendText("oVW-oszd62QE_kT66ilsRuuOJspA","admin", "hi", true);
+		//List<Reply> s = Kuroko.ks.messageKs.matchRule("²é");
 		
 		System.out.println(s);
 		

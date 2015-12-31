@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
 	<action>
-		<content>a</content>
-		<class>b</class>
+		<content>date</content>
+		<class>com.fkxpjj.demo.TAction</class>
+		<param>
+			<name>p1</name>
+			<value>v1</value>
+		</param>
 	</action>
 	<action>
 		<content>c</content>

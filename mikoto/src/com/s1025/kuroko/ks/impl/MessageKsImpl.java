@@ -17,6 +17,7 @@ import com.s1025.kuroko.dao.KfMessageDAO;
 import com.s1025.kuroko.dao.RuleDAO;
 import com.s1025.kuroko.dao.impl.KfMessageDAOimpl;
 import com.s1025.kuroko.dao.impl.RuleDAOimpl;
+import com.s1025.kuroko.ks.ActionCenter;
 import com.s1025.kuroko.ks.MessageKs;
 import com.s1025.kuroko.ks.Parse;
 import com.s1025.kuroko.ks.Passive;
@@ -30,7 +31,10 @@ import com.s1025.kuroko.model.Rule;
 import com.s1025.kuroko.model.req.ReqText;
 import com.s1025.kuroko.model.MsgType;
 import com.s1025.kuroko.model.req.ReqBase;
+import com.s1025.kuroko.model.req.ReqEvent;
+import com.s1025.kuroko.model.req.ReqEventClick;
 import com.s1025.mikoto.Mikoto;
+import com.s1025.mikoto.model.Event;
 
 public class MessageKsImpl implements MessageKs{
 	KfMessageDAO kfMessageDAO = new KfMessageDAOimpl();
@@ -43,10 +47,16 @@ public class MessageKsImpl implements MessageKs{
 	public boolean router(HttpServletRequest req, HttpServletResponse resp) {
 		ReqBase reqBase = parse.getReq(req);
 		List<Reply> mateReply = new ArrayList<Reply>();
-		
+		ActionCenter ac = new ActionCenter();
 		if(reqBase.getMsgType().equals(MsgType.TEXT)){
 			mateReply = matchRule(((ReqText)reqBase).getContent());
-		}
+		} else if(reqBase.getMsgType().equals(MsgType.EVENT)){
+			ReqEvent reqEvent = (ReqEvent) reqBase;
+			if(Event.CLICK.equals(reqEvent.getEvent())){
+				ReqEventClick click = (ReqEventClick)reqEvent;
+				mateReply = matchRule(click.getEventKey());
+			}
+		} 
 		
 		try {
 			PrintWriter pw = resp.getWriter();
@@ -57,14 +67,15 @@ public class MessageKsImpl implements MessageKs{
 			e1.printStackTrace();
 		}
 
+		
 		for(Reply reply:mateReply){
 				if(MsgType.TEXT.equals(reply.getType())){
 					Kuroko.ks.messageKs.sendText(reqBase.getFromUserName(), "system", reply.getContent());
 				} else if(MsgType.IMAGE.equals(reply.getType())){
 					Kuroko.ks.messageKs.sendText(reqBase.getFromUserName(), "system", reply.getContent());
-				} //else if(MsgType.ACTION.equals(reply.getType())){
-					//Kuroko.action.dispose(reqBase, reply.getContent(), resp);
-				//}
+				} else if(MsgType.ACTION.equals(reply.getType())){
+					ac.dispose(reqBase, reply.getContent());
+				}
 		}
 		
 		if(mateReply.size()==0){
@@ -163,7 +174,6 @@ public class MessageKsImpl implements MessageKs{
 	@Override
 	public Result<Reply> matchRule(String key, boolean r) {
 		List<Key> keys = ruleDAO.selectMatchKey(key);
-		
 		//获得所有匹配规则名
 		Set<String> ksets = new HashSet<String>();
 		for(Key k:keys){
@@ -171,7 +181,6 @@ public class MessageKsImpl implements MessageKs{
 				ksets.add(k.getRname());
 			}
 		}
-		
 		//获得reply集合
 		Set<Reply> replys = new HashSet<Reply>();
 		for(String rname:ksets){

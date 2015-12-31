@@ -15,10 +15,11 @@ import com.s1025.kuroko.ks.impl.MenuKsImpl;
 import com.s1025.kuroko.ks.impl.MessageKsImpl;
 import com.s1025.kuroko.ks.impl.UserKsImpl;
 import com.s1025.kuroko.module.account.AccountService;
-import com.s1025.kuroko.module.action.Action;
 import com.s1025.mikoto.Mikoto;
 
 public class Kuroko {
+	
+	public static String ACTIONPATH;
 	
 	public static class service{
 		public static AccountService account = new AccountService();
@@ -30,9 +31,6 @@ public class Kuroko {
 		public static MessageKs messageKs = new MessageKsImpl();
 		public static MenuKs menuKs = new MenuKsImpl();
 	}
-	
-	
-	public static Action action = new Action();
 	
 	/**
 	 * 验证服务器地址有效性.

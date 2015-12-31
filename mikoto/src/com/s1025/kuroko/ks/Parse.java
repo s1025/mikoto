@@ -35,7 +35,6 @@ public class Parse {
 		ReqBase reqBase = new ReqBase();
 		try {
 			map = parseXML(req);
-			System.out.println(map.get("MsgType"));
 			String type = map.get("MsgType");
 			if (MsgType.TEXT.equals(type)){
 				reqBase = reqBuilder.XMLtoText(map);
@@ -53,8 +52,8 @@ public class Parse {
 				reqBase = reqBuilder.XMLtoLink(map);
 			}else if(MsgType.EVENT.equals(type)){
 				String event = map.get("Event");
-				if(Event.SUBSCRIBE.endsWith(event)){
-					reqBase = reqBuilder.XMLtoSubscribe(map);
+				if(Event.CLICK.equals(event)){
+					reqBase = reqBuilder.XMLtoEventClick(map);
 				}
 			} else reqBase.setMsgType(MsgType.NONE);
 		} catch (Exception e) {

@@ -2,6 +2,7 @@ package com.s1025.kuroko.ks;
 
 import java.util.Map;
 
+import com.s1025.kuroko.model.req.ReqEventClick;
 import com.s1025.kuroko.model.req.ReqImg;
 import com.s1025.kuroko.model.req.ReqLink;
 import com.s1025.kuroko.model.req.ReqLocation;
@@ -106,5 +107,16 @@ public class ReqBuilder {
 		reqSubscribe.setCreateTime(Long.parseLong(map.get("CreateTime")));
 		reqSubscribe.setEvent(map.get("Event"));
 		return reqSubscribe;
+	}
+	
+	public ReqEventClick XMLtoEventClick(Map<String, String> map){
+		ReqEventClick reqEventClick = new ReqEventClick();
+		reqEventClick.setFromUserName(map.get("FromUserName"));
+		reqEventClick.setToUserName(map.get("ToUserName"));
+		reqEventClick.setMsgType(map.get("MsgType"));
+		reqEventClick.setCreateTime(Long.parseLong(map.get("CreateTime")));
+		reqEventClick.setEvent(map.get("Event"));
+		reqEventClick.setEventKey(map.get("EventKey"));
+		return reqEventClick;
 	}
 }
