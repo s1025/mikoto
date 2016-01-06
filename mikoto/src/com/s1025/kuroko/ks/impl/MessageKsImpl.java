@@ -226,6 +226,39 @@ public class MessageKsImpl implements MessageKs{
 	}
 
 
+	@Override
+	public Result<KfMessage> sendNews(String to, String from, String mediaId, boolean r) {
+		String re = Mikoto.api.kf.sendCustomNews(to, mediaId);
+		if(KuUtil.isResultSuccess(re)){
+			int ri = 0;
+			KfMessage message = new KfMessage();
+			message.setTouser(to);
+			message.setFromuser(from);
+			message.setContent(mediaId);
+			message.setMsgtype("news");
+			if(!"system".equals(from))
+				kfMessageDAO.insert(message);
+			Result<KfMessage> rs = new Result<KfMessage>();
+			rs.setErrcode(0);
+			rs.setErrmsg("ok");
+			return rs;
+		} else {
+			ErrResult er = gson.fromJson(re, ErrResult.class);
+			Result<KfMessage> rs = new Result<KfMessage>(er);
+			return rs;
+		}
+	}
+
+
+	@Override
+	public int sendNews(String to, String from, String mediaId) {
+		Result<KfMessage> rs = sendNews(to, from, mediaId, true);
+		if(rs.getErrcode()==0)
+			return 1;
+		return 0;
+	}
+
+
 
 
 }

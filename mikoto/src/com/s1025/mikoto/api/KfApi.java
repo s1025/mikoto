@@ -77,11 +77,9 @@ public class KfApi {
 	 * @param list Í¼ÎÄlist
 	 * @return ·µ»Øjson
 	 */
-	public String sendCustomNews(String openid, List<ArticleKf> list){
-		Gson gson = new Gson();
-		String json = gson.toJson(list);
+	public String sendCustomNews(String openid, String mediaId){
 		String url = send_custom_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
-		String post = "{\"touser\":\""+openid+"\",\"msgtype\":\"news\",\"news\":{\"articles\":"+json+"}}";
+		String post = "{\"touser\":\""+openid+"\",\"msgtype\":\"mpnews\",\"mpnews\":{\"media_id\":\""+mediaId+"\"}}";
 		String response = HttpCon.httpRequest(url, "POST", post);
 		return response;
 	}

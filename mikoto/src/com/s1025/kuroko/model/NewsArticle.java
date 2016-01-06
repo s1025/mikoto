@@ -1,11 +1,11 @@
-package com.s1025.mikoto.model.active;
+package com.s1025.kuroko.model;
 
-public class ArticleMaterial {
-	private String title;
+public class NewsArticle {
+	private String title;       //必填，小于64个字
 	private String thumb_media_id;
 	private String author;
-	private String digest;
-	private String show_cover_pic;
+	private String digest;   //选填，单图文，默认抓取正文前54个字
+	private int show_cover_pic;
 	private String content;
 	private String content_source_url;
 	public String getTitle() {
@@ -32,12 +32,7 @@ public class ArticleMaterial {
 	public void setDigest(String digest) {
 		this.digest = digest;
 	}
-	public String getShow_cover_pic() {
-		return show_cover_pic;
-	}
-	public void setShow_cover_pic(String show_cover_pic) {
-		this.show_cover_pic = show_cover_pic;
-	}
+
 	public String getContent() {
 		return content;
 	}
@@ -49,5 +44,11 @@ public class ArticleMaterial {
 	}
 	public void setContent_source_url(String content_source_url) {
 		this.content_source_url = content_source_url;
+	}
+	public int getShow_cover_pic() {
+		return show_cover_pic;
+	}
+	public void setShow_cover_pic(int show_cover_pic) {
+		this.show_cover_pic = show_cover_pic;
 	}
 }

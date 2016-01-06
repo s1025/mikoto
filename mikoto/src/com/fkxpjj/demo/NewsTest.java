@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.s1025.kuroko.ks.NewsBuilder;
+import com.s1025.kuroko.model.NewsArticle;
 import com.s1025.mikoto.Mikoto;
 import com.s1025.mikoto.model.App;
 import com.s1025.mikoto.model.active.ArticleKf;
-import com.s1025.mikoto.model.active.ArticleMaterial;
 import com.s1025.mikoto.util.Dev;
 
 public class NewsTest {
@@ -42,20 +43,25 @@ public class NewsTest {
 		String json = Mikoto.api.kf.sendCustomNews("oVW-oszd62QE_kT66ilsRuuOJspA", list);
 		System.out.println(json);
 		*/
-		List<ArticleMaterial> list = new ArrayList<ArticleMaterial>();
-		for(int i=0; i<1; i++){
-			ArticleMaterial a = new ArticleMaterial();
+		NewsBuilder nb = new NewsBuilder();
+		List<NewsArticle> list = new ArrayList<NewsArticle>();
+		for(int i=0; i<2; i++){
+			NewsArticle a = new NewsArticle();
 			a.setTitle("a"+i);
-			a.setAuthor("f");
+			//a.setAuthor("f");
 			a.setThumb_media_id("UFAuIan48n9bY_wbqR0kfgzwDTtt-xcpsWuss0k4b5w");
 			a.setContent("ccccc"+i);
-			a.setDigest("d"+i);
-			a.setShow_cover_pic("0");
-			a.setContent_source_url("http://www.baidu.com");
-			list.add(a);
+			//a.setDigest("d"+i);
+			//a.setShow_cover_pic(1);
+			//a.setContent_source_url("http://www.baidu.com");
+			nb.add(a);
 		}
 		String path = "d://1.jpg";
-		String json = Mikoto.api.material.addNews(list);
+		
+		Gson gson = new Gson();
+		String j = gson.toJson(nb.getNews());
+		
+		String json = Mikoto.api.material.addNews(j);
 		System.out.println(json);
 	}
 }

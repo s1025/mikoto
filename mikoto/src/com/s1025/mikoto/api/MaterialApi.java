@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
+import com.s1025.kuroko.model.NewsArticle;
 import com.s1025.mikoto.Mikoto;
-import com.s1025.mikoto.model.active.ArticleMaterial;
 import com.s1025.mikoto.util.HttpCon;
 
 public class MaterialApi {
@@ -108,12 +108,9 @@ public class MaterialApi {
 		return response;
 	}
 	
-	public String addNews(List<ArticleMaterial> articles){
+	public String addNews(String json){
 		String url = add_news.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
-		Gson gson = new Gson();
-		String as = gson.toJson(articles);
-		String post = "{\"articles\": "+as+"}";
-		String response = HttpCon.httpRequest(url, "POST", post);
+		String response = HttpCon.httpRequest(url, "POST", json);
 		return response;
 	}
 }
