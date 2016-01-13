@@ -2,7 +2,6 @@ package com.s1025.kuroko.model;
 
 public class Media {
 	private int mid;
-	private String name;
 	private String type;
 	private int temp;
 	private String media_id;
@@ -44,18 +43,12 @@ public class Media {
 	public void setTemp(int temp) {
 		this.temp = temp;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	@Override
 	public String toString() {
-		return "Media [mid=" + mid + ", name=" + name + ", type=" + type
-				+ ", temp=" + temp + ", media_id=" + media_id + ", url=" + url
+		return "Media [mid=" + mid + ", type=" + type + ", temp=" + temp + ", media_id=" + media_id + ", url=" + url
 				+ ", created_at=" + created_at + "]";
 	}
+
 	
 	
 }

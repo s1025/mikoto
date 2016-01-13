@@ -20,14 +20,13 @@ public class MediaDAOimpl implements MediaDAO{
 	@Override
 	public int insert(Media media) {
 		conn = DB.getCon();
-		String sql = "insert into media(type, temp, media_id, url, created_at,name) values(?,?,?,?,now(),?)";
+		String sql = "insert into media(type, temp, media_id, url, created_at) values(?,?,?,?,now())";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, media.getType());
 			pstmt.setInt(2, media.getTemp());
 			pstmt.setString(3, media.getMedia_id());
 			pstmt.setString(4, media.getUrl());
-			pstmt.setString(5, media.getName());
 			re = pstmt.executeUpdate();
 			DB.close(conn, pstmt, rs);
 		} catch (SQLException e) {
@@ -64,7 +63,6 @@ public class MediaDAOimpl implements MediaDAO{
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				media.setMid(rs.getInt("mid"));
-				media.setName(rs.getString("name"));
 				media.setTemp(rs.getInt("temp"));
 				media.setType(rs.getString("type"));
 				media.setMedia_id(rs.getString("media_id"));

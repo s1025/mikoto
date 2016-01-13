@@ -1,13 +1,23 @@
 package com.s1025.kuroko.ks.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gson.Gson;
 import com.s1025.kuroko.ks.MediaKs;
 import com.s1025.kuroko.model.Media;
 import com.s1025.kuroko.model.MediaCount;
+import com.s1025.kuroko.model.News;
+import com.s1025.kuroko.model.NewsArticle;
+import com.s1025.kuroko.model.NewsBatch;
+import com.s1025.kuroko.model.NewsContent;
+import com.s1025.kuroko.model.NewsItem;
 import com.s1025.kuroko.model.Result;
 import com.s1025.kuroko.model.ErrResult;
 import com.s1025.kuroko.model.KuUtil;
+import com.s1025.kuroko.dao.ArticleDAO;
 import com.s1025.kuroko.dao.MediaDAO;
+import com.s1025.kuroko.dao.impl.ArticleDAOimpl;
 import com.s1025.kuroko.dao.impl.MediaDAOimpl;
 import com.s1025.mikoto.Mikoto;
 
@@ -15,13 +25,13 @@ public class MediaKsImpl implements MediaKs{
 	
 	Gson gson = new Gson();
 	MediaDAO mediaDAO = new MediaDAOimpl();
+	ArticleDAO articleDAO = new ArticleDAOimpl();
 	
 	@Override
-	public Result<Media> addImage(String name, String path, boolean r) {
+	public Result<Media> addImage(String path, boolean r) {
 		String re = Mikoto.api.material.addMaterial("image", path);
 		if(KuUtil.isResultSuccess(re)){
 			Media media = gson.fromJson(re, Media.class);
-			media.setName(name);
 			media.setTemp(0);
 			media.setType("image");
 			mediaDAO.insert(media);
@@ -35,13 +45,47 @@ public class MediaKsImpl implements MediaKs{
 	}
 
 	@Override
-	public int addImage(String name, String path) {
-		Result<Media> rs = addImage(name, path, true);
+	public int addImage(String path) {
+		Result<Media> rs = addImage(path, true);
 		if(rs.getErrcode()==0)
 			return 1;
 		return 0;
 	}
 
+	@Override
+	public Result<Media> addNews(News news, boolean r) {
+		Gson gson = new Gson();
+		String re = Mikoto.api.material.addNews(gson.toJson(news));
+		if(KuUtil.isResultSuccess(re)){
+			Media media = gson.fromJson(re, Media.class);
+			media.setTemp(0);
+			media.setType("news");
+			mediaDAO.insert(media);
+			
+			List<NewsArticle> lna = news.getArticles();
+			for(int i=0; i<lna.size(); i++){
+				lna.get(i).setMedia_id(media.getMedia_id());
+				lna.get(i).setNum(i+1);
+				articleDAO.insert(lna.get(i));
+			}
+			
+			Result<Media> rs = new Result<Media>(0,"ok",media,null);
+			return rs;
+		} else {
+			ErrResult er = gson.fromJson(re, ErrResult.class);
+			Result<Media> rs = new Result<Media>(er);
+			return rs;
+		}
+	}
+
+	@Override
+	public int addNews(News news) {
+		Result<Media> rs = addNews(news, true);
+		if(rs.getErrcode()==0)
+			return 1;
+		return 0;
+	}
+	
 	@Override
 	public Result<MediaCount> getMediaCount(boolean r) {
 		String re = Mikoto.api.material.materialCount();
@@ -63,6 +107,55 @@ public class MediaKsImpl implements MediaKs{
 			return rmc.getData();
 		return new MediaCount();
 	}
+
+	@Override
+	public Result<NewsArticle> syncNews(boolean r) {
+		MediaCount mc = getMediaCount();
+		int newsNum = mc.getNews_count();
+		List<NewsBatch> lnb = new ArrayList<NewsBatch>();
+		
+		articleDAO.truncate();
+		
+		for(int n=0;n<newsNum;n=n+20){
+			String re = Mikoto.api.material.materialList("news", n, 20);
+			if(KuUtil.isResultSuccess(re)){
+				List<NewsArticle> rlna = new ArrayList<NewsArticle>();
+				NewsBatch nb = gson.fromJson(re, NewsBatch.class);
+				List<NewsItem> lni = nb.getItem();
+				for(NewsItem ni:lni){
+					NewsContent nc = ni.getContent();
+					List<NewsArticle> lna = nc.getNews_item();
+					for(int i = 0; i<lna.size(); i++){
+						NewsArticle na = lna.get(i);
+						na.setMedia_id(ni.getMedia_id());
+						na.setNum(i+1);
+						rlna.add(na);
+						articleDAO.insert(na);
+					}
+				}
+			} else {
+				ErrResult er = gson.fromJson(re, ErrResult.class);
+				Result<NewsArticle> rs = new Result<NewsArticle>(er);
+				return rs;
+			}
+		}
+		
+
+		Result<NewsArticle> rs = new Result<NewsArticle>(0,"ok",null,null);
+		return rs;
+		
+		
+	}
+
+	@Override
+	public int syncNews() {
+		Result<NewsArticle> rs = syncNews(true);
+		if(rs.getErrcode()==0)
+			return 1;
+		return 0;
+	}
+
+	
 
 	
 	  /**

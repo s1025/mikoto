@@ -71,8 +71,8 @@ public class MessageKsImpl implements MessageKs{
 		for(Reply reply:mateReply){
 				if(MsgType.TEXT.equals(reply.getType())){
 					Kuroko.ks.messageKs.sendText(reqBase.getFromUserName(), "system", reply.getContent());
-				} else if(MsgType.IMAGE.equals(reply.getType())){
-					Kuroko.ks.messageKs.sendText(reqBase.getFromUserName(), "system", reply.getContent());
+				} else if(MsgType.NEWS.equals(reply.getType())){
+					Kuroko.ks.messageKs.sendNews(reqBase.getFromUserName(), "system", reply.getContent());
 				} else if(MsgType.ACTION.equals(reply.getType())){
 					ac.dispose(reqBase, reply.getContent());
 				}
