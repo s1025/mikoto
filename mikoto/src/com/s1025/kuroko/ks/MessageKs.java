@@ -28,4 +28,17 @@ public interface MessageKs {
 	
 	public Result<KfMessage> sendNews(String to, String from, String mediaId, boolean r);
 	public int sendNews(String to, String from, String mediaId);
+	
+	public Result<KfMessage> sendAllText(int groupId, String content, boolean r);
+	public int sendAllText(int groupId, String content);
+	
+	public Result<KfMessage> sendAllNews(int groupId, String mediaId, boolean r);
+	public int sendAllNews(int groupId, String mediaId);
+	
+	public Result<KfMessage> sendPreviewText(String openid, String content, boolean r);
+	public int sendPreviewText(String openid, String content);
+	
+	public Result<KfMessage> sendPreviewNews(String openid, String mediaId, boolean r);
+	public int sendPreviewNews(String openid, String mediaId);
+	
 }

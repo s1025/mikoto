@@ -6,26 +6,24 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.s1025.kuroko.ks.AccountKs;
 import com.s1025.kuroko.ks.MediaKs;
 import com.s1025.kuroko.ks.MenuKs;
 import com.s1025.kuroko.ks.MessageKs;
 import com.s1025.kuroko.ks.UserKs;
+import com.s1025.kuroko.ks.impl.AccountKsImpl;
 import com.s1025.kuroko.ks.impl.MediaKsImpl;
 import com.s1025.kuroko.ks.impl.MenuKsImpl;
 import com.s1025.kuroko.ks.impl.MessageKsImpl;
 import com.s1025.kuroko.ks.impl.UserKsImpl;
-import com.s1025.kuroko.module.account.AccountService;
 import com.s1025.mikoto.Mikoto;
 
 public class Kuroko {
 	
 	public static String ACTIONPATH;
 	
-	public static class service{
-		public static AccountService account = new AccountService();
-	}
-	
 	public static class ks{
+		public static AccountKs account = new AccountKsImpl();
 		public static UserKs userKs = new UserKsImpl();
 		public static MediaKs mediaKs = new MediaKsImpl();
 		public static MessageKs messageKs = new MessageKsImpl();

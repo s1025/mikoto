@@ -93,6 +93,41 @@ public class MessageKsImpl implements MessageKs{
 		return false;
 	}
 	
+	@Override
+	public Result<Reply> matchRule(String key, boolean r) {
+		List<Key> keys = ruleDAO.selectMatchKey(key);
+		//获得所有匹配规则名
+		Set<String> ksets = new HashSet<String>();
+		for(Key k:keys){
+			if((k.getTotally()==1&&k.getContent().equals(key))||(k.getTotally()==0&&k.getContent().contains(key))){
+				ksets.add(k.getRname());
+			}
+		}
+		//获得reply集合
+		Set<Reply> replys = new HashSet<Reply>();
+		for(String rname:ksets){
+			Rule rule = ruleDAO.selectRuleOnly(rname);
+			List<Reply> list = ruleDAO.selectReply(rname);
+			if(rule.getRespAll()==1){
+				replys.addAll(list);
+			}else{
+				Random random = new Random();
+				int x = random.nextInt(list.size());
+				replys.add(list.get(x));
+			}
+		}
+		
+		Result<Reply> rs = new Result<Reply>(0,"ok",null,new ArrayList<Reply>(replys));
+		return rs;
+	}
+	
+	@Override
+	public List<Reply> matchRule(String key) {
+		Result<Reply> rs = matchRule(key, true);
+		if(rs.getErrcode()==0)
+			return rs.getDatas();
+		return new ArrayList<Reply>();
+	}
 	
 	/**
 	 * 主动发送文本消息.
@@ -172,61 +207,6 @@ public class MessageKsImpl implements MessageKs{
 	}
 	
 	@Override
-	public Result<Reply> matchRule(String key, boolean r) {
-		List<Key> keys = ruleDAO.selectMatchKey(key);
-		//获得所有匹配规则名
-		Set<String> ksets = new HashSet<String>();
-		for(Key k:keys){
-			if((k.getTotally()==1&&k.getContent().equals(key))||(k.getTotally()==0&&k.getContent().contains(key))){
-				ksets.add(k.getRname());
-			}
-		}
-		//获得reply集合
-		Set<Reply> replys = new HashSet<Reply>();
-		for(String rname:ksets){
-			Rule rule = ruleDAO.selectRuleOnly(rname);
-			List<Reply> list = ruleDAO.selectReply(rname);
-			if(rule.getRespAll()==1){
-				replys.addAll(list);
-			}else{
-				Random random = new Random();
-				int x = random.nextInt(list.size());
-				replys.add(list.get(x));
-			}
-		}
-		
-		Result<Reply> rs = new Result<Reply>(0,"ok",null,new ArrayList<Reply>(replys));
-		return rs;
-	}
-	
-	@Override
-	public List<Reply> matchRule(String key) {
-		Result<Reply> rs = matchRule(key, true);
-		if(rs.getErrcode()==0)
-			return rs.getDatas();
-		return new ArrayList<Reply>();
-	}
-
-
-	@Override
-	public Result<Rule> addRule(Rule rule, boolean r) {
-		int i = ruleDAO.insert(rule);
-		if(i>0)
-			return new Result<Rule>(0,"ok",rule,null);
-		return new Result<Rule>(-2,"数据库错误",null,null);
-	}
-
-
-	@Override
-	public int addRule(Rule rule) {
-		Result<Rule> rs = addRule(rule, true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
-	}
-
-
-	@Override
 	public Result<KfMessage> sendNews(String to, String from, String mediaId, boolean r) {
 		String re = Mikoto.api.kf.sendCustomNews(to, mediaId);
 		if(KuUtil.isResultSuccess(re)){
@@ -253,6 +233,125 @@ public class MessageKsImpl implements MessageKs{
 	@Override
 	public int sendNews(String to, String from, String mediaId) {
 		Result<KfMessage> rs = sendNews(to, from, mediaId, true);
+		if(rs.getErrcode()==0)
+			return 1;
+		return 0;
+	}
+
+	
+	
+
+
+	@Override
+	public Result<Rule> addRule(Rule rule, boolean r) {
+		int i = ruleDAO.insert(rule);
+		if(i>0)
+			return new Result<Rule>(0,"ok",rule,null);
+		return new Result<Rule>(-2,"数据库错误",null,null);
+	}
+
+
+	@Override
+	public int addRule(Rule rule) {
+		Result<Rule> rs = addRule(rule, true);
+		if(rs.getErrcode()==0)
+			return 1;
+		return 0;
+	}
+
+
+	
+
+	@Override
+	public Result<KfMessage> sendAllText(int groupId, String content, boolean r) {
+		String re = Mikoto.api.mass.sendAll("true", groupId, "text", content);
+		if(KuUtil.isResultSuccess(re)){
+			Result<KfMessage> rs = new Result<KfMessage>();
+			rs.setErrcode(0);
+			rs.setErrmsg("ok");
+			return rs;
+		} else {
+			ErrResult er = gson.fromJson(re, ErrResult.class);
+			Result<KfMessage> rs = new Result<KfMessage>(er);
+			return rs;
+		}
+	}
+
+
+	@Override
+	public int sendAllText(int groupId, String content) {
+		Result<KfMessage> rs = sendAllText(groupId, content, true);
+		if(rs.getErrcode()==0)
+			return 1;
+		return 0;
+	}
+
+
+	@Override
+	public Result<KfMessage> sendAllNews(int groupId, String mediaId, boolean r) {
+		String re = Mikoto.api.mass.sendAll("true", groupId, "news", mediaId);
+		if(KuUtil.isResultSuccess(re)){
+			Result<KfMessage> rs = new Result<KfMessage>();
+			rs.setErrcode(0);
+			rs.setErrmsg("ok");
+			return rs;
+		} else {
+			ErrResult er = gson.fromJson(re, ErrResult.class);
+			Result<KfMessage> rs = new Result<KfMessage>(er);
+			return rs;
+		}
+	}
+
+
+	@Override
+	public int sendAllNews(int groupId, String mediaId) {
+		Result<KfMessage> rs = sendAllNews(groupId, mediaId, true);
+		if(rs.getErrcode()==0)
+			return 1;
+		return 0;
+	}
+
+	@Override
+	public Result<KfMessage> sendPreviewText(String openid, String content, boolean r) {
+		String re = Mikoto.api.mass.preview(openid, "text", content);
+		if(KuUtil.isResultSuccess(re)){
+			Result<KfMessage> rs = new Result<KfMessage>();
+			rs.setErrcode(0);
+			rs.setErrmsg("ok");
+			return rs;
+		} else {
+			ErrResult er = gson.fromJson(re, ErrResult.class);
+			Result<KfMessage> rs = new Result<KfMessage>(er);
+			return rs;
+		}
+	}
+
+	@Override
+	public int sendPreviewText(String openid, String content) {
+		Result<KfMessage> rs = sendPreviewText(openid, content, true);
+		if(rs.getErrcode()==0)
+			return 1;
+		return 0;
+	}
+
+	@Override
+	public Result<KfMessage> sendPreviewNews(String openid, String mediaId, boolean r) {
+		String re = Mikoto.api.mass.preview(openid, "news", mediaId);
+		if(KuUtil.isResultSuccess(re)){
+			Result<KfMessage> rs = new Result<KfMessage>();
+			rs.setErrcode(0);
+			rs.setErrmsg("ok");
+			return rs;
+		} else {
+			ErrResult er = gson.fromJson(re, ErrResult.class);
+			Result<KfMessage> rs = new Result<KfMessage>(er);
+			return rs;
+		}
+	}
+
+	@Override
+	public int sendPreviewNews(String openid, String mediaId) {
+		Result<KfMessage> rs = sendPreviewNews(openid, mediaId, true);
 		if(rs.getErrcode()==0)
 			return 1;
 		return 0;
