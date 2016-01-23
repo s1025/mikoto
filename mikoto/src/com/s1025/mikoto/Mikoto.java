@@ -11,6 +11,7 @@ import com.s1025.mikoto.api.MassApi;
 import com.s1025.mikoto.api.MaterialApi;
 import com.s1025.mikoto.api.MediaApi;
 import com.s1025.mikoto.api.MenuApi;
+import com.s1025.mikoto.api.QRCodeApi;
 import com.s1025.mikoto.api.UserApi;
 import com.s1025.mikoto.model.App;
 import com.s1025.mikoto.util.Dev;
@@ -44,6 +45,7 @@ public class Mikoto {
 		public static MenuApi menu = new MenuApi();
 		public static UserApi user = new UserApi();
 		public static DatacubeApi datacube = new DatacubeApi();
+		public static QRCodeApi qrcode = new QRCodeApi();
 	}
 
 	
