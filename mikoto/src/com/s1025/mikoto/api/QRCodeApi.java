@@ -8,7 +8,6 @@ public class QRCodeApi {
 	
 	public String createQRCode(int seconds, int scene){
 		String url = create_qrcode_url.replace("ACCESS_TOKEN", Mikoto.api.access.getAccessToken());
-		System.out.println(url);
 		String post = "{\"expire_seconds\": "+seconds+", \"action_name\": \"QR_SCENE\", \"action_info\": {\"scene\": {\"scene_id\": "+scene+"}}}";
 		String response = HttpCon.httpRequest(url, "POST", post);
 		return response;
