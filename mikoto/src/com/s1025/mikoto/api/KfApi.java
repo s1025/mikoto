@@ -1,10 +1,6 @@
 package com.s1025.mikoto.api;
 
-import java.util.List;
-
-import com.google.gson.Gson;
 import com.s1025.mikoto.Mikoto;
-import com.s1025.mikoto.model.active.ArticleKf;
 import com.s1025.mikoto.util.HttpCon;
 
 public class KfApi {

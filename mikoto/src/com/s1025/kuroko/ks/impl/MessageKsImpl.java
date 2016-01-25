@@ -22,6 +22,7 @@ import com.s1025.kuroko.ks.MessageKs;
 import com.s1025.kuroko.ks.Parse;
 import com.s1025.kuroko.ks.Passive;
 import com.s1025.kuroko.model.ErrResult;
+import com.s1025.kuroko.model.Event;
 import com.s1025.kuroko.model.Key;
 import com.s1025.kuroko.model.KfMessage;
 import com.s1025.kuroko.model.KuUtil;
@@ -33,8 +34,8 @@ import com.s1025.kuroko.model.MsgType;
 import com.s1025.kuroko.model.req.ReqBase;
 import com.s1025.kuroko.model.req.ReqEvent;
 import com.s1025.kuroko.model.req.ReqEventClick;
+import com.s1025.kuroko.model.req.ReqEventScan;
 import com.s1025.mikoto.Mikoto;
-import com.s1025.mikoto.model.Event;
 
 public class MessageKsImpl implements MessageKs{
 	KfMessageDAO kfMessageDAO = new KfMessageDAOimpl();
@@ -45,19 +46,11 @@ public class MessageKsImpl implements MessageKs{
 	
 	
 	public boolean router(HttpServletRequest req, HttpServletResponse resp) {
-		ReqBase reqBase = parse.getReq(req);
-		List<Reply> mateReply = new ArrayList<Reply>();
-		ActionCenter ac = new ActionCenter();
-		if(reqBase.getMsgType().equals(MsgType.TEXT)){
-			mateReply = matchRule(((ReqText)reqBase).getContent());
-		} else if(reqBase.getMsgType().equals(MsgType.EVENT)){
-			ReqEvent reqEvent = (ReqEvent) reqBase;
-			if(Event.CLICK.equals(reqEvent.getEvent())){
-				ReqEventClick click = (ReqEventClick)reqEvent;
-				mateReply = matchRule(click.getEventKey());
-			}
-		} 
 		
+		ReqBase reqBase = parse.getReq(req);
+		boolean d = false;
+		
+		//先返回success，再处理请求
 		try {
 			PrintWriter pw = resp.getWriter();
 			pw.println("success");
@@ -66,35 +59,49 @@ public class MessageKsImpl implements MessageKs{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
 		
-		for(Reply reply:mateReply){
-				if(MsgType.TEXT.equals(reply.getType())){
-					Kuroko.ks.messageKs.sendText(reqBase.getFromUserName(), "system", reply.getContent());
-				} else if(MsgType.NEWS.equals(reply.getType())){
-					Kuroko.ks.messageKs.sendNews(reqBase.getFromUserName(), "system", reply.getContent());
-				} else if(MsgType.ACTION.equals(reply.getType())){
-					ac.dispose(reqBase, reply.getContent());
-				}
-		}
-		
+		//获得请求key
+		String key = filter(req, reqBase);
+		//从数据库中匹配响应
+		List<Reply> mateReply = match(key);
 		if(mateReply.size()==0){
-			if(reqBase.getMsgType().equals(MsgType.TEXT)){
-				ReqText reqText = (ReqText)reqBase;
-				KfMessage message = new KfMessage();
-				message.setTouser("system");
-				message.setFromuser(reqText.getFromUserName());
-				message.setMsgtype("text");
-				message.setContent(reqText.getContent());
-				int r = kfMessageDAO.insert(message);
-			}
+			d = true;
+			mateReply = match("system::default");
 		}
+		
+		//处理响应
+		outcome(mateReply, reqBase, d);
 		
 		return false;
 	}
 	
-	@Override
-	public Result<Reply> matchRule(String key, boolean r) {
+	public String filter(HttpServletRequest req, ReqBase reqBase){
+		String key = "";
+		
+		if(reqBase.getMsgType().equals(MsgType.TEXT)){
+			key = ((ReqText)reqBase).getContent();
+		}else if(reqBase.getMsgType().equals(MsgType.EVENT)){
+			ReqEvent reqEvent = (ReqEvent) reqBase;
+			if(Event.CLICK.equals(reqEvent.getEvent())){
+				ReqEventClick click = (ReqEventClick)reqEvent;
+				key = click.getEventKey();
+			} else if(Event.SCAN.equals(reqEvent.getEvent())){
+				ReqEventScan scan = (ReqEventScan)reqEvent;
+				key = scan.getEventKey()+"";
+			} else if(Event.SUBSCRIBE.equals(reqEvent.getEvent())){
+				key = "system::subscribe";
+			} else if(Event.UNSUBSCRIBE.equals(reqEvent.getEvent())){
+				key = "system::unsubscribe";
+			} else {
+				key = "system::default";
+			}
+		} 
+		
+		return key;
+	}
+	
+	//@Override
+	public Result<Reply> match(String key, boolean r) {
 		List<Key> keys = ruleDAO.selectMatchKey(key);
 		//获得所有匹配规则名
 		Set<String> ksets = new HashSet<String>();
@@ -121,12 +128,37 @@ public class MessageKsImpl implements MessageKs{
 		return rs;
 	}
 	
-	@Override
-	public List<Reply> matchRule(String key) {
-		Result<Reply> rs = matchRule(key, true);
+	//@Override
+	public List<Reply> match(String key) {
+		Result<Reply> rs = match(key, true);
 		if(rs.getErrcode()==0)
 			return rs.getDatas();
 		return new ArrayList<Reply>();
+	}
+	
+	public void outcome(List<Reply> replys, ReqBase reqBase, boolean d){
+		ActionCenter ac = new ActionCenter();
+		for(Reply reply:replys){
+			if(MsgType.TEXT.equals(reply.getType())){
+				Kuroko.ks.messageKs.sendText(reqBase.getFromUserName(), "system", reply.getContent());
+			} else if(MsgType.NEWS.equals(reply.getType())){
+				Kuroko.ks.messageKs.sendNews(reqBase.getFromUserName(), "system", reply.getContent());
+			} else if(MsgType.ACTION.equals(reply.getType())){
+				ac.dispose(reqBase, reply.getContent());
+			}
+		}
+	
+		if(d){
+			if(reqBase.getMsgType().equals(MsgType.TEXT)){
+				ReqText reqText = (ReqText)reqBase;
+				KfMessage message = new KfMessage();
+				message.setTouser("system");
+				message.setFromuser(reqText.getFromUserName());
+				message.setMsgtype("text");
+				message.setContent(reqText.getContent());
+				int r = kfMessageDAO.insert(message);
+			}
+		}
 	}
 	
 	/**

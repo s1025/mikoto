@@ -12,7 +12,6 @@ import com.s1025.kuroko.model.NewsContent;
 import com.s1025.kuroko.model.NewsItem;
 import com.s1025.mikoto.Mikoto;
 import com.s1025.mikoto.model.App;
-import com.s1025.mikoto.model.active.ArticleKf;
 import com.s1025.mikoto.util.Dev;
 
 public class NewsTest {

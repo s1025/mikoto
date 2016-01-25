@@ -3,12 +3,14 @@ package com.s1025.kuroko.ks;
 import java.util.Map;
 
 import com.s1025.kuroko.model.req.ReqEventClick;
+import com.s1025.kuroko.model.req.ReqEventScan;
 import com.s1025.kuroko.model.req.ReqImg;
 import com.s1025.kuroko.model.req.ReqLink;
 import com.s1025.kuroko.model.req.ReqLocation;
 import com.s1025.kuroko.model.req.ReqShortVideo;
 import com.s1025.kuroko.model.req.ReqSubscribe;
 import com.s1025.kuroko.model.req.ReqText;
+import com.s1025.kuroko.model.req.ReqUnSubscribe;
 import com.s1025.kuroko.model.req.ReqVideo;
 import com.s1025.kuroko.model.req.ReqVoice;
 
@@ -109,6 +111,16 @@ public class ReqBuilder {
 		return reqSubscribe;
 	}
 	
+	public ReqUnSubscribe XMLtoUnSubscribe(Map<String, String> map){
+		ReqUnSubscribe reqUnSubscribe = new ReqUnSubscribe();
+		reqUnSubscribe.setFromUserName(map.get("FromUserName"));
+		reqUnSubscribe.setToUserName(map.get("ToUserName"));
+		reqUnSubscribe.setMsgType(map.get("MsgType"));
+		reqUnSubscribe.setCreateTime(Long.parseLong(map.get("CreateTime")));
+		reqUnSubscribe.setEvent(map.get("Event"));
+		return reqUnSubscribe;
+	}
+	
 	public ReqEventClick XMLtoEventClick(Map<String, String> map){
 		ReqEventClick reqEventClick = new ReqEventClick();
 		reqEventClick.setFromUserName(map.get("FromUserName"));
@@ -118,5 +130,17 @@ public class ReqBuilder {
 		reqEventClick.setEvent(map.get("Event"));
 		reqEventClick.setEventKey(map.get("EventKey"));
 		return reqEventClick;
+	}
+	
+	public ReqEventScan XMLtoEventScan(Map<String, String> map){
+		ReqEventScan reqEventScan = new ReqEventScan();
+		reqEventScan.setFromUserName(map.get("FromUserName"));
+		reqEventScan.setToUserName(map.get("ToUserName"));
+		reqEventScan.setMsgType(map.get("MsgType"));
+		reqEventScan.setCreateTime(Long.parseLong(map.get("CreateTime")));
+		reqEventScan.setEvent(map.get("Event"));
+		reqEventScan.setEventKey(Integer.parseInt(map.get("EventKey")));
+		reqEventScan.setTicket(map.get("Ticket"));
+		return reqEventScan;
 	}
 }

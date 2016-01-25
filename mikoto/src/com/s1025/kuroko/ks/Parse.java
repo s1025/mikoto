@@ -14,12 +14,10 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import com.s1025.kuroko.Kuroko;
+import com.s1025.kuroko.model.Event;
 import com.s1025.kuroko.model.MsgType;
 import com.s1025.kuroko.model.req.ReqBase;
 import com.s1025.kuroko.model.resp.RespBase;
-import com.s1025.mikoto.Mikoto;
-import com.s1025.mikoto.model.Event;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
@@ -38,7 +36,7 @@ public class Parse {
 			String type = map.get("MsgType");
 			if (MsgType.TEXT.equals(type)){
 				reqBase = reqBuilder.XMLtoText(map);
-			} else if(MsgType.IMAGE.equals(type)){
+			}/* else if(MsgType.IMAGE.equals(type)){
 				reqBase = reqBuilder.XMLtoImg(map);
 			}else if(MsgType.VOICE.equals(type)){
 				reqBase = reqBuilder.XMLtoVoice(map);
@@ -50,11 +48,17 @@ public class Parse {
 				reqBase = reqBuilder.XMLtoLocation(map);
 			}else if(MsgType.LINK.equals(type)){
 				reqBase = reqBuilder.XMLtoLink(map);
-			}else if(MsgType.EVENT.equals(type)){
+			}*/else if(MsgType.EVENT.equals(type)){
 				String event = map.get("Event");
 				if(Event.CLICK.equals(event)){
 					reqBase = reqBuilder.XMLtoEventClick(map);
-				}
+				} else if(Event.SCAN.equals(event)){
+					reqBase = reqBuilder.XMLtoEventScan(map);
+				} else if(Event.SUBSCRIBE.equals(event)){
+					reqBase = reqBuilder.XMLtoSubscribe(map);
+				} else if(Event.UNSUBSCRIBE.equals(event)){
+					reqBase = reqBuilder.XMLtoUnSubscribe(map);
+				} else reqBase.setMsgType(MsgType.NONE);
 			} else reqBase.setMsgType(MsgType.NONE);
 		} catch (Exception e) {
 			e.printStackTrace();

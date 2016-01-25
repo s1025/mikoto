@@ -1,7 +1,6 @@
 package com.s1025.mikoto;
 
 import java.io.IOException;
-import java.util.Properties;
 
 import com.s1025.mikoto.api.AccessTokenApi;
 import com.s1025.mikoto.api.DatacubeApi;

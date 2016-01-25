@@ -1,11 +1,7 @@
 package com.s1025.mikoto.api;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import com.google.gson.Gson;
-import com.s1025.kuroko.model.NewsArticle;
 import com.s1025.mikoto.Mikoto;
 import com.s1025.mikoto.util.HttpCon;
 
@@ -69,7 +65,7 @@ public class MaterialApi {
 		Map<String, String> file = new HashMap<String, String>();
 		Map<String, String> resp = new HashMap<String, String>();
 		file.put("media", path);
-		String json = "description='{\"title\":"+title+",\"introduction\":"+intro+"}'";
+		//String json = "description='{\"title\":"+title+",\"introduction\":"+intro+"}'";
 		resp.put("title", title);
 		resp.put("introduction", intro);
 		String response = HttpCon.upload(url, resp, file);

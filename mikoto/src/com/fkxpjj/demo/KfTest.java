@@ -9,7 +9,6 @@ import com.s1025.kuroko.module.media.MediaDAOimpl;
 import com.s1025.mikoto.Mikoto;
 import com.s1025.mikoto.api.KfApi;
 import com.s1025.mikoto.model.App;
-import com.s1025.mikoto.model.active.ArticleKf;
 
 public class KfTest {
 	public static void main (String[] args){

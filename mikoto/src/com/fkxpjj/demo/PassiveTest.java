@@ -12,13 +12,13 @@ public class PassiveTest {
 		
 		Init.init();
 		
-		RuleBuilder rb = new RuleBuilder("tp");
+		RuleBuilder rb = new RuleBuilder("system::default");
 		
-		rb.addKey("pl");
-		rb.addKey("pm");
+		rb.addKey("system::default");
+		//rb.addKey("pm");
 		
-		rb.addReply("¹þ¹þ¹þ");
-		rb.addReply("ºÙºÙ");
+		rb.addReply("Ä¬ÈÏ²âÊÔ");
+		//rb.addReply("ºÙºÙ");
 		
 		Kuroko.ks.messageKs.addRule(rb.getRule());
 	}
