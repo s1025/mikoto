@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
+	<include>default.xml</include>
 	<action>
 		<content>date</content>
 		<class>com.fkxpjj.demo.TAction</class>
