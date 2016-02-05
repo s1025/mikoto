@@ -17,9 +17,8 @@ import com.s1025.kuroko.model.req.ReqBase;
 public class ActionCenter {
 	
 	public boolean dispose(ReqBase reqBase, String reply){
-		Action action = getAction(reply, Kuroko.ACTIONPATH);
+		Action action = searchAction(reply, Kuroko.ACTIONPATH);
 		boolean b = false;
-		
 		try {
 			Class<KurokoAction> cla = (Class<KurokoAction>) Class.forName(action.getClasspath());
 			KurokoAction coj = cla.newInstance();
@@ -32,44 +31,6 @@ public class ActionCenter {
 		}
 		
 		return b;
-	}
-	
-	public Action getAction(String key, String path){
-		Action action = new Action();
-        SAXReader reader = new SAXReader();
-        Document doc = null;
-		try {
-			doc = reader.read(path);
-		} catch (DocumentException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        Element root = doc.getRootElement();
-        
-        @SuppressWarnings("unchecked")
-        List<Element> actions = root.elements();
-        for (Element a : actions) {
-        	if("action".equals(a.getName())){
-        		String content = a.element("content").getText();
-        		if(content.equals(key)){
-        			Map<String, String> map = new HashMap<String, String>();
-        			String classpath = a.element("class").getText();
-            		action.setContent(content);
-            		action.setClasspath(classpath);
-            		
-            		
-            		List<Element> params = a.elements("param");
-        			
-            		for(Element param:params){
-            			map.put(param.element("name").getText(), param.element("value").getText());
-            		}
-            		
-            		action.setParam(map);
-            		
-        		}
-        	}
-        }
-        return action;
 	}
 	
 	public Action searchAction(String key, String path){

@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
-<!-- 多个action 
-	content为匹配内容
-	class为处理类的包名+类名
-
+	<include>package:com/s1025/kuroko/default-action.xml</include>
+	<!-- 
 	<action>
 		<content></content>
 		<class></class>
 	</action>
--->
-
+	 -->
 </actions>

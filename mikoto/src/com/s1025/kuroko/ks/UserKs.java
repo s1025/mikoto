@@ -36,4 +36,12 @@ public interface UserKs {
 	//同步所有用户
 	public Result<User> syncUsers(boolean r);
 	public boolean syncUsers();
+	//添加本地用户
+	public Result<User> pullUser(String openid, boolean r);
+	public boolean pullUser(String openid);
+	//删除本地用户
+	public Result<User> delUser(String openid, boolean r);
+	public boolean delUser(String openid);
+	
+	
 }

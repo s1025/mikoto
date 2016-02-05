@@ -11,8 +11,8 @@ public class ActionTest {
 	public static void main(String[] args){
 		Init.init();
 		ActionCenter ac = new ActionCenter();
-		Document action = ac.getDoc("");
-		System.out.println(action.asXML());
+		Action action = ac.searchAction("subscribe", "C:\\soft\\work\\CODE\\eclipseEE\\mikoto\\mikoto\\config\\actions.xml");
+		System.out.println(action);
 		
 	}
 	

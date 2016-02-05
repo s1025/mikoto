@@ -49,8 +49,19 @@ public class UserDAOimpl implements UserDAO{
 
 	@Override
 	public int delete(String openid) {
-		// TODO Auto-generated method stub
-		return 0;
+		conn = DB.getCon();
+		String sql = "delete from users where openid = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, openid);
+			re = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DB.close(conn, pstmt, null);
+		}
+		return re;
 	}
 
 	@Override
@@ -270,6 +281,25 @@ public class UserDAOimpl implements UserDAO{
 			e.printStackTrace();
 		}
 		return users;
+	}
+
+	@Override
+	public boolean check(String openid) {
+		conn = DB.getCon();
+		boolean flag = false;
+		String sql = "select * from users where openid = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, openid);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				flag = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 }

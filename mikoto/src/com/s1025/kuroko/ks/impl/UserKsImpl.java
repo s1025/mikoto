@@ -345,5 +345,53 @@ public class UserKsImpl implements UserKs{
 		return false;
 	}
 
+	@Override
+	public Result<User> pullUser(String openid, boolean r) {
+		boolean flag = userDAO.check(openid);
+		
+		String re = Mikoto.api.user.infoUser(openid);
+		
+		if(KuUtil.isResultSuccess(re)){
+			User user = gson.fromJson(re, User.class);
+			
+			if(flag==true&&userDAO.update(user)>0){
+				return new Result<User>(0,"ok",null,null);
+			} else if(flag==false&&userDAO.insert(user)>0){
+				return new Result<User>(0,"ok",null,null);
+			}
+			
+			return new Result<User>(-2,"数据库错误",null,null);
+		}else{
+			ErrResult er = gson.fromJson(re, ErrResult.class);
+			Result<User> rs = new Result<User>(er);
+			return rs;
+		}
+	}
+
+	@Override
+	public boolean pullUser(String openid) {
+		Result<User> rs = pullUser(openid, true);
+		if(rs.getErrcode()==0)
+			return true;
+		return false;
+	}
+
+	@Override
+	public Result<User> delUser(String openid, boolean r) {
+		int re = userDAO.delete(openid);
+		if(re>0)
+			return new Result<User>(0,"ok",null,null);
+		else
+			return new Result<User>(-2,"数据库错误",null,null);
+	}
+
+	@Override
+	public boolean delUser(String openid) {
+		Result<User> rs = delUser(openid, true);
+		if(rs.getErrcode()==0)
+			return true;
+		return false;
+	}
+
 
 }

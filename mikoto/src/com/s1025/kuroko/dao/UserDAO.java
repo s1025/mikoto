@@ -16,4 +16,6 @@ public interface UserDAO {
 	public int updateUserRemark(String openid, String remark);
 	public List<User> selectGroupUsers(int groupid); //获取某一分组的所有用户
 	public List<User> selectPageUsers(int offset, int rows); //分页查询
+	
+	public boolean check(String openid);
 }
