@@ -141,11 +141,12 @@ public class RuleDAOimpl implements RuleDAO{
 	}
 	
 	public int insertKey(Key key) throws SQLException{
-		String sql = "insert into router_key values(?,?,?)";
+		String sql = "insert into router_key values(?,?,?,?)";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, key.getRname());
-		pstmt.setString(2, key.getContent());
-		pstmt.setInt(3, key.getTotally());
+		pstmt.setString(2, key.getType());
+		pstmt.setString(3, key.getContent());
+		pstmt.setInt(4, key.getTotally());
 		re = pstmt.executeUpdate();
 		DB.close(null, pstmt, null);
 		return re;
@@ -171,6 +172,7 @@ public class RuleDAOimpl implements RuleDAO{
 			while(rs.next()){
 				Key key = new Key();
 				key.setRname(rs.getString("rname"));
+				key.setType(rs.getString("type"));
 				key.setContent(rs.getString("content"));
 				key.setTotally(rs.getInt("totally"));
 				keys.add(key);
@@ -230,13 +232,14 @@ public class RuleDAOimpl implements RuleDAO{
 	}
 
 	@Override
-	public List<Key> selectMatchKey(String content) {
+	public List<Key> selectMatchKey(String type, String content) {
 		conn = DB.getCon();
 		List<Key> keys = new ArrayList<Key>();
-		String sql = "select * from router_key where content like ?";
+		String sql = "select * from router_key where type = ? and content like ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "%"+content+"%");
+			pstmt.setString(1, type);
+			pstmt.setString(2, "%"+content+"%");
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				Key key = new Key();

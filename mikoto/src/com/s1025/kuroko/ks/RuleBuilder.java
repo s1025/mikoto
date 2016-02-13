@@ -56,7 +56,12 @@ public class RuleBuilder {
 	 * @return 本构建器
 	 */
 	public RuleBuilder addKey(String content, boolean totally){
+		return this.addKey(content, totally, "text");
+	}
+	
+	public RuleBuilder addKey(String content, boolean totally, String type){
 		Key key = new Key();
+		key.setType(type);
 		key.setContent(content);
 		key.setTotally(totally);
 		keys.add(key);
@@ -70,7 +75,7 @@ public class RuleBuilder {
 	 * @return 本构建器
 	 */
 	public RuleBuilder addReply(String content){
-		return this.addReply(MsgType.TEXT, content);
+		return this.addReply(content, MsgType.TEXT);
 	}
 	
 	/**
@@ -79,7 +84,7 @@ public class RuleBuilder {
 	 * @param content 回复内容
 	 * @return 本构建器
 	 */
-	public RuleBuilder addReply(String type, String content){
+	public RuleBuilder addReply(String content, String type){
 		Reply reply = new Reply();
 		reply.setType(type);
 		reply.setContent(content);

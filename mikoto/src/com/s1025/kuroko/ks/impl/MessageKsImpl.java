@@ -61,12 +61,12 @@ public class MessageKsImpl implements MessageKs{
 		}
 		
 		//获得请求key
-		String key = filter(req, reqBase);
+		Key key = filter(req, reqBase);
 		//从数据库中匹配响应
-		List<Reply> mateReply = match(key);
+		List<Reply> mateReply = match(key.getType(), key.getContent());
 		if(mateReply.size()==0){
 			d = true;
-			mateReply = match("system::default");
+			mateReply = match("system", "default");
 		}
 		
 		//处理响应
@@ -75,25 +75,32 @@ public class MessageKsImpl implements MessageKs{
 		return false;
 	}
 	
-	public String filter(HttpServletRequest req, ReqBase reqBase){
-		String key = "";
+	public Key filter(HttpServletRequest req, ReqBase reqBase){
+		Key key = new Key();
 		
 		if(reqBase.getMsgType().equals(MsgType.TEXT)){
-			key = ((ReqText)reqBase).getContent();
+			ReqText reqText = (ReqText)reqBase;
+			key.setType("text");
+			key.setContent(reqText.getContent());
 		}else if(reqBase.getMsgType().equals(MsgType.EVENT)){
 			ReqEvent reqEvent = (ReqEvent) reqBase;
 			if(Event.CLICK.equals(reqEvent.getEvent())){
 				ReqEventClick click = (ReqEventClick)reqEvent;
-				key = click.getEventKey();
+				key.setType("button");
+				key.setContent(click.getEventKey());
 			} else if(Event.SCAN.equals(reqEvent.getEvent())){
 				ReqEventScan scan = (ReqEventScan)reqEvent;
-				key = scan.getEventKey()+"";
+				key.setType("qrcode");
+				key.setContent(scan.getEventKey()+"");
 			} else if(Event.SUBSCRIBE.equals(reqEvent.getEvent())){
-				key = "system::subscribe";
+				key.setType("system");
+				key.setContent("subscribe");
 			} else if(Event.UNSUBSCRIBE.equals(reqEvent.getEvent())){
-				key = "system::unsubscribe";
+				key.setType("system");
+				key.setContent("unsubscribe");
 			} else {
-				key = "system::default";
+				key.setType("system");
+				key.setContent("default");
 			}
 		} 
 		
@@ -101,8 +108,8 @@ public class MessageKsImpl implements MessageKs{
 	}
 	
 	//@Override
-	public Result<Reply> match(String key, boolean r) {
-		List<Key> keys = ruleDAO.selectMatchKey(key);
+	public Result<Reply> match(String type, String key, boolean r) {
+		List<Key> keys = ruleDAO.selectMatchKey(type, key);
 		//获得所有匹配规则名
 		Set<String> ksets = new HashSet<String>();
 		for(Key k:keys){
@@ -129,8 +136,8 @@ public class MessageKsImpl implements MessageKs{
 	}
 	
 	//@Override
-	public List<Reply> match(String key) {
-		Result<Reply> rs = match(key, true);
+	public List<Reply> match(String type, String key) {
+		Result<Reply> rs = match(type, key, true);
 		if(rs.getErrcode()==0)
 			return rs.getDatas();
 		return new ArrayList<Reply>();

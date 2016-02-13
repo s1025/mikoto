@@ -13,6 +13,6 @@ public interface RuleDAO {
 	public List<Rule> selectAll();
 	
 	public Rule selectRuleOnly(String name);
-	public List<Key> selectMatchKey(String content);
+	public List<Key> selectMatchKey(String type, String content);
 	public List<Reply> selectReply(String rname);
 }

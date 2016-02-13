@@ -12,12 +12,14 @@ public class PassiveTest {
 		
 		Init.init();
 		
-		RuleBuilder rb = new RuleBuilder("system::unsubscribe");
+		RuleBuilder rb = new RuleBuilder("r2");
 		
-		rb.addKey("system::unsubscribe");
+		rb.addKey("data");
+		rb.addKey("default",true,"system");
 		//rb.addKey("pm");
 		
-		rb.addReply("action","unsubscribe");
+		rb.addReply("data","action");
+		rb.addReply("aaa");
 		//rb.addReply("ºÙºÙ");
 		
 		Kuroko.ks.messageKs.addRule(rb.getRule());

@@ -12,6 +12,8 @@ public class Key {
 	 */
 	private String rname;
 	
+	private String type;
+	
 	/**
 	 * 关键字内容.
 	 * 目前仅支持文字形式的关键字。
@@ -52,10 +54,15 @@ public class Key {
 	public void setRname(String rname) {
 		this.rname = rname;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	@Override
 	public String toString() {
-		return "Key [rname=" + rname + ", content=" + content + ", totally="
-				+ totally + "]";
+		return "Key [rname=" + rname + ", type=" + type + ", content=" + content + ", totally=" + totally + "]";
 	}
 	
 	
