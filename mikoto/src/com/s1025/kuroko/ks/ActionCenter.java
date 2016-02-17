@@ -17,7 +17,7 @@ import com.s1025.kuroko.model.req.ReqBase;
 public class ActionCenter {
 	
 	public boolean dispose(ReqBase reqBase, String reply){
-		Action action = searchAction(reply, Kuroko.ACTIONPATH);
+		Action action = searchAction(reply, Kuroko.path.actionPath);
 		boolean b = false;
 		try {
 			Class<KurokoAction> cla = (Class<KurokoAction>) Class.forName(action.getClasspath());

@@ -1,12 +1,12 @@
 package com.s1025.kuroko.model.req;
 
 public class ReqEventScan extends ReqEvent{
-	private int EventKey;
+	private long EventKey;
 	private String Ticket;
-	public int getEventKey() {
+	public long getEventKey() {
 		return EventKey;
 	}
-	public void setEventKey(int eventKey) {
+	public void setEventKey(long eventKey) {
 		EventKey = eventKey;
 	}
 	public String getTicket() {
@@ -17,8 +17,16 @@ public class ReqEventScan extends ReqEvent{
 	}
 	@Override
 	public String toString() {
-		return "ReqEventScan [EventKey=" + EventKey + ", Ticket=" + Ticket + "]";
+		return "ReqEventScan [EventKey=" + EventKey + ", Ticket=" + Ticket + ", toString()=" + super.toString() + "]";
 	}
+	public String getHexKey(){
+		String skey = Long.toHexString(EventKey);
+		for(int i = skey.length();i<8;i++){
+			skey = "0"+skey;
+		}
+		return skey;
+	}
+
 	
 	
 }

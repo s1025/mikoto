@@ -2,6 +2,7 @@ package com.s1025.kuroko.util;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -16,5 +17,18 @@ public class Builder {
 			e.printStackTrace();
 		}
 		return pps;
+	}
+	
+	public static void saveProperties(Properties pps, String path){
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(path);
+			pps.store(fos, "The core config");
+			fos.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		
 	}
 }

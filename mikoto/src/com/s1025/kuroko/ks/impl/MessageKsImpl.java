@@ -91,7 +91,11 @@ public class MessageKsImpl implements MessageKs{
 			} else if(Event.SCAN.equals(reqEvent.getEvent())){
 				ReqEventScan scan = (ReqEventScan)reqEvent;
 				key.setType("qrcode");
-				key.setContent(scan.getEventKey()+"");
+				
+				String skey = scan.getHexKey();
+				skey = skey.substring(0, 2);
+				
+				key.setContent(skey);
 			} else if(Event.SUBSCRIBE.equals(reqEvent.getEvent())){
 				key.setType("system");
 				key.setContent("subscribe");

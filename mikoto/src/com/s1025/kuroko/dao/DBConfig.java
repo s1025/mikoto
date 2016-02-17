@@ -4,13 +4,6 @@ public class DBConfig {
 	private String url;
 	private String user;
 	private String passwd;
-	public static DBConfig dbConfig = new DBConfig();
-	
-	private DBConfig(){}
-	
-	public static DBConfig get(){
-		return dbConfig;
-	}
 
 	public String getUrl() {
 		return url;

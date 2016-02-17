@@ -7,8 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.s1025.kuroko.Kuroko;
+
 public class DB {
-	static DBConfig dbConfig = DBConfig.get();
+	static DBConfig dbConfig = Kuroko.config.dbConfig;
 	
 	public static void init(){
 		try {

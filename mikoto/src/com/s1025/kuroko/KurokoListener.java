@@ -30,29 +30,17 @@ public class KurokoListener implements ServletContextListener{
 	public void contextInitialized(ServletContextEvent arg0) {
 		ServletContext servletContext = arg0.getServletContext();
 		String path = servletContext.getRealPath("/WEB-INF/kuroko.properties");
-		Properties pps = Builder.getProperties(path);
 		
-		//微信必要信息初始化
-		String appid = pps.getProperty("appid");
-		String appsecret = pps.getProperty("appsecret");
-		String token = pps.getProperty("token");
+		Kuroko.path.ppsPath = path;
+		Kuroko.path.actionPath = servletContext.getRealPath("/WEB-INF/actions.xml");
 		
-		Mikoto.app = new App(appid,appsecret);
-		Mikoto.token = token;
-		
-		//数据库信息初始化
-		String url = pps.getProperty("url");
-		String user = pps.getProperty("user");
-		String passwd = pps.getProperty("passwd");
-		
-		DBConfig dbConfig = DBConfig.get();
-		dbConfig.setUrl(url);
-		dbConfig.setUser(user);
-		dbConfig.setPasswd(passwd);
+		Kuroko.ks.configKs.pushApp(null);
+		Kuroko.ks.configKs.pushDB(null);
+		Kuroko.ks.configKs.pushToken(null);
 		
 		DB.init();
 		
-		Kuroko.ACTIONPATH = servletContext.getRealPath("/WEB-INF/actions.xml");
+		
 	}
 
 }
