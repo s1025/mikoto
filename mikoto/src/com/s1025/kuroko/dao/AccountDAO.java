@@ -1,5 +1,7 @@
 package com.s1025.kuroko.dao;
 
+import java.util.List;
+
 import com.s1025.kuroko.model.Account;
 
 public interface AccountDAO {
@@ -9,4 +11,5 @@ public interface AccountDAO {
 	public int update(Account account);
 	
 	public Account select(String account);
+	public List<Account> select();
 }

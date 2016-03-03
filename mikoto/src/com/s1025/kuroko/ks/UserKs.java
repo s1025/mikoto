@@ -42,6 +42,9 @@ public interface UserKs {
 	//删除本地用户
 	public Result<User> delUser(String openid, boolean r);
 	public boolean delUser(String openid);
+	//获得用户
+	public Result<User> getUsers(int page, int num, boolean r);
+	public List<User> getUsers(int page, int num);
 	
 	
 }

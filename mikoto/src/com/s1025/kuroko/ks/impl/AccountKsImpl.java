@@ -1,5 +1,7 @@
 package com.s1025.kuroko.ks.impl;
 
+import java.util.List;
+
 import com.s1025.kuroko.dao.AccountDAO;
 import com.s1025.kuroko.dao.AccountUserDAO;
 import com.s1025.kuroko.dao.impl.AccountDAOimpl;
@@ -139,6 +141,22 @@ public class AccountKsImpl implements AccountKs{
 		if(rs.getErrcode()==0)
 			return rs.getData();
 		return new AccountUser();
+	}
+
+	@Override
+	public Result<Account> getAccounts(boolean r) {
+		List<Account> re = accountDAO.select();
+		if(re.size()>0)
+			return new Result<Account>(0,"ok",null,re);
+		return new Result<Account>(-1,"error",null,null);
+	}
+
+	@Override
+	public int getAccounts() {
+		Result<Account> rs = getAccounts(true);
+		if(rs.getErrcode()==0)
+			return 1;
+		return 0;
 	}
 
 }

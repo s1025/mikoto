@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.s1025.kuroko.dao.AccountDAO;
 import com.s1025.kuroko.dao.DB;
@@ -19,7 +21,7 @@ public class AccountDAOimpl implements AccountDAO{
 
 	@Override
 	public int insert(Account account) {
-		String sql = "insert into account values(?,?)";
+		String sql = "insert into account(account, passwd) values(?,?)";
 		conn = DB.getCon();
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -115,6 +117,30 @@ public class AccountDAOimpl implements AccountDAO{
 			DB.close(conn, pstmt, rs);
 		}
 		return account;
+	}
+
+	@Override
+	public List<Account> select() {
+		String sql = "select * from account";
+		conn = DB.getCon();
+		List<Account> list = new ArrayList<Account>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				Account account = new Account();
+				account.setId(rs.getInt("id"));
+				account.setAccount(rs.getString("account"));
+				account.setPasswd(rs.getString("passwd"));
+				list.add(account);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			DB.close(conn, pstmt, rs);
+		}
+		return list;
 	}
 
 }

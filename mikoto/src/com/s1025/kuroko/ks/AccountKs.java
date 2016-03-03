@@ -12,6 +12,9 @@ public interface AccountKs {
 	public Result<Account> delAccount(String account, boolean r);
 	public int delAccount(String account);
 	
+	public Result<Account> getAccounts(boolean r);
+	public int getAccounts();
+	
 	public Result<Account> joinAccount(String account, String openid, int lev, int type, boolean r);
 	public int joinAccount(String account, String openid, int lev, int type);
 	
