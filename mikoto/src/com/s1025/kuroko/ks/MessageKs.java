@@ -17,8 +17,9 @@ public interface MessageKs {
 	//public Result<Reply> matchRule(String key, boolean r);
 	//public List<Reply> matchRule(String key);
 	
-	public Result<Rule> addRule(Rule rule, boolean r);
-	public int addRule(Rule rule);
+	public Result<Rule> addRule(Rule rule);
+	public Result<Rule> delRule(String name);
+	public Result<Rule> getRule();
 	
 	public Result<KfMessage> sendText(String to, String from, String content, boolean r);
 	public int sendText(String to, String from, String content);

@@ -49,6 +49,10 @@ public class Result<T> {
 		this.errcode = Integer.parseInt(er.getErrcode());
 		this.errmsg = er.getErrmsg();
 	}
+	public Result(Result<?> rs){
+		this.errcode = rs.getErrcode();
+		this.errmsg = rs.getErrmsg();
+	}
 	@Override
 	public String toString() {
 		return "Result [errcode=" + errcode + ", errmsg=" + errmsg + ", data=" + data + ", datas=" + datas + "]";

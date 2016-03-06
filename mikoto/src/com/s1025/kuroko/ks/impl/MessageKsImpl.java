@@ -286,25 +286,29 @@ public class MessageKsImpl implements MessageKs{
 
 
 	@Override
-	public Result<Rule> addRule(Rule rule, boolean r) {
+	public Result<Rule> addRule(Rule rule) {
 		int i = ruleDAO.insert(rule);
 		if(i>0)
 			return new Result<Rule>(0,"ok",rule,null);
 		return new Result<Rule>(-2,"数据库错误",null,null);
 	}
-
-
+	
 	@Override
-	public int addRule(Rule rule) {
-		Result<Rule> rs = addRule(rule, true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
+	public Result<Rule> delRule(String name) {
+		int i = ruleDAO.delete(name);
+		if(i>0)
+			return new Result<Rule>(0,"ok",null,null);
+		return new Result<Rule>(-2,"数据库错误",null,null);
 	}
 
-
+	@Override
+	public Result<Rule> getRule() {
+		List<Rule> rules = ruleDAO.selectAll();
+		if(rules.size()>0)
+			return new Result<Rule>(0,"ok",null,rules);
+		return new Result<Rule>(-2,"数据库错误",null,null);
+	}
 	
-
 	@Override
 	public Result<KfMessage> sendAllText(int groupId, String content, boolean r) {
 		String re = Mikoto.api.mass.sendAll("true", groupId, "text", content);
@@ -400,7 +404,7 @@ public class MessageKsImpl implements MessageKs{
 		return 0;
 	}
 
-
+	
 
 
 }
