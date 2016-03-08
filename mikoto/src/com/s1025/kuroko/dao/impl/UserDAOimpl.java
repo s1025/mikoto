@@ -183,12 +183,12 @@ public class UserDAOimpl implements UserDAO{
 	}
 
 	@Override
-	public int updateUserGroup(int groupid, int groupid2) {
+	public int updateUsersGroup(int groupid, int newgroupid) {
 		conn = DB.getCon();
 		String sql = "update users set groupid = ? where groupid = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, groupid2);
+			pstmt.setInt(1, newgroupid);
 			pstmt.setInt(2, groupid);
 			re = pstmt.executeUpdate();
 			DB.close(conn, pstmt, rs);

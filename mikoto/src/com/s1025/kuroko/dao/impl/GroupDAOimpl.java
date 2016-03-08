@@ -22,7 +22,7 @@ public class GroupDAOimpl implements GroupDAO{
 	@Override
 	public int insert(Group group) {
 		conn = DB.getCon();
-		String sql = "insert into groups values(?,?,?);";
+		String sql = "insert into groups values(?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, group.getId());

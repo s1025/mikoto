@@ -24,22 +24,7 @@ public class UserKsImpl implements UserKs{
 	Gson gson = new Gson();
 	GroupDAO groupDAO = new GroupDAOimpl();
 	UserDAO userDAO = new UserDAOimpl();
-
-
-	@Override
-	public Result<Group> getGroups(boolean r) {
-		List<Group> groups = groupDAO.select();
-		Result<Group> rs = new Result<Group>(0,"ok",null,groups);
-		return rs;
-	}
 	
-	@Override
-	public List<Group> getGroups() {
-		Result<Group> rs = getGroups(true);
-		List<Group> groups = rs.getDatas();
-		return groups;
-	}
-
 	/**
 	 * 创建一个新的用户分组.
 	 * 同时将写入数据库中，用户数默认为0。
@@ -47,13 +32,17 @@ public class UserKsImpl implements UserKs{
 	 * @return
 	 */
 	@Override
-	public Result<Group> createGroup(String name, boolean r) {
+	public Result<Group> addGroup(String name) {
 		String re = Mikoto.api.group.createGroup(name);
 		if(KuUtil.isResultSuccess(re)){
 			GroupRe group = gson.fromJson(re, GroupRe.class);
 			Result<Group> rs = new Result<Group>(0,"ok",group.getGroup(),null);
 			
-			groupDAO.insert(group.getGroup());
+			int dre = groupDAO.insert(group.getGroup());
+			
+			if(dre<1){
+				return new Result<Group>(-2,"数据库错误", group.getGroup(), null);
+			}
 			
 			return rs;
 		}else{
@@ -62,17 +51,44 @@ public class UserKsImpl implements UserKs{
 			return rs;
 		}
 	}
-	
+
+	/**
+	 * 删除分组，用户会进入默认分组.
+	 * 同时从数据库中删除,并将用户移入默认组，修改默认组人数。
+	 * @param id 要删除的分组id
+	 * @return
+	 */
 	@Override
-	public int createGroup(String name) {
-		Result<Group> rs = createGroup(name, true);
-		if(rs.getErrcode()==0){
-			return 1;
+	public Result<Group> delGroup(int id){
+		String re = Mikoto.api.group.deleteGroup(id);
+		if(KuUtil.isResultSuccess(re)){
+			
+			//成员自动到默认分组，给默认分组加上人数
+			Group group = groupDAO.select(0);
+			group.setCount(group.getCount()+userDAO.selectGroupUserNum(id));
+			groupDAO.update(group);
+			
+			userDAO.updateUsersGroup(id, 0);
+			
+			groupDAO.delete(id);
+			
+			return new Result<Group>(0, "ok", group, null);
+		}else{
+			ErrResult er = gson.fromJson(re, ErrResult.class);
+			Result<Group> rs = new Result<Group>(er);
+			return rs;
 		}
-		return 0;
 	}
 
-
+	@Override
+	public Result<Group> getGroups() {
+		List<Group> groups = groupDAO.select();
+		if(groups.size()>0){
+			return new Result<Group>(0,"ok",null,groups);
+		}
+		return new Result<Group>(-2,"数据库错误",null,groups);
+	}
+	
 	/**
 	 * 更改分组名.
 	 * 同时写入数据库。
@@ -81,7 +97,7 @@ public class UserKsImpl implements UserKs{
 	 * @return
 	 */
 	@Override
-	public Result<Group> changeGroupName(int id, String name, boolean r){
+	public Result<Group> changeGroupName(int id, String name){
 		String re = Mikoto.api.group.updateGroup(id, name);
 		
 		ErrResult er = gson.fromJson(re, ErrResult.class);
@@ -94,13 +110,6 @@ public class UserKsImpl implements UserKs{
 		return rs;
 	}
 
-	@Override
-	public int changeGroupName(int id, String name) {
-		Result<Group> rs = changeGroupName(id, name, true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
-	}
 	
 	/**
 	 * 更改用户所在分组.
@@ -109,7 +118,7 @@ public class UserKsImpl implements UserKs{
 	 * @param groupid 新分组的id
 	 * @return
 	 */
-	public Result<Group> changeUserGroup(String openid, int groupid, boolean r){
+	public Result<Group> changeUserGroup(String openid, int groupid){
 		User user = userDAO.select(openid);
 		Group group = groupDAO.select(groupid);
 		Group ogroup = groupDAO.select(user.getGroupid());
@@ -132,56 +141,14 @@ public class UserKsImpl implements UserKs{
 		return re;
 	}
 	
-	public int changeUserGroup(String openid, int groupid){
-		Result<Group> rs = changeUserGroup(openid, groupid, true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
-	}
 	
-	/**
-	 * 删除分组，用户会进入默认分组.
-	 * 同时从数据库中删除,并将用户移入默认组，修改默认组人数。
-	 * @param id 要删除的分组id
-	 * @return
-	 */
-	@Override
-	public Result<Group> deleteGroup(int id, boolean r){
-		String re = Mikoto.api.group.deleteGroup(id);
-		if(KuUtil.isResultSuccess(re)){
-			ErrResult er = new ErrResult();
-			er.setErrcode("0");
-			er.setErrmsg("ok");
-			Result<Group> rs = new Result<Group>(er);
-			
-			Group group = groupDAO.select(0);
-			group.setCount(group.getCount()+userDAO.selectGroupUserNum(id));
-			groupDAO.delete(id);
-			userDAO.updateUserGroup(id, 0);
-			groupDAO.update(group);
-			
-			return rs;
-		}else{
-			ErrResult er = gson.fromJson(re, ErrResult.class);
-			Result<Group> rs = new Result<Group>(er);
-			return rs;
-		}
-	}
-	
-	@Override
-	public int deleteGroup(int id){
-		Result<Group> rs = deleteGroup(id, true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
-	}
 	
 	/**
 	 * 同步所有分组信息.
 	 * @return 同步是否成功
 	 */
 	@Override
-	public Result<Group> syncGroups(boolean r){
+	public Result<Group> syncGroups(){
 		String re = Mikoto.api.group.getGroup();
 		
 		if(KuUtil.isResultSuccess(re)){
@@ -204,13 +171,7 @@ public class UserKsImpl implements UserKs{
 		return rs;
 	}
 
-	@Override
-	public boolean syncGroups() {
-		Result<Group> rs = syncGroups(true);
-		if(rs.getErrcode()==0)
-			return true;
-		return false;
-	}
+
 	
 	
 	/**
