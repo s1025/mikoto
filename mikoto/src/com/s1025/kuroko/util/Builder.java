@@ -15,11 +15,12 @@ public class Builder {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			pps = null;
 		}
 		return pps;
 	}
 	
-	public static void saveProperties(Properties pps, String path){
+	public static boolean saveProperties(Properties pps, String path){
 		FileOutputStream fos = null;
 		try {
 			fos = new FileOutputStream(path);
@@ -28,7 +29,8 @@ public class Builder {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}  
-		
+		return true;
 	}
 }

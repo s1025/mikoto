@@ -14,7 +14,7 @@ public class QRCodeKsImpl implements QRCodeKs{
 	Gson gson = new Gson();
 	
 	@Override
-	public Result<QRCode> addQRCode(int seconds, int scene, boolean r) {
+	public Result<QRCode> addQRCode(int seconds, long scene) {
 		String re = Mikoto.api.qrcode.createQRCode(seconds, scene);
 		if(KuUtil.isResultSuccess(re)){
 			QRCode qrcode = gson.fromJson(re, QRCode.class);
@@ -31,11 +31,13 @@ public class QRCodeKsImpl implements QRCodeKs{
 	}
 
 	@Override
-	public String addQRCode(int seconds, int scene) {
-		Result<QRCode> rs = addQRCode(seconds, scene, true);
-		if(rs.getErrcode()==0)
-			return rs.getData().getTicket();
-		return "";
+	public Result<QRCode> addQRCode(int seconds, String scene) {
+		return addQRCode(seconds, Long.parseLong(scene, 16));
 	}
 
+	@Override
+	public Result<QRCode> addQRCode(int seconds, String func, String para1, String para2, String para3) {
+		return addQRCode(seconds, Long.parseLong(func+para1+para2+para3, 16));
+	}
+	
 }
