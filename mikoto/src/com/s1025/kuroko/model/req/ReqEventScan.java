@@ -19,14 +19,4 @@ public class ReqEventScan extends ReqEvent{
 	public String toString() {
 		return "ReqEventScan [EventKey=" + EventKey + ", Ticket=" + Ticket + ", toString()=" + super.toString() + "]";
 	}
-	public String getHexKey(){
-		String skey = Long.toHexString(EventKey);
-		for(int i = skey.length();i<8;i++){
-			skey = "0"+skey;
-		}
-		return skey;
-	}
-
-	
-	
 }

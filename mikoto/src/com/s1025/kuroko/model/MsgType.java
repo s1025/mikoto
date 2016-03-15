@@ -14,4 +14,5 @@ public class MsgType {
 	public static final String NONE = "none";
 	public static final String EVENT = "event";
 	public static final String ACTION = "action";
+	
 }

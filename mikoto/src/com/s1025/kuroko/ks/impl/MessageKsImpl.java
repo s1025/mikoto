@@ -30,6 +30,7 @@ import com.s1025.kuroko.model.Reply;
 import com.s1025.kuroko.model.Result;
 import com.s1025.kuroko.model.Rule;
 import com.s1025.kuroko.model.req.ReqText;
+import com.s1025.kuroko.util.QRUtil;
 import com.s1025.kuroko.model.MsgType;
 import com.s1025.kuroko.model.req.ReqBase;
 import com.s1025.kuroko.model.req.ReqEvent;
@@ -91,9 +92,7 @@ public class MessageKsImpl implements MessageKs{
 			} else if(Event.SCAN.equals(reqEvent.getEvent())){
 				ReqEventScan scan = (ReqEventScan)reqEvent;
 				key.setType("qrcode");
-				
-				String skey = scan.getHexKey();
-				skey = skey.substring(0, 2);
+				String skey = QRUtil.getBlock(scan.getEventKey());
 				
 				key.setContent(skey);
 			} else if(Event.SUBSCRIBE.equals(reqEvent.getEvent())){
@@ -179,7 +178,7 @@ public class MessageKsImpl implements MessageKs{
 	 * @param content
 	 * @return
 	 */
-	public Result<KfMessage> sendText(String to, String from, String content, boolean r){
+	public Result<KfMessage> sendText(String to, String from, String content){
 		String re = Mikoto.api.kf.sendCustomText(to, content);
 		if(KuUtil.isResultSuccess(re)){
 			int ri = 0;
@@ -201,15 +200,6 @@ public class MessageKsImpl implements MessageKs{
 		}
 	}
 
-
-	@Override
-	public int sendText(String to, String from, String content) {
-		Result<KfMessage> rs = sendText(to, from, content, true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
-	}
-
 	
 	/**
 	 * 主动发送图片消息.
@@ -218,7 +208,7 @@ public class MessageKsImpl implements MessageKs{
 	 * @param content
 	 * @return
 	 */
-	public Result<KfMessage> sendImg(String to, String from, String mediaId, boolean r){
+	public Result<KfMessage> sendImg(String to, String from, String mediaId){
 		String re = Mikoto.api.kf.sendCustomImage(to, mediaId);
 		if(KuUtil.isResultSuccess(re)){
 			int ri = 0;
@@ -239,18 +229,9 @@ public class MessageKsImpl implements MessageKs{
 			return rs;
 		}
 	}
-
 	
 	@Override
-	public int sendImg(String to, String from, String mediaId) {
-		Result<KfMessage> rs = sendImg(to, from, mediaId, true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
-	}
-	
-	@Override
-	public Result<KfMessage> sendNews(String to, String from, String mediaId, boolean r) {
+	public Result<KfMessage> sendNews(String to, String from, String mediaId) {
 		String re = Mikoto.api.kf.sendCustomNews(to, mediaId);
 		if(KuUtil.isResultSuccess(re)){
 			int ri = 0;
@@ -271,19 +252,6 @@ public class MessageKsImpl implements MessageKs{
 			return rs;
 		}
 	}
-
-
-	@Override
-	public int sendNews(String to, String from, String mediaId) {
-		Result<KfMessage> rs = sendNews(to, from, mediaId, true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
-	}
-
-	
-	
-
 
 	@Override
 	public Result<Rule> addRule(Rule rule) {
@@ -310,7 +278,7 @@ public class MessageKsImpl implements MessageKs{
 	}
 	
 	@Override
-	public Result<KfMessage> sendAllText(int groupId, String content, boolean r) {
+	public Result<KfMessage> sendAllText(int groupId, String content) {
 		String re = Mikoto.api.mass.sendAll("true", groupId, "text", content);
 		if(KuUtil.isResultSuccess(re)){
 			Result<KfMessage> rs = new Result<KfMessage>();
@@ -326,16 +294,7 @@ public class MessageKsImpl implements MessageKs{
 
 
 	@Override
-	public int sendAllText(int groupId, String content) {
-		Result<KfMessage> rs = sendAllText(groupId, content, true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
-	}
-
-
-	@Override
-	public Result<KfMessage> sendAllNews(int groupId, String mediaId, boolean r) {
+	public Result<KfMessage> sendAllNews(int groupId, String mediaId) {
 		String re = Mikoto.api.mass.sendAll("true", groupId, "news", mediaId);
 		if(KuUtil.isResultSuccess(re)){
 			Result<KfMessage> rs = new Result<KfMessage>();
@@ -349,17 +308,8 @@ public class MessageKsImpl implements MessageKs{
 		}
 	}
 
-
 	@Override
-	public int sendAllNews(int groupId, String mediaId) {
-		Result<KfMessage> rs = sendAllNews(groupId, mediaId, true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
-	}
-
-	@Override
-	public Result<KfMessage> sendPreviewText(String openid, String content, boolean r) {
+	public Result<KfMessage> sendPreviewText(String openid, String content) {
 		String re = Mikoto.api.mass.preview(openid, "text", content);
 		if(KuUtil.isResultSuccess(re)){
 			Result<KfMessage> rs = new Result<KfMessage>();
@@ -374,15 +324,7 @@ public class MessageKsImpl implements MessageKs{
 	}
 
 	@Override
-	public int sendPreviewText(String openid, String content) {
-		Result<KfMessage> rs = sendPreviewText(openid, content, true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
-	}
-
-	@Override
-	public Result<KfMessage> sendPreviewNews(String openid, String mediaId, boolean r) {
+	public Result<KfMessage> sendPreviewNews(String openid, String mediaId) {
 		String re = Mikoto.api.mass.preview(openid, "news", mediaId);
 		if(KuUtil.isResultSuccess(re)){
 			Result<KfMessage> rs = new Result<KfMessage>();
@@ -395,16 +337,5 @@ public class MessageKsImpl implements MessageKs{
 			return rs;
 		}
 	}
-
-	@Override
-	public int sendPreviewNews(String openid, String mediaId) {
-		Result<KfMessage> rs = sendPreviewNews(openid, mediaId, true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
-	}
-
-	
-
 
 }

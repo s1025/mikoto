@@ -16,7 +16,7 @@ public class AccountKsImpl implements AccountKs{
 	AccountUserDAO accountUserDAO = new AccountUserDAOimpl();
 
 	@Override
-	public Result<Account> addAccount(String account, String passwd, boolean r) {
+	public Result<Account> addAccount(String account, String passwd) {
 		Account ao = new Account();
 		
 		ao.setAccount(account);
@@ -27,17 +27,9 @@ public class AccountKsImpl implements AccountKs{
 			return new Result<Account>(0,"ok",ao,null);
 		return new Result<Account>(-1,"error",null,null);
 	}
-	
-	@Override
-	public int addAccount(String account, String passwd) {
-		Result<Account> rs = addAccount(account, passwd, true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
-	}
 
 	@Override
-	public Result<Account> joinAccount(String account, String openid, int lev, int type, boolean r) {
+	public Result<Account> joinAccount(String account, String openid, int lev, int type) {
 		Account ao = accountDAO.select(account);
 		
 		AccountUser accountUser = new AccountUser();
@@ -51,17 +43,23 @@ public class AccountKsImpl implements AccountKs{
 			return new Result<Account>(0,"ok",null,null);
 		return new Result<Account>(-1,"error",null,null);
 	}
-
+	
 	@Override
-	public int joinAccount(String account, String openid, int lev, int type) {
-		Result<Account> rs = joinAccount(account, openid, lev, type, true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
+	public Result<Account> joinAccount(int aid, String openid, int lev, int type) {
+		AccountUser accountUser = new AccountUser();
+		accountUser.setId(aid);
+		accountUser.setOpenid(openid);
+		accountUser.setLev(lev);
+		accountUser.setType(type);
+		int re = accountUserDAO.insert(accountUser);
+		
+		if(re>0)
+			return new Result<Account>(0,"ok",null,null);
+		return new Result<Account>(-1,"error",null,null);
 	}
 
 	@Override
-	public Result<Account> quitAccount(String account, String openid, boolean r) {
+	public Result<Account> quitAccount(String account, String openid) {
 		Account ao = accountDAO.select(account);
 		int re = accountUserDAO.delete(ao.getId(), openid);
 		
@@ -71,15 +69,7 @@ public class AccountKsImpl implements AccountKs{
 	}
 
 	@Override
-	public int quitAccount(String account, String openid) {
-		Result<Account> rs = quitAccount(account, openid, true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
-	}
-
-	@Override
-	public Result<Account> delAccount(String account, boolean r) {
+	public Result<Account> delAccount(String account) {
 		Account ao = accountDAO.select(account);
 		accountDAO.delete(ao.getId());
 		accountUserDAO.delete(ao.getId());
@@ -87,16 +77,8 @@ public class AccountKsImpl implements AccountKs{
 	}
 
 	@Override
-	public int delAccount(String account) {
-		Result<Account> rs = delAccount(account, true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
-	}
-
-	@Override
-	public Result<Integer> getUserLev(String account, String openid, boolean r) {
-		Result<AccountUser> rs = getAccountUser(account, openid, true);
+	public Result<Integer> getUserLev(String account, String openid) {
+		Result<AccountUser> rs = getAccountUser(account, openid);
 		if(rs.getErrcode()==0){
 			new Result<Integer>(rs.getErrcode(), rs.getErrmsg(),rs.getData().getLev(),null);
 		}
@@ -104,16 +86,8 @@ public class AccountKsImpl implements AccountKs{
 	}
 
 	@Override
-	public int getUserLev(String account, String openid) {
-		Result<Integer> rs = getUserLev(account, openid, true);
-		if(rs.getErrcode()==0)
-			return rs.getData();
-		return 0;
-	}
-
-	@Override
-	public Result<Integer> getUserType(String account, String openid, boolean r) {
-		Result<AccountUser> rs = getAccountUser(account, openid, true);
+	public Result<Integer> getUserType(String account, String openid) {
+		Result<AccountUser> rs = getAccountUser(account, openid);
 		if(rs.getErrcode()==0){
 			new Result<Integer>(rs.getErrcode(), rs.getErrmsg(),rs.getData().getType(),null);
 		}
@@ -121,42 +95,18 @@ public class AccountKsImpl implements AccountKs{
 	}
 
 	@Override
-	public int getUserType(String account, String openid) {
-		Result<Integer> rs = getUserType(account, openid, true);
-		if(rs.getErrcode()==0)
-			return rs.getData();
-		return 0;
-	}
-
-	@Override
-	public Result<AccountUser> getAccountUser(String account, String openid, boolean r) {
+	public Result<AccountUser> getAccountUser(String account, String openid) {
 		Account ao = accountDAO.select(account);
 		AccountUser au = accountUserDAO.select(ao.getId(), openid);
 		return new Result<AccountUser>(0, "ok", au, null);
 	}
 
 	@Override
-	public AccountUser getAccountUser(String account, String openid) {
-		Result<AccountUser> rs = getAccountUser(account, openid, true);
-		if(rs.getErrcode()==0)
-			return rs.getData();
-		return new AccountUser();
-	}
-
-	@Override
-	public Result<Account> getAccounts(boolean r) {
+	public Result<Account> getAccounts() {
 		List<Account> re = accountDAO.select();
 		if(re.size()>0)
 			return new Result<Account>(0,"ok",null,re);
 		return new Result<Account>(-1,"error",null,null);
-	}
-
-	@Override
-	public int getAccounts() {
-		Result<Account> rs = getAccounts(true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
 	}
 
 }

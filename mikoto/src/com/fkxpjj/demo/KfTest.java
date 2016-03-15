@@ -3,6 +3,8 @@ package com.fkxpjj.demo;
 
 import com.s1025.kuroko.Kuroko;
 import com.s1025.kuroko.model.KfMessage;
+import com.s1025.kuroko.model.News;
+import com.s1025.kuroko.model.Result;
 import com.s1025.kuroko.module.media.Media;
 import com.s1025.kuroko.module.media.MediaDAO;
 import com.s1025.kuroko.module.media.MediaDAOimpl;
@@ -24,9 +26,9 @@ public class KfTest {
 		
 		Init.init();
 		
-		int r = Kuroko.ks.messageKs.sendNews("oVW-oszd62QE_kT66ilsRuuOJspA", "system", "eVnrau9ed1IjfY78zCnEStTokGsoYQ4zkliXzoGJzTY");
+		Result<KfMessage> r = Kuroko.ks.messageKs.sendNews("oVW-oszd62QE_kT66ilsRuuOJspA", "system", "eVnrau9ed1IjfY78zCnEStTokGsoYQ4zkliXzoGJzTY");
 		//String r = Mikoto.api.kf.sendCustomNews("oVW-oszd62QE_kT66ilsRuuOJspA", "eVnrau9ed1IjfY78zCnEStTokGsoYQ4zkliXzoGJzTY");
-		System.out.println(r);;
+		System.out.println(r.toString());;
 
 	}
 

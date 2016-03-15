@@ -8,4 +8,8 @@
 		<content>unsubscribe</content>
 		<class>com.s1025.kuroko.action.UnSubscribeAction</class>
 	</action>
+	<action>
+		<content>system</content>
+		<class>com.s1025.kuroko.action.SysAction</class>
+	</action>
 </actions>

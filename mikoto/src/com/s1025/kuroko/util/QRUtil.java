@@ -6,7 +6,7 @@ public class QRUtil {
 		String[] sp = new String[4];
 		
 		for(int i = sceneHec.length();i<8;i++){
-			sceneHec = sceneHec + "0";
+			sceneHec = "0" + sceneHec;
 		}
 		
 		for(int i = 0; i<4; i++){
@@ -22,19 +22,27 @@ public class QRUtil {
 		return spliteScene(sc);
 	}
 	
-	public static String getFunc(String scene){
+	public static String getBlock(String scene){
 		return spliteScene(scene)[0];
+	}
+	
+	public static String getBlock(long scene){
+		return spliteScene(scene)[0];
+	}
+	
+	public static String getFunc(String scene){
+		return spliteScene(scene)[1];
 	}
 	
 	public static String getFunc(long scene){
-		return spliteScene(scene)[0];
+		return spliteScene(scene)[1];
 	}
 	
 	public static String getPara(String scene, int i){
-		return spliteScene(scene)[i];
+		return spliteScene(scene)[i+1];
 	}
 	
 	public static String getPara(long scene, int i){
-		return spliteScene(scene)[i];
+		return spliteScene(scene)[i+1];
 	}
 }
