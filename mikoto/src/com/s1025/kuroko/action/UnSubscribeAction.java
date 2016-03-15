@@ -3,7 +3,6 @@ package com.s1025.kuroko.action;
 import com.s1025.kuroko.ks.KurokoAction;
 import com.s1025.kuroko.ks.UserKs;
 import com.s1025.kuroko.ks.impl.UserKsImpl;
-import com.s1025.kuroko.model.Action;
 import com.s1025.kuroko.model.Event;
 import com.s1025.kuroko.model.req.ReqBase;
 import com.s1025.kuroko.model.req.ReqUnSubscribe;
@@ -23,7 +22,7 @@ public class UnSubscribeAction implements KurokoAction{
 	}
 
 	@Override
-	public boolean service(ReqBase reqBase, Action action) {
+	public boolean service(ReqBase reqBase) {
 		ReqUnSubscribe rs = (ReqUnSubscribe)reqBase;
 		UserKs userKs = new UserKsImpl();
 		if(Event.UNSUBSCRIBE.equals(rs.getEvent())){

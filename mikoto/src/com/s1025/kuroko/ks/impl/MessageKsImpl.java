@@ -17,7 +17,7 @@ import com.s1025.kuroko.dao.KfMessageDAO;
 import com.s1025.kuroko.dao.RuleDAO;
 import com.s1025.kuroko.dao.impl.KfMessageDAOimpl;
 import com.s1025.kuroko.dao.impl.RuleDAOimpl;
-import com.s1025.kuroko.ks.ActionCenter;
+import com.s1025.kuroko.ks.KurokoAction;
 import com.s1025.kuroko.ks.MessageKs;
 import com.s1025.kuroko.ks.Parse;
 import com.s1025.kuroko.ks.Passive;
@@ -147,14 +147,22 @@ public class MessageKsImpl implements MessageKs{
 	}
 	
 	public void outcome(List<Reply> replys, ReqBase reqBase, boolean d){
-		ActionCenter ac = new ActionCenter();
 		for(Reply reply:replys){
 			if(MsgType.TEXT.equals(reply.getType())){
 				Kuroko.ks.messageKs.sendText(reqBase.getFromUserName(), "system", reply.getContent());
 			} else if(MsgType.NEWS.equals(reply.getType())){
 				Kuroko.ks.messageKs.sendNews(reqBase.getFromUserName(), "system", reply.getContent());
 			} else if(MsgType.ACTION.equals(reply.getType())){
-				ac.dispose(reqBase, reply.getContent());
+				try {
+					Class<KurokoAction> cla = (Class<KurokoAction>) Class.forName(reply.getContent());
+					KurokoAction coj = cla.newInstance();
+					coj.init();
+					boolean b = coj.service(reqBase);
+					coj.dest();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	

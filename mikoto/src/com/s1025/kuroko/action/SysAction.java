@@ -3,7 +3,6 @@ package com.s1025.kuroko.action;
 import com.s1025.kuroko.Kuroko;
 import com.s1025.kuroko.ks.KurokoAction;
 import com.s1025.kuroko.model.Account;
-import com.s1025.kuroko.model.Action;
 import com.s1025.kuroko.model.Event;
 import com.s1025.kuroko.model.Result;
 import com.s1025.kuroko.model.req.ReqBase;
@@ -26,7 +25,7 @@ public class SysAction implements KurokoAction{
 	}
 
 	@Override
-	public boolean service(ReqBase reqBase, Action action) {
+	public boolean service(ReqBase reqBase) {
 		String type = ReqUtil.getType(reqBase);
 		String content = "Œ¥¥¶¿Ì";
 		if(Event.SCAN.equals(type)){

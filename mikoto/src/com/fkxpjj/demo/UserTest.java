@@ -8,9 +8,6 @@ import com.s1025.kuroko.dao.DBConfig;
 import com.s1025.kuroko.ks.UserKs;
 import com.s1025.kuroko.ks.impl.UserKsImpl;
 import com.s1025.kuroko.model.Group;
-import com.s1025.kuroko.module.user.User;
-import com.s1025.kuroko.module.user.UserDAO;
-import com.s1025.kuroko.module.user.UserDAOimpl;
 import com.s1025.mikoto.Mikoto;
 import com.s1025.mikoto.model.App;
 

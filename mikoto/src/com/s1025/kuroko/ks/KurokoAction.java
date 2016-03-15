@@ -1,6 +1,5 @@
 package com.s1025.kuroko.ks;
 
-import com.s1025.kuroko.model.Action;
 import com.s1025.kuroko.model.req.ReqBase;
 
 public interface KurokoAction {
@@ -8,7 +7,7 @@ public interface KurokoAction {
 	
 	public void dest();
 	
-	public abstract boolean service(ReqBase reqBase, Action action);
+	public abstract boolean service(ReqBase reqBase);
 	
 	
 	

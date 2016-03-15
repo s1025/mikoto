@@ -13,7 +13,6 @@ import com.s1025.kuroko.model.Group;
 import com.s1025.kuroko.model.GroupRe;
 import com.s1025.kuroko.model.Result;
 import com.s1025.kuroko.model.User;
-import com.s1025.kuroko.module.user.UserList;
 import com.s1025.kuroko.model.Groups;
 import com.s1025.kuroko.model.KuUtil;
 import com.s1025.mikoto.Mikoto;
@@ -255,8 +254,9 @@ public class UserKsImpl implements UserKs{
 	 * 拉取所有用户的openid，并委托其他函数进行信息拉取。
 	 * @return 是否同步成功
 	 */
+	
 	@Override
-	public Result<User> syncUsers(boolean r){
+	public Result<User> syncUsers(boolean r){/**
 		String re = Mikoto.api.user.usersList(null);
 		if(KuUtil.isResultSuccess(re)){
 			userDAO.clean();
@@ -295,7 +295,8 @@ public class UserKsImpl implements UserKs{
 			ErrResult er = gson.fromJson(re, ErrResult.class);
 			Result<User> rs = new Result<User>(er);
 			return rs;
-		}
+		}**/
+		return null;
 	}
 
 	@Override
