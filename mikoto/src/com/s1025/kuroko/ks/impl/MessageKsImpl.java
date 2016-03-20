@@ -26,6 +26,7 @@ import com.s1025.kuroko.model.Event;
 import com.s1025.kuroko.model.Key;
 import com.s1025.kuroko.model.KfMessage;
 import com.s1025.kuroko.model.KuUtil;
+import com.s1025.kuroko.model.KurokoContext;
 import com.s1025.kuroko.model.Reply;
 import com.s1025.kuroko.model.Result;
 import com.s1025.kuroko.model.Rule;
@@ -61,6 +62,9 @@ public class MessageKsImpl implements MessageKs{
 			e1.printStackTrace();
 		}
 		
+		//预处理
+		pre(req, reqBase);
+		
 		//获得请求key
 		Key key = filter(req, reqBase);
 		//从数据库中匹配响应
@@ -74,6 +78,12 @@ public class MessageKsImpl implements MessageKs{
 		outcome(mateReply, reqBase, d);
 		
 		return false;
+	}
+	
+	public void pre(HttpServletRequest req, ReqBase reqBase){
+		KurokoContext kc = new KurokoContext();
+		kc.setHttpSession(req.getSession());
+		reqBase.setKurokoContext(kc);
 	}
 	
 	public Key filter(HttpServletRequest req, ReqBase reqBase){

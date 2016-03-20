@@ -7,8 +7,5 @@ public interface KurokoAction {
 	
 	public void dest();
 	
-	public abstract boolean service(ReqBase reqBase);
-	
-	
-	
+	public abstract boolean service(ReqBase reqBase);	
 }

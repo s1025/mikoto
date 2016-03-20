@@ -102,11 +102,38 @@ public class AccountKsImpl implements AccountKs{
 	}
 
 	@Override
+	public Result<Account> getAccount(String accounts){
+		Account account = accountDAO.select(accounts);
+		if(account.getId()<1){
+			return new Result<Account>(-10,"没有此账号",null,null);
+		}
+		return new Result<Account>(0,"ok",account,null);
+	}
+	
+	@Override
 	public Result<Account> getAccounts() {
 		List<Account> re = accountDAO.select();
 		if(re.size()>0)
 			return new Result<Account>(0,"ok",null,re);
 		return new Result<Account>(-1,"error",null,null);
+	}
+
+	@Override
+	public Result<AccountUser> checkAccountUser(int aid, String passwd, String openid) {
+		AccountUser au = accountUserDAO.select(aid, openid);
+		if(au.getId()==0){
+			return new Result<AccountUser>(-10,"没有登录权限",null,null);
+		}
+		return new Result<AccountUser>(0, "ok", au, null);
+	}
+
+	@Override
+	public Result<Account> getAccount(int aid) {
+		Account account = accountDAO.select(aid);
+		if(account.getId()<1){
+			return new Result<Account>(-10,"没有此账号",null,null);
+		}
+		return new Result<Account>(0,"ok",account,null);
 	}
 
 }

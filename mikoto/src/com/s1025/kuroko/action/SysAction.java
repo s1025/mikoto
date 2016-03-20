@@ -39,6 +39,10 @@ public class SysAction implements KurokoAction{
 				} else {
 					content = "管理员绑定失败";
 				}
+			} else if ("02".equals(func)){
+				String openid = reqBase.getFromUserName();
+				String account = QRUtil.getPara(key, 1);
+				Kuroko.ks.accountKs.getAccountUser(account, openid);
 			}
 		}
 		Kuroko.ks.messageKs.sendText(reqBase.getFromUserName(), reqBase.getToUserName(), content);

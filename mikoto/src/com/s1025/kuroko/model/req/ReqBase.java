@@ -1,11 +1,14 @@
 package com.s1025.kuroko.model.req;
 
+import com.s1025.kuroko.model.KurokoContext;
+
 public class ReqBase {
 	private String ToUserName;
 	private String FromUserName;
 	private long CreateTime;
 	private String MsgType;
 	private String MsgId;
+	private KurokoContext kurokoContext;
 	public String getToUserName() {
 		return ToUserName;
 	}
@@ -36,13 +39,15 @@ public class ReqBase {
 	public void setCreateTime(long createTime) {
 		CreateTime = createTime;
 	}
+	public KurokoContext getKurokoContext() {
+		return kurokoContext;
+	}
+	public void setKurokoContext(KurokoContext kurokoContext) {
+		this.kurokoContext = kurokoContext;
+	}
 	@Override
 	public String toString() {
-		return "ReqBase [ToUserName=" + ToUserName + ", FromUserName="
-				+ FromUserName + ", CreateTime=" + CreateTime + ", MsgType="
-				+ MsgType + ", MsgId=" + MsgId + "]";
+		return "ReqBase [ToUserName=" + ToUserName + ", FromUserName=" + FromUserName + ", CreateTime=" + CreateTime
+				+ ", MsgType=" + MsgType + ", MsgId=" + MsgId + ", kurokoContext=" + kurokoContext + "]";
 	}
-	
-	
-	
 }

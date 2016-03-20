@@ -8,6 +8,8 @@ public interface AccountKs {
 
 	public Result<Account> addAccount(String account, String passwd);	
 	public Result<Account> delAccount(String account);
+	public Result<Account> getAccount(String account);
+	public Result<Account> getAccount(int aid);
 	public Result<Account> getAccounts();
 	
 	public Result<Account> joinAccount(String account, String openid, int lev, int type);
@@ -16,5 +18,7 @@ public interface AccountKs {
 	public Result<AccountUser> getAccountUser(String account, String openid);
 	public Result<Integer> getUserLev(String account, String openid);
 	public Result<Integer> getUserType(String account, String openid);
+	
+	public Result<AccountUser> checkAccountUser(int aid, String passwd, String openid);
 	
 }
