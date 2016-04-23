@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import com.s1025.kuroko.Kuroko;
 import com.s1025.kuroko.ks.KurokoAction;
 import com.s1025.kuroko.model.Account;
+import com.s1025.kuroko.model.AccountUser;
 import com.s1025.kuroko.model.Event;
 import com.s1025.kuroko.model.QRCode;
 import com.s1025.kuroko.model.Result;
@@ -66,8 +67,14 @@ public class AccountAction implements KurokoAction{
 		Result<Account> rs = Kuroko.ks.accountKs.getAccount(Integer.parseInt(aid));
 		if(rs.getErrcode()!=0)
 			return new Result<QRCode>(rs);
+		else {
+			Result<AccountUser> rs2 = Kuroko.ks.accountKs.checkAccountUser(Integer.parseInt(aid), scan.getFromUserName());
+			if(rs2.getErrcode()!=0){
+				return new Result<QRCode>(rs2);
+			}
+		}
 		
-		HttpSession session = scan.getKurokoContext().getHttpSession();
+		HttpSession session = scan.getKurokoContext().getHttpSession();	
 		session.setAttribute("openid", scan.getFromUserName());
 		
 		Kuroko.ks.messageKs.sendText(scan.getFromUserName(), scan.getToUserName(), "µÇÂ¼³É¹¦");

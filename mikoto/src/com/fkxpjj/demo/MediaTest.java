@@ -23,8 +23,8 @@ public class MediaTest {
 		
 		//int s = Kuroko.ks.mediaKs.addImage("a", path);
 		
-		Media s = mediaDAO.select(8);
-		System.out.println(s);
+		String re = Mikoto.api.media.uploadMedia("image", path);
+		System.out.println(re);
 	}
 
 }

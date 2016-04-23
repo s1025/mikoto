@@ -1,6 +1,7 @@
 package com.s1025.kuroko.action;
 
 import com.s1025.kuroko.Kuroko;
+import com.s1025.kuroko.dao.DBConfig;
 import com.s1025.kuroko.ks.KurokoAction;
 import com.s1025.kuroko.model.Account;
 import com.s1025.kuroko.model.Event;
@@ -47,6 +48,19 @@ public class SysAction implements KurokoAction{
 		}
 		Kuroko.ks.messageKs.sendText(reqBase.getFromUserName(), reqBase.getToUserName(), content);
 		return false;
+	}
+	
+	public Result<DBConfig> setDB(DBConfig db){
+		if(!db.getUrl().startsWith("jdbc")){
+			db.setUrl("jdbc:mysql://127.0.0.1:3306/"+db.getUrl()+"?characterEncoding=UTF-8");
+		}
+		Kuroko.ks.configKs.setDB(db, null);
+		Kuroko.ks.configKs.pushDB(null);
+		return new Result<DBConfig>(0, "ok", null, null);
+	}
+	
+	public Result<DBConfig> getDB(){
+		return null;
 	}
 
 }

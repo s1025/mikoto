@@ -119,7 +119,7 @@ public class AccountKsImpl implements AccountKs{
 	}
 
 	@Override
-	public Result<AccountUser> checkAccountUser(int aid, String passwd, String openid) {
+	public Result<AccountUser> checkAccountUser(int aid, String openid) {
 		AccountUser au = accountUserDAO.select(aid, openid);
 		if(au.getId()==0){
 			return new Result<AccountUser>(-10,"没有登录权限",null,null);

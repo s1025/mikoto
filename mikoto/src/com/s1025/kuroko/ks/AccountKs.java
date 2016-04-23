@@ -19,6 +19,6 @@ public interface AccountKs {
 	public Result<Integer> getUserLev(String account, String openid);
 	public Result<Integer> getUserType(String account, String openid);
 	
-	public Result<AccountUser> checkAccountUser(int aid, String passwd, String openid);
+	public Result<AccountUser> checkAccountUser(int aid, String openid);
 	
 }

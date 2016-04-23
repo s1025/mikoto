@@ -56,7 +56,7 @@ public class NewsTest {
 			nb.add(a);
 		}
 		
-		int i = Kuroko.ks.mediaKs.addNews(nb.getNews());
+		int i = Kuroko.ks.mediaKs.addNews(nb.getNews()).getErrcode();
 		
 		System.out.println(i);
 	}

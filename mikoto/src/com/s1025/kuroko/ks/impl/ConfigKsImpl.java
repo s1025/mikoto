@@ -80,6 +80,25 @@ public class ConfigKsImpl implements ConfigKs{
 		Builder.saveProperties(pps, path);
 		
 	}
+	
+	@Override
+	public void pushApp(String path) {
+		if(path==null){
+			path = Kuroko.path.ppsPath;
+		}
+		
+		Properties pps = Builder.getProperties(path);
+		
+		if(pps==null){
+			pps = new Properties();
+		}
+		
+		App app = new App();
+		app.setAppID(pps.getProperty("appid"));
+		app.setAppSecret(pps.getProperty("appsecret"));
+		
+		Mikoto.app = app;	
+	}
 
 	@Override
 	public String getToken() {
@@ -105,24 +124,7 @@ public class ConfigKsImpl implements ConfigKs{
 
 	
 
-	@Override
-	public void pushApp(String path) {
-		if(path==null){
-			path = Kuroko.path.ppsPath;
-		}
-		
-		Properties pps = Builder.getProperties(path);
-		
-		if(pps==null){
-			pps = new Properties();
-		}
-		
-		App app = new App();
-		app.setAppID(pps.getProperty("appid"));
-		app.setAppSecret(pps.getProperty("appsecret"));
-		
-		Mikoto.app = app;	
-	}
+	
 
 	@Override
 	public void pushToken(String path) {

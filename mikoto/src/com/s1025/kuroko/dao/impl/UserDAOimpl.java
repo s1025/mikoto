@@ -250,14 +250,25 @@ public class UserDAOimpl implements UserDAO{
 	}
 
 	@Override
-	public List<User> selectPageUsers(int offset, int rows) {
+	public List<User> selectPageUsers(int groupid, int offset, int rows) {
 		conn = DB.getCon();
-		String sql = "select * from users limit ?,?";
+		String sql = "select * from users";
+		if(groupid>=0)
+			sql += " where groupid = ?";
+		sql += " limit ?,?";
 		List<User> users = new ArrayList<User>();
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, offset);
-			pstmt.setInt(2, rows);
+			
+			int i = 0;
+			if(groupid>=0){
+				i++;
+				pstmt.setInt(i, groupid);
+			}
+			
+			pstmt.setInt(i+1, offset);
+			pstmt.setInt(i+2, rows);
+			
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				User user = new User();

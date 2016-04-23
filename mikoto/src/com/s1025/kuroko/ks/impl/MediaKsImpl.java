@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.s1025.kuroko.ks.MediaKs;
 import com.s1025.kuroko.model.Media;
 import com.s1025.kuroko.model.MediaCount;
+import com.s1025.kuroko.model.MediaTmp;
 import com.s1025.kuroko.model.News;
 import com.s1025.kuroko.model.NewsArticle;
 import com.s1025.kuroko.model.NewsBatch;
@@ -28,7 +29,7 @@ public class MediaKsImpl implements MediaKs{
 	ArticleDAO articleDAO = new ArticleDAOimpl();
 	
 	@Override
-	public Result<Media> addImage(String path, boolean r) {
+	public Result<Media> addImage(String path) {
 		String re = Mikoto.api.material.addMaterial("image", path);
 		if(KuUtil.isResultSuccess(re)){
 			Media media = gson.fromJson(re, Media.class);
@@ -45,15 +46,7 @@ public class MediaKsImpl implements MediaKs{
 	}
 
 	@Override
-	public int addImage(String path) {
-		Result<Media> rs = addImage(path, true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
-	}
-
-	@Override
-	public Result<Media> addNews(News news, boolean r) {
+	public Result<Media> addNews(News news) {
 		Gson gson = new Gson();
 		String re = Mikoto.api.material.addNews(gson.toJson(news));
 		if(KuUtil.isResultSuccess(re)){
@@ -77,17 +70,9 @@ public class MediaKsImpl implements MediaKs{
 			return rs;
 		}
 	}
-
-	@Override
-	public int addNews(News news) {
-		Result<Media> rs = addNews(news, true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
-	}
 	
 	@Override
-	public Result<MediaCount> getMediaCount(boolean r) {
+	public Result<MediaCount> getMediaCount() {
 		String re = Mikoto.api.material.materialCount();
 		if(KuUtil.isResultSuccess(re)){
 			MediaCount mc = gson.fromJson(re, MediaCount.class);
@@ -101,16 +86,8 @@ public class MediaKsImpl implements MediaKs{
 	}
 
 	@Override
-	public MediaCount getMediaCount() {
-		Result<MediaCount> rmc = getMediaCount(true);
-		if(rmc.getErrcode()==0)
-			return rmc.getData();
-		return new MediaCount();
-	}
-
-	@Override
-	public Result<NewsArticle> syncNews(boolean r) {
-		MediaCount mc = getMediaCount();
+	public Result<NewsArticle> syncNews() {
+		MediaCount mc = getMediaCount().getData();
 		int newsNum = mc.getNews_count();
 		List<NewsBatch> lnb = new ArrayList<NewsBatch>();
 		
@@ -148,11 +125,23 @@ public class MediaKsImpl implements MediaKs{
 	}
 
 	@Override
-	public int syncNews() {
-		Result<NewsArticle> rs = syncNews(true);
-		if(rs.getErrcode()==0)
-			return 1;
-		return 0;
+	public String getMediaList(String type, int offset, int count) {
+		String re = Mikoto.api.material.materialList(type, offset, count);
+		return null;
+	}
+
+	@Override
+	public Result<String> addImageTmp(String path) {
+		String re = Mikoto.api.material.addMaterial("image", path);
+		if(KuUtil.isResultSuccess(re)){
+			MediaTmp mediaTmp = gson.fromJson(re, MediaTmp.class);
+			Result<String> rs = new Result<String>(0,"ok",mediaTmp.getMedia_id(),null);
+			return rs;
+		} else {
+			ErrResult er = gson.fromJson(re, ErrResult.class);
+			Result<String> rs = new Result<String>(er);
+			return rs;
+		}
 	}
 
 	

@@ -356,17 +356,11 @@ public class UserKsImpl implements UserKs{
 	}
 
 	@Override
-	public Result<User> getUsers(int page, int num, boolean r) {
-		List<User> users = userDAO.selectPageUsers((page-1)*num, num);
+	public Result<User> getUsers(int groupid, int page, int num) {
+		List<User> users = userDAO.selectPageUsers(groupid, (page-1)*num, num);
 		if(users.size()>1)
 			return new Result<User>(0,"ok",null,users);
 		return new Result<User>(-2,"Êı¾İ¿â´íÎó",null,users);
-	}
-
-	@Override
-	public List<User> getUsers(int page, int num) {
-		Result<User> rs = getUsers(page, num, true);
-		return rs.getDatas();
 	}
 
 

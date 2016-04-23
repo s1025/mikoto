@@ -1,8 +1,6 @@
 package com.s1025.kuroko.model;
 
-import java.util.ArrayList;
 import java.util.List;
-
 
 public class Result<T> {
 	private int errcode;

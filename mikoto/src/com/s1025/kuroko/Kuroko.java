@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.s1025.kuroko.action.SysAction;
 import com.s1025.kuroko.dao.DBConfig;
 import com.s1025.kuroko.ks.AccountKs;
 import com.s1025.kuroko.ks.ConfigKs;
@@ -32,6 +33,10 @@ public class Kuroko {
 	
 	public static class config{
 		public static DBConfig dbConfig = new DBConfig();
+	}
+	
+	public static class action{
+		public static SysAction sysAction = new SysAction();
 	}
 	
 	public static class ks{

@@ -7,20 +7,17 @@ import com.s1025.kuroko.model.News;
 import com.s1025.kuroko.model.NewsArticle;
 
 public interface MediaKs {
-	public Result<Media> addImage(String path, boolean r);
-	public int addImage(String path);
+	public Result<Media> addImage(String path);
 	
-	
-	public Result<Media> addNews(News news, boolean r);
-	public int addNews(News news);
+	public Result<Media> addNews(News news);
 	
 	//public Result<Media> addNews();
 	
+	public Result<MediaCount> getMediaCount();
 	
+	public String getMediaList(String type, int offset, int count);
 	
-	public Result<MediaCount> getMediaCount(boolean r);
-	public MediaCount getMediaCount();
+	public Result<NewsArticle> syncNews();
 	
-	public Result<NewsArticle> syncNews(boolean r);
-	public int syncNews();
+	public Result<String> addImageTmp(String path);
 }

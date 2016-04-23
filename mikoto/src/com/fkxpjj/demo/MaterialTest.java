@@ -15,12 +15,12 @@ public class MaterialTest {
 		
 		//Kuroko.service.media.addVideo(path);
 		//String s = Mikoto.api.material.materialCount();
-		String s = Mikoto.api.material.materialCount();
+		String s = Mikoto.api.material.materialList("news", 0, 10);
 		
 		Gson gson = new Gson();
-		MediaCount mc =  gson.fromJson(s, MediaCount.class);
+		//MediaCount mc =  gson.fromJson(s, MediaCount.class);
 		
-		System.out.println(mc);
+		System.out.println(s);
 	}
 
 }
