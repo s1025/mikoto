@@ -139,7 +139,6 @@ public class ConfigKsImpl implements ConfigKs{
 		}
 		
 		String token = pps.getProperty("token");
-		
 		Mikoto.token = token;
 	}
 

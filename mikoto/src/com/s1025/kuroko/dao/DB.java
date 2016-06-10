@@ -10,7 +10,6 @@ import java.sql.Statement;
 import com.s1025.kuroko.Kuroko;
 
 public class DB {
-	static DBConfig dbConfig = Kuroko.config.dbConfig;
 	
 	public static void init(){
 		try {
@@ -23,6 +22,7 @@ public class DB {
 	
 	public static Connection getCon(){
 		Connection con = null;
+		DBConfig dbConfig = Kuroko.config.dbConfig;
 		try {
 			con = DriverManager.getConnection(dbConfig.getUrl(),dbConfig.getUser(),dbConfig.getPasswd());
 		} catch (SQLException e) {

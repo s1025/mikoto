@@ -10,6 +10,7 @@ import com.s1025.mikoto.api.MassApi;
 import com.s1025.mikoto.api.MaterialApi;
 import com.s1025.mikoto.api.MediaApi;
 import com.s1025.mikoto.api.MenuApi;
+import com.s1025.mikoto.api.PageApi;
 import com.s1025.mikoto.api.QRCodeApi;
 import com.s1025.mikoto.api.UserApi;
 import com.s1025.mikoto.model.App;
@@ -31,7 +32,7 @@ public class Mikoto {
 	
 	/**
 	 * api类，包含了api包下的实例.
-	 * @author fkxpjj
+	 * @author fkxacg
 	 *
 	 */
 	public static class api{
@@ -45,6 +46,7 @@ public class Mikoto {
 		public static UserApi user = new UserApi();
 		public static DatacubeApi datacube = new DatacubeApi();
 		public static QRCodeApi qrcode = new QRCodeApi();
+		public static PageApi page = new PageApi();
 	}
 
 	
